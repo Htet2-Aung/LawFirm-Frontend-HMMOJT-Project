@@ -1,13 +1,14 @@
 import { useEffect } from "react"
 import { useDispatch, useSelector } from "react-redux"
 import Appointment from "./Appointment"
-import { fetchAppointment, getAppointmentStatus, selectAllIAppointment } from "./appointmentSlice"
+import { fetchAppointment, getAppointmentError, getAppointmentStatus, selectAllIAppointment } from "./appointmentSlice"
 
 function AppointmentList(){
     const dispatch = useDispatch()
     const appointments = useSelector(selectAllIAppointment)
     console.log("InqueryList: "+appointments)
     const appointmentStatus = useSelector(getAppointmentStatus)
+    const error=useSelector(getAppointmentError);
 
     useEffect(() => {
         if(appointmentStatus === 'idle'){
@@ -36,7 +37,9 @@ function AppointmentList(){
                 )
             );
         }
-
+        if(appointmentStatus === 'failed'){
+            content = (<p>{error}</p>);
+        }
  
 
     return content;

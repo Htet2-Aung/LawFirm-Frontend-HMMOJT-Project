@@ -13,7 +13,7 @@ function  AddInqueryForm(props){
     const onLawyerNameChange = e => setLawyerName(e.target.value);
     const onDescriptionChange = e => setDescription(e.target.value);
  
-   const canSave = [ phoneNo, lawyerName, description].every(Boolean) && addRequestStatus === 'idle'
+   const canSave = [ phoneNo, description].every(Boolean) && addRequestStatus === 'idle'
 
     //const isEdit = props.mode === 'edit'
 
@@ -78,7 +78,7 @@ function  AddInqueryForm(props){
                     </div>
                     <div className="col-lg-6 mb-5 mb-lg-0">
 
-                        <h1 className="text-primary text-center mb-4">Make Inquery Form</h1>
+                        <h1 className="text-dark text-center mb-4">Make Inquery Form</h1>
                         <div className="bg1-light text-center rounded p-5">
 
                             <form onSubmit={onSubmit}>

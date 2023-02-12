@@ -3,23 +3,23 @@
     padding: 0.5rem 1.5rem;
     cursor: pointer;
     border-radius: 4px;
-    background-color: #800040;
+    background-color: #2515fa;
     color: white;
-    border: 1px solid #800040;
+    border: 1px solid #230cf0;
     margin: 0 1rem;
   }
   .btn:hover {
-    background-color: #9c1458;
-    border-color: #9c1458;
+    background-color: blue;
+    border-color: blue;
   }
   
   .btn--alt {
     background-color: transparent;
-    color: #800040;
+    color: #181bf3;
   }
   
   .btn--alt:hover {
-    background-color: #f8dae9;
+    background-color:white;
   }
   
   .modal {

@@ -1,8 +1,13 @@
 import { useState } from "react";
 import { useDispatch } from "react-redux";
+import { useNavigate, useParams } from "react-router-dom";
 import { addNewAppointment } from "./appointmentSlice";
 
 function AddAppointmentForm() {
+
+    const { inqueryId } = useParams()
+    console.log(inqueryId);
+    const navigate = useNavigate()
 
     const [name, setName] = useState('');
     const [consultantFees, setConsultantFees] = useState('')
@@ -33,20 +38,21 @@ function AddAppointmentForm() {
         if (canSave) {
             try {
                 setAddRequestStatus('pending')
-                console.log("In the can save")
+                console.log(addRequestStatus);
 
                 dispatch(
                     addNewAppointment({
-                        name,
-                        consultantFees,
-                        clientStatus,
-                        lawyerStatus,
-                        date,
-                        time
-
-                    }),
+                        
+                            name,
+                            consultantFees,
+                            clientStatus,
+                            lawyerStatus,
+                            date,
+                            time
+                        
+                    }),inqueryId
                 ).unwrap();
-
+                navigate('/inquery')
             } catch (error) {
                 console.log(error)
 
@@ -71,7 +77,7 @@ function AddAppointmentForm() {
 
             <div className="container">
                 <div className="row gx-5">
-                <div className="col-lg-3 mb-5 mb-lg-0"></div>
+                    <div className="col-lg-3 mb-5 mb-lg-0"></div>
                     <div className="col-lg-6 mb-5 mb-lg-0">
 
                         <h1 className="text-primary text-center mb-4">Make Appointment Form</h1>
@@ -99,22 +105,34 @@ function AddAppointmentForm() {
                                         />
                                     </div>
                                     <div className="col-12 col-sm-12">
-                                        <input
-                                            type="text"
-                                            className="form-control bg-white border-0"
-                                            placeholder="Lawyer Status"
+                                    <select
+                                            className="form-control"
                                             value={lawyerStatus}
                                             onChange={onLawyerStatusChange}
-                                        />
+                                        >
+                                            <option value="">Select Status</option>
+                                            <option value="Agree">Agree</option>
+                                            <option value="Disagree">Disagree</option>
+                                        </select>
                                     </div>
                                     <div className="col-12 col-sm-12">
-                                        <input
+                                        <select
+                                            className="form-control"
+                                            value={clientStatus}
+                                            onChange={onClientStatusChange}
+                                        >
+                                            <option value="">Select Status</option>
+                                            <option value="Agree">Agree</option>
+                                            <option value="Disagree">Disagree</option>
+                                        </select>
+
+                                        {/* <input
                                             type="text"
                                             className="form-control bg-white border-0"
                                             placeholder="Client Status"
                                             value={clientStatus}
                                             onChange={onClientStatusChange}
-                                        />
+                                        /> */}
                                     </div>
                                     <div className="col-12 col-sm-12">
                                         <input

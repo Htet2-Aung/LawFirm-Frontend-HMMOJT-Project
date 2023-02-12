@@ -25,7 +25,7 @@ function EditInqueryForm(props){
     const onDescriptionChange = e => setDescription(e.target.value);
 
 
-    const canSave = [ lawyerName,phoneNo,description].every(Boolean) && addRequestStatus === 'idle'
+    const canSave = [ phoneNo,description].every(Boolean) && addRequestStatus === 'idle'
    
 
     const dispatch = useDispatch();

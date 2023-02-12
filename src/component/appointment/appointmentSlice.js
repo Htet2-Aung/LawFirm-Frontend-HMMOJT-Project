@@ -11,7 +11,7 @@ export const fetchAppointment= createAsyncThunk('appointments/fetchAppointment',
 });
 
 export const addNewAppointment = createAsyncThunk('appointments/addNewAppointment', async(appointment)=>{
-    const response = await axios.post(POST_NEW_Appointment,appointment)
+    const response = await axios.post(`${POST_NEW_Appointment}${appointment.inqueryId}`,appointment)
     return response.data;
 })
 

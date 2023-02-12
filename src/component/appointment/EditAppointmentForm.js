@@ -41,7 +41,7 @@ function EditAppointmentForm(props){
            if(canSave){
             try {
                 setAddRequestStatus('pending')
-                console.log("In the can save")
+                
 
                 dispatch(
                    
@@ -54,7 +54,7 @@ function EditAppointmentForm(props){
                     date,
                     time
                     }),
-                )
+                ).unwrap();
             }                
              catch (error) {
                 console.log(error)
@@ -62,6 +62,8 @@ function EditAppointmentForm(props){
             }finally{
                 setAddRequestStatus('idle')
             }
+
+            navigate('/appointment')
 
             setId('')
             setName('')
@@ -107,26 +109,30 @@ function EditAppointmentForm(props){
                                         />
                                     </div>
                                     <div className="col-12 col-sm-12">
-                                        <input
-                                            type="text"
-                                            className="form-control bg-white border-0"
-                                            placeholder="Lawyer Status"
+                                    <select
+                                            className="form-control"
                                             value={lawyerStatus}
                                             onChange={onLawyerStatusChange}
-                                        />
+                                        >
+                                            <option value="">Select Status</option>
+                                            <option value="Agree">Agree</option>
+                                            <option value="Disagree">Disagree</option>
+                                        </select>
                                     </div>
                                     <div className="col-12 col-sm-12">
-                                        <input
-                                            type="text"
-                                            className="form-control bg-white border-0"
-                                            placeholder="Client Status"
+                                    <select
+                                            className="form-control"
                                             value={clientStatus}
                                             onChange={onClientStatusChange}
-                                        />
+                                        >
+                                            <option value="">Select Status</option>
+                                            <option value="Agree">Agree</option>
+                                            <option value="Disagree">Disagree</option>
+                                        </select>
                                     </div>
                                     <div className="col-12 col-sm-12">
                                         <input
-                                            type="text"
+                                            type="date"
                                             className="form-control bg-white border-0"
                                             placeholder="Lawyer Name"
                                             value={date}
@@ -135,7 +141,7 @@ function EditAppointmentForm(props){
                                     </div>
                                     <div className="col-12 col-sm-12">
                                         <input
-                                            type="text"
+                                            type="time"
                                             className="form-control bg-white border-0"
                                             placeholder="Lawyer Name"
                                             value={time}
