@@ -3,26 +3,27 @@ import { useDispatch} from "react-redux";
 import { useState } from "react";
 //import { useParams,useNavigate } from "react-router-dom";
 //import { getToken } from "../auth/authSlice";
+import Card from '../ui/Card'
+import { useParams } from "react-router-dom";
 
 
-function AddContractForm() {
+function AddContractForm(props) {
 
     //const contract = useSelector((state)=>selectProjectByIdentifier(state,String(contractId))) 
 
+    const {appointmentId} = useParams();
+    console.log(appointmentId)
     
-    const [appointmentId,setAppointmentId] = useState('');
-    const [caseId,setCaseId] = useState('');
     const [contractDate,setContractDate] = useState('');
     const [conDescription,setConDescription] = useState('');
     const [addRequestStatus,setAddRequestStatus] = useState('idle')
     
-    const onAppointmentIdChange = e => setAppointmentId(e.target.value);
-    const onCaseIdChange = e => setCaseId(e.target.value);
+    
     const onContractDateChange = e => setContractDate(e.target.value);
     const onConDescriptionChange = e => setConDescription(e.target.value);
     
 
-    const canSave = [appointmentId,caseId,contractDate,conDescription].every(Boolean) && addRequestStatus === 'idle'
+    const canSave = [contractDate,conDescription].every(Boolean) && addRequestStatus === 'idle'
    // const token = useSelector(getToken)
 
     const dispatch = useDispatch();
@@ -31,43 +32,35 @@ function AddContractForm() {
         event.preventDefault();
         //console.log(token)
 
-        if(canSave){
-            try {
+         
 
-                setAddRequestStatus('pending');
 
                 dispatch(
                     
                     addNewContract({
                         contract:{
-                            appointmentId,
-                            caseId,
+                            
                             contractDate,
                             conDescription,
-                        }//,
-                        //token
+                        },appointmentId
+                        
                     }),
                 ).unwrap();
 
                
                 
-            } catch (error) {
-                console.log(error)
-            }finally{
-                setAddRequestStatus('idle')
-            }
+           
            
 
-        setAppointmentId('')
-        setCaseId('')
+        
         setContractDate('')
         setConDescription('')
         
-        }
     }
     
 
     return (
+        <Card>
 
         <div className="container-fluid py-5">
 
@@ -82,24 +75,8 @@ function AddContractForm() {
 
                         <form onSubmit={onSubmit}>
                                 <div className="row g-3">
-                                    <div className="col-12 col-sm-6">
-                                        <div className="Date" id="date" data-target-input="nearest">
-                                            <input type="text"
-                                                className="form-control text-primary bg-white border-0 datetimepicker-input"
-                                                value={appointmentId}
-                                                onChange={onAppointmentIdChange}
-                                                placeholder="Appointment Id" data-target="#date" data-toggle="datetimepicker" />
-                                        </div>
-                                    </div>
-                                    <div className="col-12 col-sm-6">
-                                    <div className="Date" id="date" data-target-input="nearest">
-                                            <input type="text"
-                                                className="form-control text-primary bg-white border-0 datetimepicker-input"
-                                                value={caseId}
-                                                onChange={onCaseIdChange}
-                                                placeholder="Case Id" data-target="#date" data-toggle="datetimepicker" />
-                                        </div>
-                                    </div>
+                                    
+                                   
 
                                     <div className="col-12 col-sm-6">
                                         <div className="date" id="date" data-target-input="nearest">
@@ -138,6 +115,8 @@ function AddContractForm() {
             </div>
 
         </div>
+
+        </Card>
 
     );
 }

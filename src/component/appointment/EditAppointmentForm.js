@@ -2,9 +2,11 @@ import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
 import { selectAppointmentById, updateAppointment } from "./appointmentSlice";
+import { useNavigate } from "react-router-dom";
 
 function EditAppointmentForm(props){
     const { appointmentId } = useParams( )
+    const navigate = useNavigate()
     const appointment = useSelector((state)=>selectAppointmentById(state,Number(appointmentId))) 
     console.log(appointmentId)
     console.log(appointment)

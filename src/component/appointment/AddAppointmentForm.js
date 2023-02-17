@@ -1,13 +1,14 @@
 import { useState } from "react";
 import { useDispatch } from "react-redux";
-import { useNavigate, useParams } from "react-router-dom";
+import {  useParams } from "react-router-dom";
 import { addNewAppointment } from "./appointmentSlice";
+import lawyerDiscussion from "./lawyerDiscussion.jpg";
 
-function AddAppointmentForm() {
+function AddAppointmentForm(props) {
 
-    const { inqueryId } = useParams()
-    console.log(inqueryId);
-    const navigate = useNavigate()
+    const { inqueryId } = useParams( )
+    console.log(Number(inqueryId));
+   
 
     const [name, setName] = useState('');
     const [consultantFees, setConsultantFees] = useState('')
@@ -42,17 +43,19 @@ function AddAppointmentForm() {
 
                 dispatch(
                     addNewAppointment({
-                        
+                       appointment: {
                             name,
                             consultantFees,
                             clientStatus,
                             lawyerStatus,
                             date,
-                            time
-                        
-                    }),inqueryId
+                            time 
+                        },inqueryId
+                       
+                           
+                    }) 
                 ).unwrap();
-                navigate('/inquery')
+               
             } catch (error) {
                 console.log(error)
 
@@ -73,38 +76,50 @@ function AddAppointmentForm() {
 
     }
     return (
-        <div className="container-fluid bg-primary py-5">
+        <div class="container bg-gradient-primary">
 
-            <div className="container">
-                <div className="row gx-5">
-                    <div className="col-lg-3 mb-5 mb-lg-0"></div>
-                    <div className="col-lg-6 mb-5 mb-lg-0">
+        <div class="card o-hidden border-0 shadow-lg my-5">
+            <div class="card-body p-0">
 
-                        <h1 className="text-primary text-center mb-4">Make Appointment Form</h1>
-                        <div className="bg-light text-center rounded p-5">
-
-                            <form onSubmit={onSubmit}>
-                                <div className="row g-3">
-                                    <div className="col-12 col-sm-12">
-
-                                        <input
-                                            type="text"
-                                            className="form-control bg-white border-0"
-                                            placeholder="Appointment Name"
+                <div class="row">
+                    <div class="col-lg-5 d-none d-lg-block">
+                        <img src={lawyerDiscussion} className="w-100 h-100" />
+                    </div>
+                    <div class="col-lg-7">
+                        <div class="p-5">
+                            <div class="text-center">
+                                <h1 class="h4 text-gray-900 mb-4">Create An Appointment!</h1>
+                            </div>
+                            <form onSubmit={onSubmit} class="user">
+                                <div class="form-group row mb-3">
+                                    <div class="col-sm-6 mb-3 mb-sm-0">
+                                    <input type="text" class="form-control form-control-user" id="exampleLastName"
+                                            placeholder="Name"
                                             value={name}
                                             onChange={onNameChange}
                                         />
                                     </div>
-                                    <div className="col-12 col-sm-12">
-                                        <input
-                                            type="text"
-                                            className="form-control bg-white border-0"
-                                            placeholder="ConsultantFees"
+                                    <div class="col-sm-6">
+                                        <input type="text" class="form-control form-control-user" id="exampleLastName"
+                                            placeholder="Phone Number"
                                             value={consultantFees}
                                             onChange={onConsultantFeesChange}
                                         />
                                     </div>
-                                    <div className="col-12 col-sm-12">
+                                </div>
+                                <div class="form-group row mb-3">
+                                    <div class="col-sm-6 mb-3 mb-sm-0">
+                                    <select
+                                            className="form-control"
+                                            value={clientStatus}
+                                            onChange={onClientStatusChange}
+                                        >
+                                            <option value="">Select Status</option>
+                                            <option value="Agree">Agree</option>
+                                            <option value="Disagree">isagree</option>
+                                        </select>
+                                    </div>
+                                    <div class="col-sm-6">
                                     <select
                                             className="form-control"
                                             value={lawyerStatus}
@@ -112,65 +127,56 @@ function AddAppointmentForm() {
                                         >
                                             <option value="">Select Status</option>
                                             <option value="Agree">Agree</option>
-                                            <option value="Disagree">Disagree</option>
+                                            <option value="Disagree">isagree</option>
                                         </select>
                                     </div>
-                                    <div className="col-12 col-sm-12">
-                                        <select
-                                            className="form-control"
-                                            value={clientStatus}
-                                            onChange={onClientStatusChange}
-                                        >
-                                            <option value="">Select Status</option>
-                                            <option value="Agree">Agree</option>
-                                            <option value="Disagree">Disagree</option>
-                                        </select>
-
-                                        {/* <input
-                                            type="text"
-                                            className="form-control bg-white border-0"
-                                            placeholder="Client Status"
-                                            value={clientStatus}
-                                            onChange={onClientStatusChange}
-                                        /> */}
-                                    </div>
-                                    <div className="col-12 col-sm-12">
-                                        <input
-                                            type="date"
-                                            className="form-control bg-white border-0"
+                                </div>
+                                <div class="form-group row mb-3">
+                                    <div class="col-sm-6 mb-3 mb-sm-0">
+                                    <input type="date" class="form-control form-control-user" id="exampleLastName"
                                             placeholder="Appointment Date"
                                             value={date}
                                             onChange={onDateChange}
                                         />
                                     </div>
-                                    <div className="col-12 col-sm-12">
-                                        <input
-                                            type="time"
-                                            className="form-control bg-white border-0"
+                                    <div class="col-sm-6">
+                                        <input type="time" class="form-control form-control-user" id="exampleLastName"
                                             placeholder="Appointment Time"
                                             value={time}
                                             onChange={onTimeChange}
                                         />
                                     </div>
+                                </div>
+                                <div class="form-group row mb-3">
+                                    <div class="col-sm-6 mb-3 mb-sm-0">
+                                    <input
+                                        type="submit"
+                                        className="btn btn-primary w-100 py-3"
 
-                                    <div className="col-12">
-                                        <input
-                                            type="submit"
-                                            className="btn btn-primary w-100 py-3"
+                                        value={'Make An Appointment'}
+                                    />
+                                    </div>
+                                    <div class="col-sm-6 mb-3 mb-sm-0">
+                                    <input
+                                        type="reset"
+                                        className="btn btn-danger w-100 py-3"
 
-                                            value={'Make An Appointment'}
-                                        />
-
+                                        value={'Reset'}
+                                    />
                                     </div>
                                 </div>
-                            </form>
-                        </div>
 
+
+                            </form>
+
+
+                        </div>
                     </div>
                 </div>
             </div>
-
         </div>
+
+    </div>
     );
 }
 export default AddAppointmentForm;

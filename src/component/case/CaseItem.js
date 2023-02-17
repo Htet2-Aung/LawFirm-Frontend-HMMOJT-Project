@@ -1,9 +1,9 @@
 import { Link } from "react-router-dom";
 import { useDispatch} from "react-redux";
-import { deleteCase } from "./lawCaseSlice";
+import { deleteCase } from "./casesSlice";
 import { useState } from "react";
 import ConfirmModal from "../utility/ConfirmModal";
-import Backdrop from "../utility/Backdrop";
+import BackDrop from "../utility/BackDrop";
 
 
 
@@ -36,41 +36,37 @@ function CaseItem(props){
 
     return (
 
-        <div className="col-lg-4 col-md-6">
+        
                 
-                    <div className="service-item bg-primary rounded d-flex flex-column align-items-center justify-content-center text-center">
+                    <tr >                        
+                        <td > {props.id}</td>
+                        <td >{props.caseTitle}</td>
+                        <td >{props.attenCourtRoom}</td>
+                        <td >Status </td>
+                        <td >{props.description}</td>
+                        <td >{props.startDate} /{props.startTime}</td>
+                        <td >{props.endDate} / {props.endTime}</td>                       
                         
-                        <h6 className="mb-3">Id: {props.id}</h6>
-                        <h6 className="mb-3">Title: {props.caseTitle}</h6>
-                        <h6 className="mb-3">Attendent: {props.attenCourtRoom}</h6>
-                        <h6 className="mb-3">Type: </h6>
-                        <h6 className="mb-3">Start Date and Time: {props.startDate} , {props.startTime}</h6>
-                        <h6 className="mb-3">End Date and Time: {props.endDate} , {props.endTime}</h6>                       
-                        <p className="m-0">{props.description}</p>
-                        <div className="my-3">
+                        <td >
                         <Link to={`/case/edit/${props.id}`}>
-                            <button className="btn btn-info mx-2">Update</button>
+                            <button className="btn btn-secondary mx-2">Update</button>
                         </Link>
-                        <Link to={`/case/edit/${props.id}`}>
-                            <button className="btn btn-success mx-2">Payment</button>
+                        <Link to={`/case/create/${props.id}`}>
+                            <button className="btn btn-success mx-2">Case</button>
                         </Link>
                         <Link onClick={deleteHandler}>
                             <button className="btn btn-danger">Delete</button>
                         </Link>
                         
 
-                        </div>
-                        <Link to={`/contract/edit/${props.id}`}>
-                            <button className="btn btn-lg btn-primary rounded-pill">
-                            <i className="bi bi-arrow-right"></i>
-                            </button>
-                        </Link>
-                        {isModalOpen && <ConfirmModal onCancel={cancelHandler} onConfirm={confirmHandler}/>}
-                        {isModalOpen && <Backdrop onBackdrop={backdropHandler}/>} 
+                        </td>
                         
-                    </div>
+                        {isModalOpen && <ConfirmModal onCancel={cancelHandler} onConfirm={confirmHandler}/>}
+                        {isModalOpen && <BackDrop onBackdrop={backdropHandler}/>} 
+                        
+                    </tr>
              
-            </div>
+           
         
   
     );

@@ -1,4 +1,4 @@
-import { addNewCase } from "./lawCaseSlice";
+import { addNewCase } from "./casesSlice";
 import { useDispatch } from "react-redux";
 import { useState} from "react";
 import { useNavigate } from "react-router-dom";
@@ -7,9 +7,13 @@ import Card from '../ui/Card'
 
 
 function AddCaseForm(props) {
-    const { contractId } = useParams()
+    const  {contractId } = useParams()
+    const conId=Number(contractId)
     const navigate = useNavigate()
-
+    console.log(contractId)
+    console.log(typeof Number(contractId))
+    console.log(conId)
+    console.log (typeof conId)
        
     const [caseTitle, setCaseTitle] = useState(''); 
     const [attenCourtRoom, setAttenCourtRoom] = useState('');
@@ -66,11 +70,11 @@ function AddCaseForm(props) {
                             endTime,
                             description
                             
-                        },contractId
+                        },conId
                     }),
                 ).unwrap();
 
-                navigate('/contract')
+                navigate('/case')
 
             
                 setAddRequestStatus('idle')    

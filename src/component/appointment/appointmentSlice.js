@@ -2,7 +2,7 @@ import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
 
 const GET_ALL_Appointment = "http://localhost:8585/api/appointment/all";
-const POST_NEW_Appointment = "http://localhost:8585/api/appointment/create";
+const POST_NEW_Appointment = "http://localhost:8585/api/appointment/create/";
 const DELETE_Appointment = "http://localhost:8585/api/appointment/id/";
 
 export const fetchAppointment= createAsyncThunk('appointments/fetchAppointment', async () => {
@@ -10,8 +10,8 @@ export const fetchAppointment= createAsyncThunk('appointments/fetchAppointment',
     return response.data;
 });
 
-export const addNewAppointment = createAsyncThunk('appointments/addNewAppointment', async(appointment)=>{
-    const response = await axios.post(`${POST_NEW_Appointment}${appointment.inqueryId}`,appointment)
+export const addNewAppointment = createAsyncThunk('appointments/addNewAppointment', async(data)=>{
+    const response = await axios.post(`${POST_NEW_Appointment}${data.inqueryId}`,data.appointment)
     return response.data;
 })
 
@@ -49,7 +49,7 @@ export const appointmentSlice = createSlice({
                         clientStatus,
                         lawyerStatus,
                         date,
-                        time 
+                        time,
                     }
                 }
             },

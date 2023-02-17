@@ -43,7 +43,7 @@ function InqueryItem(props) {
                     <Link onClick={deleteHandler}>
                     <button className="btn btn-danger mx-2">Delete</button>
                     </Link>
-                    <Link to="/appointment">
+                    <Link to={`/appointment/create/${props.id}`}>
                     <button className="btn btn-info mx-2">Appointment</button>
                     </Link>
                     {isModalOpen && <ConfirmModal onCancel={cancelHandler} onConfirm={confirmHandler} />}

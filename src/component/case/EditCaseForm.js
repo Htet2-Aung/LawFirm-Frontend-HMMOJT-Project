@@ -1,4 +1,4 @@
-import { updateCase, selectCaseById } from "./lawCaseSlice";
+import { updateCase, selectCaseById } from "./casesSlice";
 import { useDispatch } from "react-redux";
 import { useState} from "react";
 import { useParams } from "react-router-dom";
@@ -69,7 +69,7 @@ function EditCaseForm(props) {
                 dispatch(
                     
                     updateCase({
-                        case:{
+                        lawCase:{
                             id,
                             caseTitle,
                             attenCourtRoom,
@@ -196,7 +196,7 @@ function EditCaseForm(props) {
                                                 type="submit"
                                                 className="btn btn-light text-primary btn-block mt-4"
                                                 
-                                                value={'Make Case'}
+                                                value={'Update Case'}
                                             />
 
                                         </div>

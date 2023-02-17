@@ -1,41 +1,36 @@
 import { useSelector} from "react-redux";
-import { fetchCases, getCaseError, getCaseStatus, selectAllCase } from "./lawCaseSlice";
+import { fetchCases, getCaseStatus, selectAllCase } from "./casesSlice";
 import CaseItem from "./CaseItem";
 import { useDispatch } from "react-redux";
 import { useEffect } from "react";
 
 function CaseList() {
-    
-    
-    const dispatch = useDispatch();     
     const cases = useSelector(selectAllCase);
-    
+    const dispatch = useDispatch();    
     const caseStatus = useSelector(getCaseStatus);
-    const error=useSelector(getCaseError);    
+    //const error=useSelector(getCaseError);
+    
     console.log(cases)
-
-    
-
-    
+    console.log(caseStatus)
     useEffect(()=>{
-        if(caseStatus === 'idle'){
+        
             dispatch(fetchCases())
-        }
-        
-            
             
         
-    },[caseStatus,dispatch]);
-
+    },[dispatch]);
+    
+    
+     
+    
+         
+    
     let content;
 
-    if(caseStatus === 'loading'){
-        content = (<p>Loading....</p>);
-    }
+    
 
     
 
-    if(caseStatus === 'succeeded'){
+   
         
         content = cases.map(
             (lawCase) => (
@@ -50,11 +45,7 @@ function CaseList() {
                     description={lawCase.description}  
                         
                 />));
-    }
-
-    if(caseStatus === 'failed'){
-        content = (<p>{error}</p>);
-    }
+    
    
     
     return content;

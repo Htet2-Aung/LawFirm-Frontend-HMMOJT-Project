@@ -1,12 +1,11 @@
 import { Table } from "react-bootstrap";
-import { Link } from "react-router-dom";
 import AppointmentList from "../appointment/AppointmentList";
 
 function AppTable() {
     return (
         <div className="ms-5 me-2">
             <div className="col-md-8 mb-3">
-                <Link to="/appointment">Add</Link>
+                {/* <Link to="/appointment">Add</Link> */}
             </div>
             <div className="col-md-4">
 
