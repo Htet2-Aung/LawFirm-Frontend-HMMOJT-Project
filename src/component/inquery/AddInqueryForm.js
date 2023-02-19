@@ -54,23 +54,23 @@ function AddInqueryForm(props) {
     }
     return (
 
-        <div class="container bg-gradient-primary">
+        <div className="container bg-gradient-primary">
 
-            <div class="card o-hidden border-0 shadow-lg my-5">
-                <div class="card-body p-0">
+            <div className="card o-hidden border-0 shadow-lg my-5">
+                <div className="card-body p-0">
 
-                    <div class="row">
-                        <div class="col-lg-5 d-none d-lg-block">
+                    <div className="row">
+                        <div className="col-lg-5 d-none d-lg-block">
                             <img src={lawyerImage} className="w-100" />
                         </div>
-                        <div class="col-lg-7">
-                            <div class="p-5">
-                                <div class="text-center">
-                                    <h1 class="h4 text-gray-900 mb-4">Create an Inquery!</h1>
+                        <div className="col-lg-7">
+                            <div className="p-5">
+                                <div className="text-center">
+                                    <h1 className="h4 text-gray-900 mb-4">Create an Inquery!</h1>
                                 </div>
-                                <form onSubmit={onSubmit} class="user">
-                                    <div class="form-group row mb-3">
-                                        <div class="col-sm-6 mb-3 mb-sm-0">
+                                <form onSubmit={onSubmit} className="user">
+                                    <div className="form-group row mb-3">
+                                        <div className="col-sm-6 mb-3 mb-sm-0">
                                         <select
                                             className="form-control"
                                             value={lawyerName}
@@ -81,17 +81,17 @@ function AddInqueryForm(props) {
                                             <option value="ThuRai">ThuRai</option>
                                         </select>
                                         </div>
-                                        <div class="col-sm-6">
-                                            <input type="text" class="form-control form-control-user" id="exampleLastName"
+                                        <div className="col-sm-6">
+                                            <input type="text" className="form-control" id="exampleLastName"
                                                 placeholder="Phone Number"
                                                 value={phoneNo}
                                                 onChange={onPhoneNoChange}
                                             />
                                         </div>
                                     </div>
-                                    <div class="form-group row mb-3">
-                                        <div class="mb-3">
-                                            <textarea type="text" class="form-control form-control-user"
+                                    <div className="form-group row mb-3">
+                                        <div className="mb-3">
+                                            <textarea type="text" className="form-control"
                                                 rows={7}
                                                 id="exampleRepeatPassword" placeholder="Description"
                                                 value={description}
@@ -99,8 +99,8 @@ function AddInqueryForm(props) {
                                             />
                                         </div>
                                     </div>
-                                    <div class="form-group row mb-3">
-                                        <div class="col-sm-6 mb-3 mb-sm-0">
+                                    <div className="form-group row mb-3">
+                                        <div className="col-sm-6 mb-3 mb-sm-0">
                                         <input
                                             type="submit"
                                             className="btn btn-primary w-100 py-3"
@@ -108,7 +108,7 @@ function AddInqueryForm(props) {
                                             value={'Make An Inquiry'}
                                         />
                                         </div>
-                                        <div class="col-sm-6 mb-3 mb-sm-0">
+                                        <div className="col-sm-6 mb-3 mb-sm-0">
                                         <input
                                             type="reset"
                                             className="btn btn-danger w-100 py-3"

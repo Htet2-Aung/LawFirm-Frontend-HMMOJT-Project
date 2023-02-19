@@ -36,15 +36,13 @@ function Appointment(props) {
             <td>{props.time}</td>
             <td>
                 <Link to={`/appointment/edit/${props.id}`}>
-                    <button className="btn btn-success mx-3">Update</button>
+                <i className='fas fa-edit text-success mx-3'></i>
                 </Link>
                 <Link onClick={deleteHandler}>
-                    <button className="btn btn-danger mx-3">
-                        Delete
-                    </button>
+                <i className='fas fa-trash text-danger mx-3'></i>
                 </Link>
                 <Link to={`/contract/create/${props.id}`}>
-                    <button className="btn btn-success mx-3">Contract</button>
+                    <button className="btn btn-light mx-3"><i className="fas fa-scroll text-primary"></i>Contract</button>
                 </Link>
                 </td> 
                 {isModalOpen && <ConfirmModal onCancel={cancelHandler} onConfirm={confirmHandler} />}

@@ -1,19 +1,21 @@
 import InqueryList from "../inquery/InqueryList";
 
 function InqTable() {
+    
+    
     return (
 
-        <div class="container-fluid">
-            <div class="card shadow mb-4">
-                <div class="card-header py-3">
-                    <h6 class="m-0 font-weight-bold text-primary">DataTables Example</h6>        
+        <div className="container-fluid">
+            <div className="card shadow mb-4">
+                <div className="card-header py-3">
+                <input type="text" id="myInput" onkeyup="myFunction()" placeholder="Search for names.."/>
                     
                 </div>
-                <div class="card-body">
-                    <div class="table-responsive">
-                        <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                <div className="card-body">
+                    <div className="table-responsive">
+                        <table className="table table-bordered" id="myTable" width="100%" cellspacing="0">
                             <thead>
-                                <tr>
+                                <tr class="header">
                                     <th>No</th>
                                     <th>Lawyer Name</th>
                                     <th>Phone No</th>
@@ -29,7 +31,7 @@ function InqTable() {
                                     <th>Actions</th>
                                 </tr>
                             </tfoot> */}
-                            <tbody>
+                            <tbody >
                                 <InqueryList/>
                             </tbody>
                         </table>

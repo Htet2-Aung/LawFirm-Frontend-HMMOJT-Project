@@ -119,14 +119,14 @@ select.form-control {
 
 // Readonly controls as plain text
 //
-// Apply class to a readonly input to make it appear like regular plain
+// Apply className to a readonly input to make it appear like regular plain
 // text (without any border, background color, focus indicator)
 
 .form-control-plaintext {
   display: block;
   width: 100%;
   padding: $input-padding-y 0;
-  margin-bottom: 0; // match inputs if this class comes on inputs with default margins
+  margin-bottom: 0; // match inputs if this className comes on inputs with default margins
   @include font-size($input-font-size);
   line-height: $input-line-height;
   color: $input-plaintext-color;
@@ -203,7 +203,7 @@ textarea.form-control {
   margin-left: -$form-grid-gutter-width / 2;
 
   > .col,
-  > [class*="col-"] {
+  > [className*="col-"] {
     padding-right: $form-grid-gutter-width / 2;
     padding-left: $form-grid-gutter-width / 2;
   }
@@ -265,7 +265,7 @@ textarea.form-control {
 
 // Inline forms
 //
-// Make forms appear inline(-block) by adding the `.form-inline` class. Inline
+// Make forms appear inline(-block) by adding the `.form-inline` className. Inline
 // forms begin stacked on extra small (mobile) devices and then go inline when
 // viewports reach <768px.
 //

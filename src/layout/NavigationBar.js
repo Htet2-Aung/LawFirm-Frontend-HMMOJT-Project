@@ -1,7 +1,6 @@
 
 import Nav from 'react-bootstrap/Nav';
 
-
 function NavigationBar() {
     return (
 
@@ -13,7 +12,7 @@ function NavigationBar() {
             <Nav defaultActiveKey="/home" className="flex-column">
             <Nav.Link href="/" className="navbar-brand">
                     <h3 className="m-0 text-uppercase text-primary">
-                    <i class='fas fa-balance-scale' ></i>Lawyer Landing</h3>
+                    <i className='fas fa-balance-scale' ></i>Lawyer Landing</h3>
             </Nav.Link>
             <hr className="sidebar-divider"/>
       <Nav.Link href="/inquery">Inquiry</Nav.Link>
@@ -24,6 +23,10 @@ function NavigationBar() {
       <hr className="sidebar-divider"/>
       <Nav.Link href="/case" >
        Case
+      </Nav.Link>
+      <hr className="sidebar-divider"/>
+      <Nav.Link href="/payment" >
+       Payment
       </Nav.Link>
     </Nav>
 

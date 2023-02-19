@@ -1,0 +1,9 @@
+.our_lawyer{
+    animation-delay: 0.1s;
+    visibility: visible;
+    animation-name: fadeInUp2;
+    position: relative;
+}
+.lawyerImage{
+    position: relative;
+}

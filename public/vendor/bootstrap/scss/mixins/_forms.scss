@@ -68,7 +68,7 @@
     // See https://github.com/twbs/bootstrap/pull/31557
     // Align tooltip to form elements
     .form-row > .col > &,
-    .form-row > [class*="col-"] > & {
+    .form-row > [className*="col-"] > & {
       left: $form-grid-gutter-width / 2;
     }
   }

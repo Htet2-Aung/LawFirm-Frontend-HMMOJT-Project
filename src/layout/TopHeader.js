@@ -2,7 +2,7 @@ function TopHeader(){
     return(
         <div>            
    
-            <div className="container-fluid py-2 border-bottom d-none d-lg-block">
+            <div className="container-fluid py-2 border-bottom d-none d-lg-block text-primary">
                 <div className="container">
                     <div className="row">
                         <div className="col-md-6 text-center text-lg-start mb-2 mb-lg-0">

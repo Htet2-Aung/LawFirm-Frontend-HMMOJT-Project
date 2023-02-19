@@ -3,7 +3,7 @@
 // Set the container width, and override it for fixed navbars in media queries.
 
 @if $enable-grid-classes {
-  // Single container class with breakpoint max-widths
+  // Single container className with breakpoint max-widths
   .container,
   // 100% wide container at all breakpoints
   .container-fluid {
@@ -57,7 +57,7 @@
     margin-left: 0;
 
     > .col,
-    > [class*="col-"] {
+    > [className*="col-"] {
       padding-right: 0;
       padding-left: 0;
     }

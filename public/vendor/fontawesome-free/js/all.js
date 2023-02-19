@@ -2005,7 +2005,7 @@
 
   function _classCallCheck(instance, Constructor) {
     if (!(instance instanceof Constructor)) {
-      throw new TypeError("Cannot call a class as a function");
+      throw new TypeError("Cannot call a className as a function");
     }
   }
 
@@ -2193,7 +2193,7 @@
   };
   var oneToTen = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
   var oneToTwenty = oneToTen.concat([11, 12, 13, 14, 15, 16, 17, 18, 19, 20]);
-  var ATTRIBUTES_WATCHED_FOR_MUTATION = ['class', 'data-prefix', 'data-icon', 'data-fa-transform', 'data-fa-mask'];
+  var ATTRIBUTES_WATCHED_FOR_MUTATION = ['className', 'data-prefix', 'data-icon', 'data-fa-transform', 'data-fa-mask'];
   var DUOTONE_CLASSES = {
     GROUP: 'group',
     SWAP_OPACITY: 'swap-opacity',
@@ -2227,7 +2227,7 @@
   }
 
   if (DOCUMENT && typeof DOCUMENT.querySelector === 'function') {
-    var attrs = [['data-family-prefix', 'familyPrefix'], ['data-replacement-class', 'replacementClass'], ['data-auto-replace-svg', 'autoReplaceSvg'], ['data-auto-add-css', 'autoAddCss'], ['data-auto-a11y', 'autoA11y'], ['data-search-pseudo-elements', 'searchPseudoElements'], ['data-observe-mutations', 'observeMutations'], ['data-mutate-approach', 'mutateApproach'], ['data-keep-original-source', 'keepOriginalSource'], ['data-measure-performance', 'measurePerformance'], ['data-show-missing-icons', 'showMissingIcons']];
+    var attrs = [['data-family-prefix', 'familyPrefix'], ['data-replacement-className', 'replacementClass'], ['data-auto-replace-svg', 'autoReplaceSvg'], ['data-auto-add-css', 'autoAddCss'], ['data-auto-a11y', 'autoA11y'], ['data-search-pseudo-elements', 'searchPseudoElements'], ['data-observe-mutations', 'observeMutations'], ['data-mutate-approach', 'mutateApproach'], ['data-keep-original-source', 'keepOriginalSource'], ['data-measure-performance', 'measurePerformance'], ['data-show-missing-icons', 'showMissingIcons']];
     attrs.forEach(function (_ref) {
       var _ref2 = _slicedToArray(_ref, 2),
           attr = _ref2[0],
@@ -2455,7 +2455,7 @@
     global.process.emit('rejectionHandled', promise);
   }
   /**
-   * @class
+   * @className
    */
 
 
@@ -2651,7 +2651,7 @@
     if (node.classList) {
       return toArray(node.classList);
     } else {
-      return (node.getAttribute('class') || '').split(' ').filter(function (i) {
+      return (node.getAttribute('className') || '').split(' ').filter(function (i) {
         return i;
       });
     }
@@ -2947,7 +2947,7 @@
       attributes: _objectSpread({}, extra.attributes, {
         'data-prefix': prefix,
         'data-icon': iconName,
-        'class': attrClass,
+        'className': attrClass,
         'role': extra.attributes.role || 'img',
         'xmlns': 'http://www.w3.org/2000/svg',
         'viewBox': "0 0 ".concat(width, " ").concat(height)
@@ -3006,7 +3006,7 @@
     var attributes = _objectSpread({}, extra.attributes, title ? {
       'title': title
     } : {}, {
-      'class': extra.classes.join(' ')
+      'className': extra.classes.join(' ')
     });
 
     if (watchable) {
@@ -3042,7 +3042,7 @@
       val.push({
         tag: 'span',
         attributes: {
-          class: 'sr-only'
+          className: 'sr-only'
         },
         children: [title]
       });
@@ -3058,7 +3058,7 @@
     var attributes = _objectSpread({}, extra.attributes, title ? {
       'title': title
     } : {}, {
-      'class': extra.classes.join(' ')
+      'className': extra.classes.join(' ')
     });
 
     var styleString = joinStyles(extra.styles);
@@ -3078,7 +3078,7 @@
       val.push({
         tag: 'span',
         attributes: {
-          class: 'sr-only'
+          className: 'sr-only'
         },
         children: [title]
       });
@@ -3360,7 +3360,7 @@
       var forSvg = new RegExp("".concat(config.familyPrefix, "-.*"));
       delete abstract[0].attributes.style;
       delete abstract[0].attributes.id;
-      var splitClasses = abstract[0].attributes.class.split(' ').reduce(function (acc, cls) {
+      var splitClasses = abstract[0].attributes.className.split(' ').reduce(function (acc, cls) {
         if (cls === config.replacementClass || cls.match(forSvg)) {
           acc.toSvg.push(cls);
         } else {
@@ -3372,11 +3372,11 @@
         toNode: [],
         toSvg: []
       });
-      abstract[0].attributes.class = splitClasses.toSvg.join(' ');
+      abstract[0].attributes.className = splitClasses.toSvg.join(' ');
       var newInnerHTML = abstract.map(function (a) {
         return toHtml(a);
       }).join('\n');
-      node.setAttribute('class', splitClasses.toNode.join(' '));
+      node.setAttribute('className', splitClasses.toNode.join(' '));
       node.setAttribute(DATA_FA_I2SVG, '');
       node.innerHTML = newInnerHTML;
     }
@@ -3445,7 +3445,7 @@
         }
 
         if (mutationRecord.type === 'attributes' && isWatched(mutationRecord.target) && ~ATTRIBUTES_WATCHED_FOR_MUTATION.indexOf(mutationRecord.attributeName)) {
-          if (mutationRecord.attributeName === 'class') {
+          if (mutationRecord.attributeName === 'className') {
             var _getCanonicalIcon = getCanonicalIcon(classArray(mutationRecord.target)),
                 prefix = _getCanonicalIcon.prefix,
                 iconName = _getCanonicalIcon.iconName;
@@ -3591,7 +3591,7 @@
 
   function attributesParser (node) {
     var extraAttributes = toArray(node.attributes).reduce(function (acc, attr) {
-      if (acc.name !== 'class' && acc.name !== 'style') {
+      if (acc.name !== 'className' && acc.name !== 'style') {
         acc[attr.name] = attr.value;
       }
 
@@ -3762,19 +3762,19 @@
       element = {
         tag: 'g',
         attributes: {
-          class: "".concat(config.familyPrefix, "-").concat(DUOTONE_CLASSES.GROUP)
+          className: "".concat(config.familyPrefix, "-").concat(DUOTONE_CLASSES.GROUP)
         },
         children: [{
           tag: 'path',
           attributes: {
-            class: "".concat(config.familyPrefix, "-").concat(DUOTONE_CLASSES.SECONDARY),
+            className: "".concat(config.familyPrefix, "-").concat(DUOTONE_CLASSES.SECONDARY),
             fill: 'currentColor',
             d: vectorData[0]
           }
         }, {
           tag: 'path',
           attributes: {
-            class: "".concat(config.familyPrefix, "-").concat(DUOTONE_CLASSES.PRIMARY),
+            className: "".concat(config.familyPrefix, "-").concat(DUOTONE_CLASSES.PRIMARY),
             fill: 'currentColor',
             d: vectorData[1]
           }
@@ -3994,7 +3994,7 @@
 
       if (alreadyProcessedPseudoElement && !fontFamily) {
         // If we've already processed it but the current computed style does not result in a font-family,
-        // that probably means that a class name that was previously present to make the icon has been
+        // that probably means that a className name that was previously present to make the icon has been
         // removed. So we now should delete the icon.
         node.removeChild(alreadyProcessedPseudoElement);
         return resolve();
@@ -4400,7 +4400,7 @@
       return [{
         tag: 'span',
         attributes: {
-          class: ["".concat(config.familyPrefix, "-layers")].concat(_toConsumableArray(classes)).join(' ')
+          className: ["".concat(config.familyPrefix, "-layers")].concat(_toConsumableArray(classes)).join(' ')
         },
         children: children
       }];

@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
 import { selectAppointmentById, updateAppointment } from "./appointmentSlice";
 import { useNavigate } from "react-router-dom";
+import lawyerDiscussion from "./lawyerDiscussion.jpg";
 
 function EditAppointmentForm(props){
     const { appointmentId } = useParams( )
@@ -79,95 +80,106 @@ function EditAppointmentForm(props){
         
         }
         return(
-            <div className="container-fluid bg-primary py-5">
+            <div className="container bg-gradient-primary">
 
-            <div className="container">
-                <div className="row gx-5">
-                <div className="col-lg-3 mb-5 mb-lg-0"></div>
-                    <div className="col-lg-6 mb-5 mb-lg-0">
-
-                        <h1 className="text-primary text-center mb-4">Make Inquery Form</h1>
-                        <div className="bg1-light text-center rounded p-5">
-
-                            <form onSubmit={onSubmit}>
-                                <div className="row g-3">
-                                    <div className="col-12 col-sm-12">
-
-                                        <input
-                                            type="text"
-                                            className="form-control bg-white border-0"
-                                            placeholder="Phone Number"
-                                            value={name}
-                                            onChange={onNameChange}
-                                        />
-                                    </div>
-                                    <div className="col-12 col-sm-12">
-                                        <input
-                                            type="text"
-                                            className="form-control bg-white border-0"
-                                            placeholder="Lawyer Name"
-                                            value={consultantFees}
-                                            onChange={onConsultantFeesChange}
-                                        />
-                                    </div>
-                                    <div className="col-12 col-sm-12">
-                                    <select
-                                            className="form-control"
-                                            value={lawyerStatus}
-                                            onChange={onLawyerStatusChange}
-                                        >
-                                            <option value="">Select Status</option>
-                                            <option value="Agree">Agree</option>
-                                            <option value="Disagree">Disagree</option>
-                                        </select>
-                                    </div>
-                                    <div className="col-12 col-sm-12">
-                                    <select
-                                            className="form-control"
-                                            value={clientStatus}
-                                            onChange={onClientStatusChange}
-                                        >
-                                            <option value="">Select Status</option>
-                                            <option value="Agree">Agree</option>
-                                            <option value="Disagree">Disagree</option>
-                                        </select>
-                                    </div>
-                                    <div className="col-12 col-sm-12">
-                                        <input
-                                            type="date"
-                                            className="form-control bg-white border-0"
-                                            placeholder="Lawyer Name"
-                                            value={date}
-                                            onChange={onDateChange}
-                                        />
-                                    </div>
-                                    <div className="col-12 col-sm-12">
-                                        <input
-                                            type="time"
-                                            className="form-control bg-white border-0"
-                                            placeholder="Lawyer Name"
-                                            value={time}
-                                            onChange={onTimeChange}
-                                        />
-                                    </div>
-                                    
-                                    <div className="col-12">
-                                            <input 
-                                            type="submit" 
-                                            className="btn btn-primary w-100 py-3" 
-        
-                                            value={'Make An Appointment'}
-                                            />
-                                            
-                                    </div>
-                                </div>
-                            </form>
+            <div className="card o-hidden border-0 shadow-lg my-5">
+                <div className="card-body p-0">
+    
+                    <div className="row">
+                        <div className="col-lg-5 d-none d-lg-block">
+                            <img src={lawyerDiscussion} className="w-100 h-100" />
                         </div>
-
+                        <div className="col-lg-7">
+                            <div className="p-5">
+                                <div className="text-center">
+                                    <h1 className="h4 text-gray-900 mb-4">Update An Appointment!</h1>
+                                </div>
+                                <form onSubmit={onSubmit} className="user">
+                                    <div className="form-group row mb-3">
+                                        <div className="col-sm-6 mb-3 mb-sm-0">
+                                        <input type="text" className="form-control" id="exampleLastName"
+                                                placeholder="Name"
+                                                value={name}
+                                                onChange={onNameChange}
+                                            />
+                                        </div>
+                                        <div className="col-sm-6">
+                                            <input type="text" className="form-control" id="exampleLastName"
+                                                placeholder="Phone Number"
+                                                value={consultantFees}
+                                                onChange={onConsultantFeesChange}
+                                            />
+                                        </div>
+                                    </div>
+                                    <div className="form-group row mb-3">
+                                        <div className="col-sm-6 mb-3 mb-sm-0">
+                                        <select
+                                                className="form-control"
+                                                value={clientStatus}
+                                                onChange={onClientStatusChange}
+                                            >
+                                                <option value="">Select Status</option>
+                                                <option value="Agree">Agree</option>
+                                                <option value="Disagree">Disagree</option>
+                                            </select>
+                                        </div>
+                                        <div className="col-sm-6">
+                                        <select
+                                                className="form-control"
+                                                value={lawyerStatus}
+                                                onChange={onLawyerStatusChange}
+                                            >
+                                                <option value="">Select Status</option>
+                                                <option value="Agree">Agree</option>
+                                                <option value="Disagree">Disagree</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div className="form-group row mb-3">
+                                        <div className="col-sm-6 mb-3 mb-sm-0">
+                                        <input type="date" className="form-control" id="exampleLastName"
+                                                placeholder="Appointment Date"
+                                                value={date}
+                                                onChange={onDateChange}
+                                            />
+                                        </div>
+                                        <div className="col-sm-6">
+                                            <input type="time" className="form-control" id="exampleLastName"
+                                                placeholder="Appointment Time"
+                                                value={time}
+                                                onChange={onTimeChange}
+                                            />
+                                        </div>
+                                    </div>
+                                    <div className="form-group row mb-3">
+                                        <div className="col-sm-6 mb-3 mb-sm-0">
+                                        <input
+                                            type="submit"
+                                            className="btn btn-primary w-100 py-3"
+    
+                                            value={'Update An Appointment'}
+                                        />
+                                        </div>
+                                        <div className="col-sm-6 mb-3 mb-sm-0">
+                                        <input
+                                            type="reset"
+                                            className="btn btn-danger w-100 py-3"
+    
+                                            value={'Reset'}
+                                        />
+                                        </div>
+                                    </div>
+    
+    
+                                </form>
+    
+    
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
-
+    
         </div>
         );
 }

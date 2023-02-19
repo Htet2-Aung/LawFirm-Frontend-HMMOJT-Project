@@ -1,8 +1,9 @@
 import { useState } from "react";
 import { useDispatch,useSelector } from "react-redux";
-
-import { useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import { selectInqueryById, updateInquery } from "./inquerySlice";
+import lawyerImage from "./lawyer.jpg";
+
 function EditInqueryForm(props){
 
     const { inqueryId } = useParams( )
@@ -66,84 +67,79 @@ function EditInqueryForm(props){
         
         }
         return(
-            <div className="container-fluid bg-primary py-5">
+            <div className="container bg-gradient-primary">
 
-            <div className="container">
-                <div className="row gx-5">
-                    <div className="col-lg-6 mb-5 mb-lg-0">
-                        <div className="text-center mx-auto mb-5">
-                            <h5 className="d-inline-block text-white text-uppercase border-bottom border-5">Find A Lawyer</h5>
-                            <h1 className="display-4 mb-4">Find A Lawyer Professionals</h1>
-                            <h5 className="text-white fw-normal">Duo ipsum erat stet dolor sea ut nonumy tempor. Tempor duo lorem eos sit sed ipsum takimata ipsum sit est. Ipsum ea voluptua ipsum sit justo</h5>
+            <div className="card o-hidden border-0 shadow-lg my-5">
+                <div className="card-body p-0">
+
+                    <div className="row">
+                        <div className="col-lg-5 d-none d-lg-block">
+                            <img src={lawyerImage} className="w-100" />
                         </div>
-                        <div className="mx-auto">
-                            <div className="input-group">
-                                <select className="form-select border-primary w-25">
-                                    <option value="0">Lawyer</option>
-                                    <option value="1">Lawyer 1</option>
-                                    <option value="2">Lawyer 2</option>
-                                    <option value="3">Lawyer 3</option>
-                                </select>
-                                <input type="text" class="form-control border-primary w-50" placeholder="Keyword" />
-                                <button className="btn btn-dark border-0 w-25">Search</button>
-                            </div>
-                        </div>
-                    </div>
-                    <div className="col-lg-6 mb-5 mb-lg-0">
-
-                        <h1 className="text-primary text-center mb-4">Make Inquery Form</h1>
-                        <div className="bg1-light text-center rounded p-5">
-
-                            <form onSubmit={onSubmit}>
-                                <div className="row g-3">
-                                    <div className="col-12 col-sm-12">
-
-                                        <input
-                                            type="text"
-                                            className="form-control bg-white border-0"
-                                            placeholder="Phone Number"
-                                            value={phoneNo}
-                                            onChange={onPhoneNoChange}
-                                        />
-                                    </div>
-                                    <div className="col-12 col-sm-12">
-                                        <input
-                                            type="text"
-                                            className="form-control bg-white border-0"
-                                            placeholder="Lawyer Name"
+                        <div className="col-lg-7">
+                            <div className="p-5">
+                                <div className="text-center">
+                                    <h1 className="h4 text-gray-900 mb-4">Update an Inquery!</h1>
+                                </div>
+                                <form onSubmit={onSubmit} className="user">
+                                    <div className="form-group row mb-3">
+                                        <div className="col-sm-6 mb-3 mb-sm-0">
+                                        <select
+                                            className="form-control"
                                             value={lawyerName}
                                             onChange={onLawyerNameChange}
-                                        />
-                                    </div>
-                                    <div className="col-12 col-sm-12">
-                                        <textarea type="text"
-                                            className="form-control text-primary bg-white border-0 datetimepicker-input"
-                                            rows={10}
-                                            placeholder="Your Description" data-target="#time" data-toggle="datetimepicker"
-                                            value={description}
-                                            onChange={onDescriptionChange}
-                                        />
-
-                                    </div>
-                                    
-                                    <div className="col-12">
-                                            <input 
-                                            type="submit" 
-                                            className="btn btn-primary w-100 py-3" 
-        
-                                            value={'Update A Inquery'}
+                                        >
+                                            <option value="">Select LawyerName</option>
+                                            <option value="Myat Thu">Myat Thu</option>
+                                            <option value="ThuRai">ThuRai</option>
+                                        </select>
+                                        </div>
+                                        <div className="col-sm-6">
+                                            <input type="text" className="form-control " id="exampleLastName"
+                                                placeholder="Phone Number"
+                                                value={phoneNo}
+                                                onChange={onPhoneNoChange}
                                             />
-                                            
+                                        </div>
                                     </div>
-                                </div>
-                            </form>
-                        </div>
+                                    <div className="form-group row mb-3">
+                                        <div className="mb-3">
+                                            <textarea type="text" className="form-control"
+                                                rows={7}
+                                                id="exampleRepeatPassword" placeholder="Description"
+                                                value={description}
+                                                onChange={onDescriptionChange}
+                                            />
+                                        </div>
+                                    </div>
+                                    <div className="form-group row mb-3">
+                                        <div className="col-sm-6 mb-3 mb-sm-0">
+                                        <Link to="/inquery"
+                                            type="submit"
+                                            className="btn btn-primary w-100 py-3">Update an Inquiry</Link>
 
+                                
+                                        </div>
+                                        <div className="col-sm-6 mb-3 mb-sm-0">
+                                        <Link to="#"
+                                            type="reset"
+                                            className="btn btn-danger w-100 py-3">Reset</Link>
+                                        </div>
+                                    </div>
+
+
+                                </form>
+
+
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
 
         </div>
+
+
         );
 }
 export default EditInqueryForm;

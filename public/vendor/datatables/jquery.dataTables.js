@@ -70,7 +70,7 @@
 	 * to `jQuery.fn.DataTable` and `jQuery.fn.dataTable` through which it may
 	 * be  accessed.
 	 *
-	 *  @class
+	 *  @className
 	 *  @param {object} [init={}] Configuration object for DataTables. Options
 	 *    are defined by {@link DataTable.defaults}
 	 *  @requires jQuery 1.7+
@@ -635,7 +635,7 @@
 		 * particular record should be deleted.
 		 *  @param {node} nTr The table row to 'open'
 		 *  @param {string|node|jQuery} mHtml The HTML to put into the row
-		 *  @param {string} sClass Class to give the new TD cell
+		 *  @param {string} sClass className to give the new TD cell
 		 *  @returns {node} The row opened. Note that if the table row passed in as the
 		 *    first parameter, is not found in the table, this method will silently
 		 *    return.
@@ -2072,7 +2072,7 @@
 				oCol._sManualType = oOptions.sType;
 			}
 	
-			// `class` is a reserved word in Javascript, so we need to provide
+			// `className` is a reserved word in Javascript, so we need to provide
 			// the ability to use a valid name for the camel case input
 			if ( oOptions.className && ! oOptions.sClass )
 			{
@@ -2129,10 +2129,10 @@
 		if ( !oSettings.oFeatures.bSort )
 		{
 			oCol.bSortable = false;
-			th.addClass( oClasses.sSortableNone ); // Have to add class here as order event isn't called
+			th.addClass( oClasses.sSortableNone ); // Have to add className here as order event isn't called
 		}
 	
-		/* Check that the class assignment is correct for sorting */
+		/* Check that the className assignment is correct for sorting */
 		var bAsc = $.inArray('asc', oCol.asSorting) !== -1;
 		var bDesc = $.inArray('desc', oCol.asSorting) !== -1;
 		if ( !oCol.bSortable || (!bAsc && !bDesc) )
@@ -2385,7 +2385,7 @@
 					}
 					else if ( typeof aTargets[j] === 'string' )
 					{
-						/* Class name matching on TH element */
+						/* className name matching on TH element */
 						for ( k=0, kLen=columns.length ; k<kLen ; k++ )
 						{
 							if ( aTargets[j] == "_all" ||
@@ -3156,7 +3156,7 @@
 					nTd.innerHTML = _fnGetCellData( oSettings, iRow, i, 'display' );
 				}
 	
-				/* Add user defined class */
+				/* Add user defined className */
 				if ( oCol.sClass )
 				{
 					nTd.className += ' '+oCol.sClass;
@@ -3520,11 +3520,11 @@
 				sZero = oLang.sEmptyTable;
 			}
 	
-			anRows[ 0 ] = $( '<tr/>', { 'class': iStripes ? asStripeClasses[0] : '' } )
+			anRows[ 0 ] = $( '<tr/>', { 'className': iStripes ? asStripeClasses[0] : '' } )
 				.append( $('<td />', {
 					'valign':  'top',
 					'colSpan': _fnVisbleColumns( oSettings ),
-					'class':   oSettings.oClasses.sRowEmpty
+					'className':   oSettings.oClasses.sRowEmpty
 				} ).html( sZero ) )[0];
 		}
 	
@@ -3605,7 +3605,7 @@
 		// All DataTables are wrapped in a div
 		var insert = $('<div/>', {
 			id:      oSettings.sTableId+'_wrapper',
-			'class': classes.sWrapper + (oSettings.nTFoot ? '' : ' '+classes.sNoFooter)
+			'className': classes.sWrapper + (oSettings.nTFoot ? '' : ' '+classes.sNoFooter)
 		} );
 	
 		oSettings.nHolding = holding[0];
@@ -3625,7 +3625,7 @@
 				/* New container div */
 				nNewNode = $('<div/>')[0];
 	
-				/* Check to see if we should append an id and/or a class name to the container */
+				/* Check to see if we should append an id and/or a className name to the container */
 				cNext = aDom[i+1];
 				if ( cNext == "'" || cNext == '"' )
 				{
@@ -3647,7 +3647,7 @@
 						sAttr = classes.sJUIFooter;
 					}
 	
-					/* The attribute can be in the format of "#id.class", "#id" or "class" This logic
+					/* The attribute can be in the format of "#id.className", "#id" or "className" This logic
 					 * breaks the string into parts and applies them as needed
 					 */
 					if ( sAttr.indexOf('.') != -1 )
@@ -4215,7 +4215,7 @@
 		var language = settings.oLanguage;
 		var previousSearch = settings.oPreviousSearch;
 		var features = settings.aanFeatures;
-		var input = '<input type="search" class="'+classes.sFilterInput+'"/>';
+		var input = '<input type="search" className="'+classes.sFilterInput+'"/>';
 	
 		var str = language.sSearch;
 		str = str.match(/_INPUT_/) ?
@@ -4224,7 +4224,7 @@
 	
 		var filter = $('<div/>', {
 				'id': ! features.f ? tableId+'_filter' : null,
-				'class': classes.sFilter
+				'className': classes.sFilter
 			} )
 			.append( $('<label/>' ).append( str ) );
 	
@@ -4639,7 +4639,7 @@
 			tid = settings.sTableId,
 			nodes = settings.aanFeatures.i,
 			n = $('<div/>', {
-				'class': settings.oClasses.sInfo,
+				'className': settings.oClasses.sInfo,
 				'id': ! nodes ? tid+'_info' : null
 			} );
 	
@@ -4862,7 +4862,7 @@
 		var select = $('<select/>', {
 			'name':          tableId+'_length',
 			'aria-controls': tableId,
-			'class':         classes.sLengthSelect
+			'className':         classes.sLengthSelect
 		} );
 	
 		for ( var i=0, ien=lengths.length ; i<ien ; i++ ) {
@@ -5053,7 +5053,7 @@
 	{
 		return $('<div/>', {
 				'id': ! settings.aanFeatures.r ? settings.sTableId+'_processing' : null,
-				'class': settings.oClasses.sProcessing
+				'className': settings.oClasses.sProcessing
 			} )
 			.html( settings.oLanguage.sProcessing )
 			.insertBefore( settings.nTable )[0];
@@ -5128,9 +5128,9 @@
 		 *        table - scroll foot table
 		 *          tfoot - tfoot
 		 */
-		var scroller = $( _div, { 'class': classes.sScrollWrapper } )
+		var scroller = $( _div, { 'className': classes.sScrollWrapper } )
 			.append(
-				$(_div, { 'class': classes.sScrollHead } )
+				$(_div, { 'className': classes.sScrollHead } )
 					.css( {
 						overflow: 'hidden',
 						position: 'relative',
@@ -5138,7 +5138,7 @@
 						width: scrollX ? size(scrollX) : '100%'
 					} )
 					.append(
-						$(_div, { 'class': classes.sScrollHeadInner } )
+						$(_div, { 'className': classes.sScrollHeadInner } )
 							.css( {
 								'box-sizing': 'content-box',
 								width: scroll.sXInner || '100%'
@@ -5155,7 +5155,7 @@
 					)
 			)
 			.append(
-				$(_div, { 'class': classes.sScrollBody } )
+				$(_div, { 'className': classes.sScrollBody } )
 					.css( {
 						position: 'relative',
 						overflow: 'auto',
@@ -5166,14 +5166,14 @@
 	
 		if ( footer ) {
 			scroller.append(
-				$(_div, { 'class': classes.sScrollFoot } )
+				$(_div, { 'className': classes.sScrollFoot } )
 					.css( {
 						overflow: 'hidden',
 						border: 0,
 						width: scrollX ? size(scrollX) : '100%'
 					} )
 					.append(
-						$(_div, { 'class': classes.sScrollFootInner } )
+						$(_div, { 'className': classes.sScrollFootInner } )
 							.append(
 								footerClone
 									.removeAttr('id')
@@ -5417,7 +5417,7 @@
 		// both match, but we want to hide it completely. We want to also fix their
 		// width to what they currently are
 		_fnApplyToChildren( function(nSizer, i) {
-			nSizer.innerHTML = '<div class="dataTables_sizing">'+headerContent[i]+'</div>';
+			nSizer.innerHTML = '<div className="dataTables_sizing">'+headerContent[i]+'</div>';
 			nSizer.childNodes[0].style.height = "0";
 			nSizer.childNodes[0].style.overflow = "hidden";
 			nSizer.style.width = headerWidths[i];
@@ -5426,7 +5426,7 @@
 		if ( footer )
 		{
 			_fnApplyToChildren( function(nSizer, i) {
-				nSizer.innerHTML = '<div class="dataTables_sizing">'+footerContent[i]+'</div>';
+				nSizer.innerHTML = '<div className="dataTables_sizing">'+footerContent[i]+'</div>';
 				nSizer.childNodes[0].style.height = "0";
 				nSizer.childNodes[0].style.overflow = "hidden";
 				nSizer.style.width = footerWidths[i];
@@ -6873,17 +6873,17 @@
 	
 	
 	/**
-	 * DataTables API class - used to control and interface with  one or more
+	 * DataTables API className - used to control and interface with  one or more
 	 * DataTables enhanced tables.
 	 *
-	 * The API class is heavily based on jQuery, presenting a chainable interface
-	 * that you can use to interact with tables. Each instance of the API class has
+	 * The API className is heavily based on jQuery, presenting a chainable interface
+	 * that you can use to interact with tables. Each instance of the API className has
 	 * a "context" - i.e. the tables that it will operate on. This could be a single
 	 * table, all tables on a page or a sub-set thereof.
 	 *
 	 * Additionally the API is designed to allow you to easily work with the data in
 	 * the tables, retrieving and manipulating it as required. This is done by
-	 * presenting the API class as an array like interface. The contents of the
+	 * presenting the API className as an array like interface. The contents of the
 	 * array depend upon the actions requested by each method (for example
 	 * `rows().nodes()` will return an array of nodes, while `rows().data()` will
 	 * return an array of objects or arrays depending upon your table's
@@ -6902,7 +6902,7 @@
 	 *     // Chained
 	 *     api.row.add( {...} ).draw();
 	 *
-	 * @class DataTable.Api
+	 * @className DataTable.Api
 	 * @param {array|object|string|jQuery} context DataTable identifier. This is
 	 *   used to define which DataTables enhanced tables this API will operate on.
 	 *   Can be one of:
@@ -9669,7 +9669,7 @@
 		"_sFilterRow": null,
 	
 		/**
-		 * Cache of the class name that DataTables has applied to the row, so we
+		 * Cache of the className name that DataTables has applied to the row, so we
 		 * can quickly look at this variable rather than needing to do a DOM check
 		 * on className for the nTr property.
 		 *  @type string
@@ -9858,7 +9858,7 @@
 		"nTf": null,
 	
 		/**
-		 * The class to apply to all TD elements in the table's TBODY for the column
+		 * The className to apply to all TD elements in the table's TBODY for the column
 		 *  @type string
 		 *  @default null
 		 */
@@ -9902,14 +9902,14 @@
 		"sSortDataType": 'std',
 	
 		/**
-		 * Class to be applied to the header element when sorting on this column
+		 * className to be applied to the header element when sorting on this column
 		 *  @type string
 		 *  @default null
 		 */
 		"sSortingClass": null,
 	
 		/**
-		 * Class to be applied to the header element when sorting on this column -
+		 * className to be applied to the header element when sorting on this column -
 		 * when jQuery UI theming is used.
 		 *  @type string
 		 *  @default null
@@ -10289,7 +10289,7 @@
 		 * have `targets` defined in each object in the array. Values in the `targets`
 		 * array may be:
 		 *   <ul>
-		 *     <li>a string - class name will be matched on the TH for the column</li>
+		 *     <li>a string - className name will be matched on the TH for the column</li>
 		 *     <li>0 or a positive integer - column index counting from the left</li>
 		 *     <li>a negative integer - column index counting from the right</li>
 		 *     <li>the string "_all" - all columns (i.e. assign a default)</li>
@@ -10330,7 +10330,7 @@
 	
 		/**
 		 * An array of CSS classes that should be applied to displayed rows. This
-		 * array may be of any length, and DataTables will apply each class
+		 * array may be of any length, and DataTables will apply each className
 		 * sequentially, looping when required.
 		 *  @type array
 		 *  @default null <i>Will take the values determined by the `oClasses.stripe*`
@@ -10937,7 +10937,7 @@
 		/**
 		 * This function allows you to 'post process' each row after it have been
 		 * generated for each table draw, but before it is rendered on screen. This
-		 * function might be used for setting the row class name etc.
+		 * function might be used for setting the row className name etc.
 		 *  @type function
 		 *  @param {node} row "TR" element for the current row
 		 *  @param {array} data Raw data array for this row
@@ -11911,7 +11911,7 @@
 		 * This initialisation variable allows you to specify exactly where in the
 		 * DOM you want DataTables to inject the various controls it adds to the page
 		 * (for example you might want the pagination controls at the top of the
-		 * table). DIV elements (with or without a custom class) can also be added to
+		 * table). DIV elements (with or without a custom className) can also be added to
 		 * aid styling. The follow syntax is used:
 		 *   <ul>
 		 *     <li>The following options are allowed:
@@ -11933,7 +11933,7 @@
 		 *     <li>The following syntax is expected:
 		 *       <ul>
 		 *         <li>'&lt;' and '&gt;' - div elements</li>
-		 *         <li>'&lt;"class" and '&gt;' - div with a class</li>
+		 *         <li>'&lt;"className" and '&gt;' - div with a className</li>
 		 *         <li>'&lt;"#id" and '&gt;' - div with an ID</li>
 		 *       </ul>
 		 *     </li>
@@ -12683,11 +12683,11 @@
 	
 	
 		/**
-		 * Class to give to each cell in this column.
+		 * className to give to each cell in this column.
 		 *  @type string
 		 *  @default <i>Empty string</i>
 		 *
-		 *  @name DataTable.defaults.column.class
+		 *  @name DataTable.defaults.column.className
 		 *  @dtopt Columns
 		 *
 		 *  @example
@@ -12695,7 +12695,7 @@
 		 *    $(document).ready( function() {
 		 *      $('#example').dataTable( {
 		 *        "columnDefs": [
-		 *          { "class": "my_class", "targets": [ 0 ] }
+		 *          { "className": "my_class", "targets": [ 0 ] }
 		 *        ]
 		 *      } );
 		 *    } );
@@ -12705,7 +12705,7 @@
 		 *    $(document).ready( function() {
 		 *      $('#example').dataTable( {
 		 *        "columns": [
-		 *          { "class": "my_class" },
+		 *          { "className": "my_class" },
 		 *          null,
 		 *          null,
 		 *          null,
@@ -13003,7 +13003,7 @@
 	 * given table, including configuration, data and current application of the
 	 * table options. DataTables does not have a single instance for each DataTable
 	 * with the settings attached to that instance, but rather instances of the
-	 * DataTable "class" are created on-the-fly as needed (typically by a
+	 * DataTable "className" are created on-the-fly as needed (typically by a
 	 * $().dataTable() call) and the settings object is then applied to that
 	 * instance.
 	 *
@@ -13120,7 +13120,7 @@
 			"bSortMulti": null,
 	
 			/**
-			 * Apply a class to the columns which are being sorted to provide a
+			 * Apply a className to the columns which are being sorted to provide a
 			 * visual highlight or not. This can slow things down when enabled since
 			 * there is a lot of DOM interaction.
 			 * Note that this parameter will be set by the initialisation routine. To
@@ -13946,7 +13946,7 @@
 	
 	
 		/**
-		 * Element class names
+		 * Element className names
 		 *
 		 *  @type object
 		 *  @default {}
@@ -14427,7 +14427,7 @@
 	
 	
 		/**
-		 * jQuery UI class container
+		 * jQuery UI className container
 		 *  @type object
 		 *  @deprecated Since v1.10
 		 */
@@ -14621,7 +14621,7 @@
 	
 							switch ( button ) {
 								case 'ellipsis':
-									container.append('<span class="ellipsis">&#x2026;</span>');
+									container.append('<span className="ellipsis">&#x2026;</span>');
 									break;
 	
 								case 'first':
@@ -14669,7 +14669,7 @@
 	
 							if ( btnDisplay !== null ) {
 								node = $('<a>', {
-										'class': classes.sPageButton+' '+btnClass,
+										'className': classes.sPageButton+' '+btnClass,
 										'aria-controls': settings.sTableId,
 										'aria-label': aria[ button ],
 										'data-dt-idx': counter,

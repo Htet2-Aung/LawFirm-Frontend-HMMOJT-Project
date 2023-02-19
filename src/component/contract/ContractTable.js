@@ -5,10 +5,10 @@ import ContractList from "./ContractList";
 
 function ContractTable(){
     return(
-        <div class="container">
-            <table id="example" class="table table-striped">
-            <thead class="table-success">
-                <tr class="table-primary text-dark text-center">
+        <div className="container">
+            <table id="example" className="table table-striped">
+            <thead className="table-success">
+                <tr className="table-primary text-dark text-center">
                     <th>Contract Id</th>
                     <th>Contract Description</th>
                     <th>Contract Date</th>                    

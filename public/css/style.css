@@ -457,4 +457,11 @@
       width: 100%;
     }
   }
+  .welcome{
+    background-image: url(../lawfirm.webp);
+  }
+  .hero-header{
+    background: url(../law_house.jpg) top right no-repeat;
+    background-size: cover;
+  }
   

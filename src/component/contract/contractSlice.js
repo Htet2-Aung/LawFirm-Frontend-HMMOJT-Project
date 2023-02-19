@@ -20,7 +20,8 @@ export const addNewContract = createAsyncThunk('contract/addNewContract', async 
 });
 
 export const updateContract = createAsyncThunk('contract/addUpdateContract', async (data)=>{
-    const response = await axios.post(POST_NEW_UpdateCONTRACT,data.contract)
+   await axios.post(POST_NEW_UpdateCONTRACT,data.contract)
+   const response = await axios.get(GET_ALL_CONTRACT)
     return response.data
 });
 

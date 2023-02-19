@@ -31,20 +31,18 @@ function InqueryItem(props) {
 
     return (
 
-        <tr>
+        <tr id="data_table tr">
             <td> {props.id}</td>
                 <td>{props.lawyerName}</td>
                 <td>{props.phoneNo}</td>
                 <td>{props.description}</td>
                 <td className="text-center">
-                    <Link to={`/inquery/edit/${props.id}`}>
-                    <button className="btn btn-success mx-2">Update</button>
-                    </Link>
+                  
                     <Link onClick={deleteHandler}>
-                    <button className="btn btn-danger mx-2">Delete</button>
+                    <i className='fas fa-trash text-danger mx-3'></i>
                     </Link>
                     <Link to={`/appointment/create/${props.id}`}>
-                    <button className="btn btn-info mx-2">Appointment</button>
+                    <button className="btn btn-light mx-2"><i className='fas fa-paste text-primary'></i>Appointment</button>
                     </Link>
                     {isModalOpen && <ConfirmModal onCancel={cancelHandler} onConfirm={confirmHandler} />}
                    
@@ -56,7 +54,7 @@ function InqueryItem(props) {
                 
             //         <div className="service-item bg-primary rounded d-flex flex-column align-items-center justify-content-center text-center">
                         // {/* <div className="service-icon mb-4">
-                        // <i class="fa-solid fa-user"></i>
+                        // <i className="fa-solid fa-user"></i>
                         // </div> */}
                 // <h6 className="mb-3">Id: {props.id}</h6>
                 // <h4 className="mb-3">Lawyer: {props.lawyerName}</h4>
