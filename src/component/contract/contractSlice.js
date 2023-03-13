@@ -13,15 +13,24 @@ export const fetchContracts = createAsyncThunk('contract/fetchContracts', async 
     return response.data;
 });
 
-export const addNewContract = createAsyncThunk('contract/addNewContract', async (data)=>{
+
+export const addNewContract = createAsyncThunk('contract/addNewContract', async(data)=>{
     
-    const response = await axios.post(`${ POST_NEW_CONTRACT }${data.appointmentId}`,data.contract)
-    return response.data
-});
+    console.log("In the contract slice toke is"+data.token)
+    console.log("In the contract slice appointment is"+data.contract)
+    console.log("In the contract slice appointmet id is"+data.appointmentId)
+    const response = await axios.post(`${POST_NEW_CONTRACT}${data.appointmentId}`,data.contract,{
+        headers:{
+            
+        'Authorization':data.token,
+    }
+})
+    return response.data;
+})
+
 
 export const updateContract = createAsyncThunk('contract/addUpdateContract', async (data)=>{
-   await axios.post(POST_NEW_UpdateCONTRACT,data.contract)
-   const response = await axios.get(GET_ALL_CONTRACT)
+    const response = await axios.post(POST_NEW_UpdateCONTRACT,data.contract)
     return response.data
 });
 
@@ -80,7 +89,7 @@ export const contractSlice = createSlice({
              .addCase(updateContract.fulfilled,(state,action)=>{
                 const contract = action.payload
 
-                const contracts = state.contracts.filter(p => p.contractIde !== contract.contractId)
+                const contracts = state.contracts.filter(p => p.contractId !== contract.contractId)
 
                 state.contracts = [contract,...contracts]              
 
@@ -105,6 +114,11 @@ export const selectAllContract = (state)=>state.contracts.contracts;
 export const getContractStatus =  (state)=>state.contracts.status;
 export const getContractError =  (state)=>state.contracts.error;
 export const selectContractById = (state,contractId)=> state.contracts.contracts.find(contract => contract.id === contractId)
+export const selectContractsByDes = (state,searchValue)=>(searchValue==="")?state.contracts.contracts:state.contracts.contracts.filter(contract=> contract.conDescription.toLowerCase().includes(searchValue.toLowerCase()))
+export const selectContractsByCaseStatus = (state,searchStatus)=>state.contracts.contracts.filter(contract=> contract.caseCreated===(searchStatus))
+export const selectContractsByUsername = (state,email)=>state.contracts.contracts.filter(contract=> contract.username===(email))
+export const selectContractsByLawyerName = (state,email)=>state.contracts.contracts.filter(contract=> contract.lawyerName===(email))
+
 export const { addContract } = contractSlice.actions;
 export default contractSlice.reducer;
 

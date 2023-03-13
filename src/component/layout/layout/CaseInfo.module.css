@@ -1,0 +1,32 @@
+.project__content
+{
+    position: absolute;
+    font-family: "Flaticon";
+    bottom: 40px;
+    color: #ededed;
+    font-size: 85px;
+    line-height: 1;
+    opacity: 0.7;
+    right: 45px;
+    top: 40px;
+    z-index: -1;
+    -webkit-transition: all 0.4s ease-out 0s;
+    -moz-transition: all 0.4s ease-out 0s;
+    -ms-transition: all 0.4s ease-out 0s;
+    -o-transition: all 0.4s ease-out 0s;
+    transition: all 0.4s ease-out 0s;
+}
+
+
+.progress .progress_bar {
+    background-color: #b49657;
+    width: 85%;
+}
+.progress {
+    display: flex;
+    height: 1rem;
+    overflow: hidden;
+    font-size: .75rem;
+    background-color: #e9ecef;
+    border-radius: 0.25rem;
+}

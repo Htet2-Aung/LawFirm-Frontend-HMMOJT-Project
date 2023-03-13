@@ -1,30 +1,37 @@
-import { updateCase, selectCaseById } from "./casesSlice";
+import { addNewCase, selectAllCase, fetchCases} from "./casesSlice";
 import { useDispatch } from "react-redux";
 import { useState} from "react";
-import { useParams } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
+import { useParams } from "react-router-dom";
+import lawyerDiscussion from "./caseImg.jfif";
 import { useSelector } from "react-redux";
-import Card from '../ui/Card'
-
-
+import { selectAllCourt,fetchCourts } from "../court/courtSlices";
+import { fetchCategories, selectAllCategory } from "../category/categorySlices";
+import { useEffect } from "react";
+import { selectCaseById} from "./casesSlice";
+import { updateCase } from "./casesSlice";
 
 function EditCaseForm(props) {
-
     const { caseId } = useParams()
     console.log(caseId)
     console.log(typeof caseId)
     
     const caseLaw = useSelector((state) => selectCaseById(state, Number(caseId)))
-    //const case = useSelector(
-        //(caseId) =>cases.find(case => case.id === caseId)
-   // )
+    const cases=useSelector(selectAllCase);
+    console.log(cases);
     
-    //console.log(case);
+    const catId=useState(caseLaw.category); 
+    console.log("case cat id obj is"+catId)
     const navigate = useNavigate()
-
-    console.log(caseLaw)
     
-    const [id,setId]=useState(caseLaw.id);
+    
+   
+    const courts=useSelector(selectAllCourt)
+    const categories = useSelector(selectAllCategory );
+    console.log("categories are"+ categories)
+    console.log("courts are"+ courts)
+    
+    const [id,setId]=useState(caseLaw.id)
     const [caseTitle, setCaseTitle] = useState(caseLaw.caseTitle); 
     const [attenCourtRoom, setAttenCourtRoom] = useState(caseLaw.attenCourtRoom);
     const [startDate, setStartDate] = useState(caseLaw.startDate);
@@ -33,6 +40,10 @@ function EditCaseForm(props) {
     const [endTime, setEndTime] = useState(caseLaw.endTime);
     const [description, setDescription] = useState(caseLaw.description);   
     const [addRequestStatus, setAddRequestStatus] = useState('idle')
+    const [courtId, setCourtId] = useState(caseLaw.court.id);
+    const [categoryId, setCategoryId] = useState(caseLaw.category.id);
+    const [caseStatus, setCaseStatus] = useState('');
+
 
 
 
@@ -43,33 +54,47 @@ function EditCaseForm(props) {
     const onEndDateChange = e => setEndDate(e.target.value);
     const onEndTimeChange = e => setEndTime(e.target.value);
     const onDescriptionChange = e => setDescription(e.target.value);
+    const onCourtNameChange = e => setCourtId(e.target.value);
+    const onCategoryNameChange = e => setCategoryId(e.target.value);
+    const onCaseStatusChange = e => setCaseStatus(e.target.value);
+    
+    
 
-
-    const canSave = [caseTitle, startDate, id].every(Boolean) && addRequestStatus === 'idle'
-    console.log([caseTitle, startDate, id].every(Boolean))
-    console.log(addRequestStatus)
-    console.log(canSave)
-    // const token = useSelector(getToken)
-
-    //const isEdit = props.mode === 'edit'
-
-    const dispatch = useDispatch();
 
     
+    
+    // const token = useSelector(getToken)
+
+    
+
+const dispatch = useDispatch();
+
+useEffect(()=>{
+        
+        dispatch(fetchCourts()) 
+        dispatch(fetchCategories())
+        dispatch(fetchCases())
+        
+    
+},[dispatch]);
 
     const onSubmit = (event) => {
         event.preventDefault();
         //console.log(token)
 
-        if (canSave) {
+       
             
 
                 setAddRequestStatus('pending');
+                console.log("id is"+id);
+                console.log("Court id is"+courtId);
+                console.log("categoryId is"+categoryId);
 
                 dispatch(
                     
+                    
                     updateCase({
-                        lawCase:{
+                        lawCase: {
                             id,
                             caseTitle,
                             attenCourtRoom,
@@ -77,19 +102,21 @@ function EditCaseForm(props) {
                             startTime,
                             endDate,
                             endTime,
-                            description
+                            description,
+                            caseStatus
                             
-                        }
-                    })).unwrap();
+                        },categoryId,courtId
+                    }),
+                    
+                ).unwrap();
 
                 navigate('/case')
 
             
-                
-                
+                setAddRequestStatus('idle')    
 
 
-            
+           
                 setCaseTitle('');
                 setAttenCourtRoom('');
                 setStartDate('');
@@ -97,121 +124,188 @@ function EditCaseForm(props) {
                 setEndDate('');
                 setEndTime('');
                 setDescription('');
-                setId('');
-                setAddRequestStatus('idle')
+            
 
-        }
+        
     }
 
 
     return (
-        <Card>
 
-            <div className="container-fluid py-5">
+        <div className="container bg-gradient-primary">
 
-                <div className="container">
-                    <div className="row gx-5">
-                        <div className="col-lg-3 mb-5 mb-lg-0">
-                        </div>
-                        <div className="col-lg-6 mb-5 mb-lg-0">
+        <div className="card o-hidden  shadow-lg my-5">
+            <div className="card-body p-0">
 
-                            <h1 className="text-primary text-center mb-4">Make Case</h1>
-                            <div className="bg-primary text-center rounded p-5">
-
-                            <form onSubmit={onSubmit}>
-                                    <div className="row g-3">
-                                        <div className="col-12 col-sm-4">
-
-                                        <input type="text"
-                                            className="form-control text-primary bg-white border-0 datetimepicker-input"
-                                            value={id}
-                                            disabled={true}
-                                            placeholder="Case Title" data-target="#time" data-toggle="datetimepicker" />
-
-                                        </div>
-                                        <div className="col-12 col-sm-4">
-                                        <input type="text"
-                                            className="form-control text-primary bg-white border-0 datetimepicker-input"
+                <div className="row">
+                    <div className="col-lg-5 d-none d-lg-block fluid ">
+                        <img src={lawyerDiscussion} className="w-100 h-80 pt-5 my-5" />
+                    </div>
+                    <div className="col-lg-7">
+                        <div className="p-5">
+                            <div className="text-center">
+                                <h1 className="h4 text-gray-900 mb-4">Create A Case!</h1>
+                            </div>
+                            <form onSubmit={onSubmit} className="user">
+                                <div className="form-group row mb-3">
+                                    <div className="col-sm-6 mb-3 mb-sm-0">
+                                    <input type="text" className="form-control text-primary bg-white datetimepicker-input"
                                             value={caseTitle}
                                             onChange={onCaseTitleChange}
-                                            
-                                            placeholder="Case Title" data-target="#time" data-toggle="datetimepicker" />
-
-                                        </div>
-                                        <div className="col-12 col-sm-4">
-                                        <input type="text"
-                                            className="form-control text-primary bg-white border-0 datetimepicker-input"
+                                            placeholder="Case Title"
+                                        />
+                                    </div>
+                                    <div className="col-sm-6">
+                                        <input type="number" className="form-control text-primary bg-white datetimepicker-input"
                                             value={attenCourtRoom}
                                             onChange={onAttenCourtRoomChange}
-                                            placeholder="Attendent Court Room" data-target="#time" data-toggle="datetimepicker" />
-
-                                        </div>
-                                        <div className="col-12 col-sm-4">
+                                            placeholder="Attendent Court Room"
+                                        />
+                                    </div>
+                                </div>
+                                
+                                <div className="form-group row mb-3">
+                                    
+                                    <div className="col-sm-6 mb-3 mb-sm-0">
+                                        <label>Start Date</label>
                                         <input type="date"
-                                            className="form-control text-primary bg-white border-0 datetimepicker-input"
+                                            className="form-control text-primary bg-white  datetimepicker-input"
                                             value={startDate}
                                             onChange={onStartDateChange}
                                             placeholder="Start Date" data-target="#time" data-toggle="datetimepicker" />
-
-                                        </div>
-                                        <div className="col-12 col-sm-4">
+                                    </div>
+                                    <div className="col-sm-6">
+                                    <label>Start Time</label>
                                         <input type="time"
-                                            className="form-control text-primary bg-white border-0 datetimepicker-input"
+                                            className="form-control text-primary bg-white  datetimepicker-input"
                                             value={startTime}
                                             onChange={onStartTimeChange}
                                             placeholder="Start Time" data-target="#time" data-toggle="datetimepicker" />
+                                    </div>
+                                </div>
+                                <div className="form-group row mb-3">
+                                    <div className="col-sm-6 mb-3 mb-sm-0">
+                                    <select
+                                        className="form-control"
+                                        value={courtId}
+                                        onChange={onCourtNameChange}
+                                    >
+                                        <option value="">Add Court Name</option>
+                                        {courts.map( (court) =>
+                                                    
+                                                        <option value={court.id}>
+                                                            {court.courtName}
+                                                        </option>
+                                                    
+                                                    )};
+                                       
+                                       
+                                        
+                                        
+                                    </select>
+                                    </div>
+                                    <div className="col-sm-6">
+                                    <select
+                                        className="form-control"
+                                        value={categoryId}
+                                        onChange={onCategoryNameChange}
+                                    >
+                                        <option value="">Choose Category</option>
+                                        {categories.map( (category) =>
+                                                    
+                                                        <option value={category.id}>
+                                                            {category.categoryName}
+                                                        </option>
+                                                    
+                                                    )};
+                                       
+                                         
+                                        
+                                        
+                                    </select>
+                                    </div>
+                                </div>
 
+                                <div className="form-group row mb-3">
+                                        <div className="col-sm-6">
+                                        <select
+                                            className="form-control"
+                                            value={caseStatus}
+                                            onChange={onCaseStatusChange}
+                                        required>
+                                            <option value="">Choose Case Status</option>
+                                            <option value="Current">Current</option>
+                                            <option value="Fail">Fail</option>
+                                            <option value="Success">Success</option>
+                                        </select>
                                         </div>
-                                        <div className="col-12 col-sm-4">
+                                        <div className="col-sm-6"></div>
+
+                                </div>
+
+                                <div className="form-group row mb-3">
+                                
+                                    <div className="col-sm-6 mb-3 mb-sm-0">
+                                    <label>End Date</label>
                                         <input type="date"
-                                            className="form-control text-primary bg-white border-0 datetimepicker-input"
+                                            className="form-control text-primary bg-white  datetimepicker-input"
                                             value={endDate}
                                             onChange={onEndDateChange}
                                             placeholder="End Date" data-target="#time" data-toggle="datetimepicker" />
-
-                                        </div>
-                                        <div className="col-12 col-sm-4">
+                                    </div>
+                                    <div className="col-sm-6">
+                                    <label>End Time</label>
                                         <input type="time"
-                                            className="form-control text-primary bg-white border-0 datetimepicker-input"
+                                            className="form-control text-primary bg-white  datetimepicker-input"
                                             value={endTime}
                                             onChange={onEndTimeChange}
                                             placeholder="End Time" data-target="#time" data-toggle="datetimepicker" />
-
-                                        </div>
-                                                                                
-                                        
-                                        
-                                        <div className="col-12">
-
-                                            <textarea type="text"
-                                                className="form-control text-primary bg-white border-0 datetimepicker-input"
-                                                rows={10}
+                                    </div>
+                                </div>
+                                <div className="form-group row mb-3">
+                                <textarea type="text"
+                                                className="form-control text-primary bg-white  datetimepicker-input"
+                                                rows={7}
                                                 value={description}
                                                 onChange={onDescriptionChange}
                                                 placeholder="Case Description" data-target="#time" data-toggle="datetimepicker" />
 
-                                        </div>
-                                        <div className="col-12">
-                                            <input
-                                                type="submit"
-                                                className="btn btn-light text-primary btn-block mt-4"
-                                                
-                                                value={'Update Case'}
-                                            />
+                                </div>
+                                <div className="form-group row mb-3">
+                                    <div className="col-sm-6 mb-3 mb-sm-0">
+                                    <input
+                                        type="submit"
+                                        className="btn btn-primary w-100 py-3"
 
-                                        </div>
-                                        </div>
-                                    
+                                        value={'Make Case'}
+                                    />
+                                    </div>
+                                    <div className="col-sm-6 mb-3 mb-sm-0">
+                                    <input
+                                        type="reset"
+                                        className="btn btn-danger w-100 py-3"
+
+                                        value={'Reset'}
+                                    />
+                                    </div>
+                                </div>
+
                                 </form>
-                            </div>
+
 
                         </div>
                     </div>
                 </div>
-
             </div>
+        </div>
 
-        </Card>
+    </div>
+
+        
+
+
+
+        
 
     );
 }

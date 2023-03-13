@@ -1,22 +1,34 @@
 import { Link } from "react-router-dom";
 import AppointmentList from "../appointment/AppointmentList";
+import $, { each } from "jquery"
+import { useEffect } from "react";
 
 function AppTable() {
+    useEffect(() => {
+        setTimeout(() => {
+            // $('#example').DataTable().destroy();
+            $('#example').DataTable();
+        }, 200);
+    })
+
     return (
-        <div className="container-fluid">
+        <div className="row container-fluid">
+            <div className="col-md-1"></div>
+            <div className="col-md-11">
             <div className="card shadow mb-4">
                 <div className="card-header py-3">
-                    <h6 className="m-0 font-weight-bold text-primary">DataTables Example</h6>
+                    <h4>Appointment List</h4>
                     <Link to="/inquery" className="text-primary">Back</Link>
-
                 </div>
                 <div className="card-body">
                     <div className="table-responsive">
-                        <table className="table table-bordered" id="dataTable" width="100%" cellspacing="0">
-                            <thead>
+                        <table className="display" id="example" width="100%" cellspacing="0">
+                            <thead className="text-center">
                                 <tr>
-                                    <th>Id</th>
+                                    <th>No.</th>
                                     <th>Name</th>
+                                    <th>User Name</th>
+                                    <th>Lawyer Name</th>
                                     <th>ConsultantFees</th>
                                     <th>LawyerStatus</th>
                                     <th>ClientStatus</th>
@@ -28,12 +40,35 @@ function AppTable() {
                             <tbody>
                                 <AppointmentList />
                             </tbody>
+                            <tfoot className="text-center">
+                                <tr>
+                                    <th>No.</th>
+                                    <th>Name</th>
+                                    <th>User Name</th>
+                                    <th>Lawyer Name</th>
+                                    <th>ConsultantFees</th>
+                                    <th>LawyerStatus</th>
+                                    <th>ClientStatus</th>
+                                    <th>Date</th>
+                                    <th>Time</th>
+                                    <th>Actions</th>
+                                </tr>
+                            </tfoot>
                         </table>
                     </div>
                 </div>
             </div>
+            </div>
+            <div className="col-md-1"></div>
+          
 
         </div>
+
+
+
+
+
+
 
 
     );

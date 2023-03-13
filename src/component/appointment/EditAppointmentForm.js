@@ -1,68 +1,94 @@
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
-import { selectAppointmentById, updateAppointment } from "./appointmentSlice";
+import { fetchAppointment, fetchAppointmentAdmin, selectAppointmentById, updateAppointment } from "./appointmentSlice";
 import { useNavigate } from "react-router-dom";
 import lawyerDiscussion from "./lawyerDiscussion.jpg";
+import { getToken } from "../auth/authSlice";
+import { useEffect } from "react";
 
-function EditAppointmentForm(props){
-    const { appointmentId } = useParams( )
-    const navigate = useNavigate()
-    const appointment = useSelector((state)=>selectAppointmentById(state,Number(appointmentId))) 
+function EditAppointmentForm(props) {
+
+    const token=useSelector(getToken);
+  
+  
+
+    const { appointmentId, inqueryId } = useParams()
+    console.log("In the appointment update :"+inqueryId)
     console.log(appointmentId)
+    const navigate = useNavigate()
+    const appointment = useSelector((state) => selectAppointmentById(state, Number(appointmentId)))
     console.log(appointment)
 
-    const [id,setId] = useState(appointment?.id);
-    
-    const [name,setName] = useState(appointment?.name);
-    const [consultantFees,setConsultantFees] = useState(appointment?.consultantFees)
-    const [clientStatus,setClientStatus] = useState(appointment?.clientStatus);
-    const [lawyerStatus,setLawyerStatus] = useState(appointment?.lawyerStatus);
-    const [date,setDate] = useState(appointment?.date);
-    const [time,setTime] = useState(appointment?.time);
-    const [addRequestStatus,setAddRequestStatus]= useState('idle')
 
-     
+
+    const [id, setId] = useState(appointment?.id);
     
+
+    const [name, setName] = useState(appointment?.name);
+    const [username, setUsername] = useState(appointment.username);
+    const [lawyerName, setLawyerName] = useState(appointment.lawyerName)
+    const [contractStatus, setContractStatus] = useState(appointment.contractStatus)
+    const [consultantFees, setConsultantFees] = useState(appointment?.consultantFees)
+    const [clientStatus, setClientStatus] = useState(appointment?.clientStatus);
+    const [lawyerStatus, setLawyerStatus] = useState(appointment?.lawyerStatus);
+    const [date, setDate] = useState(appointment?.date);
+    const [time, setTime] = useState(appointment?.time);
+    const [addRequestStatus, setAddRequestStatus] = useState('idle')
+    
+
     const onNameChange = e => setName(e.target.value);
     const onConsultantFeesChange = e => setConsultantFees(e.target.value);
     const onClientStatusChange = e => setClientStatus(e.target.value);
     const onLawyerStatusChange = e => setLawyerStatus(e.target.value);
+    const onUsername = e => setUsername(e.target.value);
+    const onLawyerName = e => setLawyerName(e.target.value);
+    const onContractStatus = e => setContractStatus(e.target.value);
     const onDateChange = e => setDate(e.target.value);
     const onTimeChange = e => setTime(e.target.value);
 
-
-    const canSave = [ name,consultantFees,clientStatus,lawyerStatus,date,time].every(Boolean) && addRequestStatus === 'idle'
    
+
+    const canSave = [name, consultantFees, clientStatus, lawyerStatus, date, time].every(Boolean) && addRequestStatus === 'idle'
+
 
     const dispatch = useDispatch();
 
-    const onSubmit = (event)=>{
+    useEffect(()=>{
+        dispatch(fetchAppointmentAdmin())
+    },[dispatch])
+
+    const onSubmit = (event) => {
         event.preventDefault();
 
-         
-           if(canSave){
+        if (canSave) {
             try {
                 setAddRequestStatus('pending')
-                
 
                 dispatch(
-                   
-                   updateAppointment({
-                    id,
-                    name,
-                    consultantFees,
-                    clientStatus,
-                    lawyerStatus,
-                    date,
-                    time
+
+                    updateAppointment({
+                        
+                            appointment: {
+                                id,
+                                name,
+                                consultantFees,
+                                lawyerName,
+                                username,
+                                contractStatus,
+                                clientStatus,
+                                lawyerStatus,
+                                date,
+                                time
+                            },inqueryId,token
+                     
                     }),
                 ).unwrap();
-            }                
-             catch (error) {
+            }
+            catch (error) {
                 console.log(error)
-                
-            }finally{
+
+            } finally {
                 setAddRequestStatus('idle')
             }
 
@@ -75,16 +101,19 @@ function EditAppointmentForm(props){
             setClientStatus('')
             setDate('')
             setTime('')
-           }
-           console.log(canSave)
-        
+            setUsername('')
+            setLawyerName('')
+            setContractStatus('')
         }
-        return(
-            <div className="container bg-gradient-primary">
+        console.log(canSave)
+
+    }
+    return (
+        <div className="container bg-gradient-primary">
 
             <div className="card o-hidden border-0 shadow-lg my-5">
                 <div className="card-body p-0">
-    
+
                     <div className="row">
                         <div className="col-lg-5 d-none d-lg-block">
                             <img src={lawyerDiscussion} className="w-100 h-100" />
@@ -97,7 +126,7 @@ function EditAppointmentForm(props){
                                 <form onSubmit={onSubmit} className="user">
                                     <div className="form-group row mb-3">
                                         <div className="col-sm-6 mb-3 mb-sm-0">
-                                        <input type="text" className="form-control" id="exampleLastName"
+                                            <input type="text" className="form-control" id="exampleLastName"
                                                 placeholder="Name"
                                                 value={name}
                                                 onChange={onNameChange}
@@ -105,7 +134,7 @@ function EditAppointmentForm(props){
                                         </div>
                                         <div className="col-sm-6">
                                             <input type="text" className="form-control" id="exampleLastName"
-                                                placeholder="Phone Number"
+                                                placeholder="Consultant Fees"
                                                 value={consultantFees}
                                                 onChange={onConsultantFeesChange}
                                             />
@@ -113,31 +142,31 @@ function EditAppointmentForm(props){
                                     </div>
                                     <div className="form-group row mb-3">
                                         <div className="col-sm-6 mb-3 mb-sm-0">
-                                        <select
+                                            <select
                                                 className="form-control"
                                                 value={clientStatus}
                                                 onChange={onClientStatusChange}
                                             >
-                                                <option value="">Select Status</option>
+                                                <option value="">Select Client Status</option>
                                                 <option value="Agree">Agree</option>
-                                                <option value="Disagree">Disagree</option>
+                                                <option value="EditedDisagree">EditedDisagree</option>
                                             </select>
                                         </div>
                                         <div className="col-sm-6">
-                                        <select
+                                            <select
                                                 className="form-control"
                                                 value={lawyerStatus}
                                                 onChange={onLawyerStatusChange}
                                             >
-                                                <option value="">Select Status</option>
+                                                <option value="">Select Lawyer Status</option>
                                                 <option value="Agree">Agree</option>
-                                                <option value="Disagree">Disagree</option>
+                                                <option value="EditedDisagree">EditedDisagree</option>
                                             </select>
                                         </div>
                                     </div>
                                     <div className="form-group row mb-3">
                                         <div className="col-sm-6 mb-3 mb-sm-0">
-                                        <input type="date" className="form-control" id="exampleLastName"
+                                            <input type="date" className="form-control" id="exampleLastName"
                                                 placeholder="Appointment Date"
                                                 value={date}
                                                 onChange={onDateChange}
@@ -153,34 +182,34 @@ function EditAppointmentForm(props){
                                     </div>
                                     <div className="form-group row mb-3">
                                         <div className="col-sm-6 mb-3 mb-sm-0">
-                                        <input
-                                            type="submit"
-                                            className="btn btn-primary w-100 py-3"
-    
-                                            value={'Update An Appointment'}
-                                        />
+                                            <input
+                                                type="submit"
+                                                className="btn btn-primary w-100 py-3"
+
+                                                value={'Update An Appointment'}
+                                            />
                                         </div>
                                         <div className="col-sm-6 mb-3 mb-sm-0">
-                                        <input
-                                            type="reset"
-                                            className="btn btn-danger w-100 py-3"
-    
-                                            value={'Reset'}
-                                        />
+                                            <input
+                                                type="reset"
+                                                className="btn btn-danger w-100 py-3"
+
+                                                value={'Reset'}
+                                            />
                                         </div>
                                     </div>
-    
-    
+
+
                                 </form>
-    
-    
+
+
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
-    
+
         </div>
-        );
+    );
 }
 export default EditAppointmentForm;

@@ -1,17 +1,110 @@
-import { useState } from "react";
-import { useDispatch } from "react-redux";
+import { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
+import { getToken, getUser } from "../auth/authSlice";
+import { fetchUser, selectUserByEmail } from "../user/usersSlice";
 import ConfirmModal from "../utility/ConfirmModal";
 import { deleteInquery } from "./inquerySlice";
 
 function InqueryItem(props) {
-   
+    const token = useSelector(getToken)
+    console.log("In the inquery Item and token is " + token)
+
+    const user = useSelector(getUser)
+    console.log("In the inquery Item " + user.role)
+
+
+
+
+    function Admin() {
+        return (
+            <td className="text-center">
+                <Link to={`info/${props.id}`}>
+                    <i title="View Inquiry" className="bi bi-info-circle text-info mx-3"></i>
+                </Link>
+                <SetLink />
+
+            </td>
+        );
+    }
+    function User() {
+        return (
+            <td className="text-center">
+
+                {/* created & not create */}
+                <DeleteLink />
+            </td>
+        );
+    }
+
     console.log(props.id);
 
-    const [isModalOpen,setModalOpen] = useState(false)
-    const dispatch = useDispatch();
+    function LinkItem() {
+        return (
+            <Link to={`/appointment/create/${props.id}`}>
+                <i title="Appointment create" className='fas fa-paste text-primary'></i>
+            </Link>
 
-    function deleteHandler(){
+        );
+    }
+
+    function DeleteLink() {
+        let content;
+        if (props.appointmentStatus !== 'CREATED') {
+            content = (
+                <span>
+                    <Link to={`info/${props.id}`}>
+                        <i title="View Inquiry" className="bi bi-info-circle text-info mx-3"></i>
+                    </Link>
+                    <Link to={`/inquery/edit/${props.id}`}>
+                        <i title="Edit inquiry" className='fas fa-edit text-success mx-3'></i>
+                    </Link>
+                    <Link onClick={deleteHandler}>
+                        <i title="Delete" className="fa fa-minus-circle pr-1 mx-2 text-danger "></i>
+                    </Link>
+                    {isModalOpen && <ConfirmModal onCancel={cancelHandler} onConfirm={confirmHandler} />}
+                </span>
+            )
+        } else {
+            content = (
+                <Link to={`info/${props.id}`}>
+                    <button className="btn btn-primary">View Inquiry</button>
+                </Link>
+            )
+        }
+        return content;
+    }
+    function UnLinkItem() {
+        return (
+            <i title="Created Appointment" className='fas fa-paste text-success'></i>
+        );
+    }
+
+    function SetLink() {
+        let content;
+        console.log("in the setLink")
+        console.log(props.appointmentStatus)
+        if (props.appointmentStatus === 'CREATED') {
+            content = <UnLinkItem />
+        }
+        else {
+            content = <LinkItem />
+        }
+        return content;
+    }
+
+    console.log(props.id);
+
+
+    const [isModalOpen, setModalOpen] = useState(false)
+    const dispatch = useDispatch();
+    const appointmentStatus = props.appointmentStatus
+    console.log("Id for AppointmentStatus" + appointmentStatus)
+
+
+
+
+    function deleteHandler() {
         setModalOpen(true);
     }
 
@@ -19,67 +112,66 @@ function InqueryItem(props) {
     //     setModalOpen(false);
     // }
 
-    function cancelHandler(){
+    function cancelHandler() {
         setModalOpen(false);
     }
 
-    function confirmHandler(){
-        dispatch(deleteInquery({inqueryId:props.id})).unwrap()
+    function confirmHandler() {
+        dispatch(deleteInquery({ inqueryId: props.id, token })).unwrap()
 
         setModalOpen(false)
     }
 
-    return (
 
-        <tr id="data_table tr">
-            <td> {props.id}</td>
+    let result;
+    if (user.role === 'User') {
+        result = (
+            <tr id="data_table tr">
+                <td> {props.no}</td>
                 <td>{props.lawyerName}</td>
+                <td>{props.userName}</td>
                 <td>{props.phoneNo}</td>
-                <td>{props.description}</td>
-                <td className="text-center">
-                  
-                    <Link onClick={deleteHandler}>
-                    <i className='fas fa-trash text-danger mx-3'></i>
-                    </Link>
-                    <Link to={`/appointment/create/${props.id}`}>
-                    <button className="btn btn-light mx-2"><i className='fas fa-paste text-primary'></i>Appointment</button>
-                    </Link>
-                    {isModalOpen && <ConfirmModal onCancel={cancelHandler} onConfirm={confirmHandler} />}
-                   
+                {/* <td>{props.description}</td> */}
+                <td>{props.appointmentStatus}</td>
+                <User />
+
+            </tr>
+        )
+    } else if (user.role === 'Admin') {
+
+
+        result = (
+            <tr id="data_table tr">
+                <td> {props.no}</td>
+                <td>{props.lawyerName}</td>
+                <td>{props.userName}</td>
+                <td>{props.phoneNo}</td>
+                {/* <td>{props.description}</td> */}
+                <td>{props.appointmentStatus}</td>
+                <Admin />
+
+            </tr>
+
+        )
+
+    }
+    else {
+        result = (
+            <tr id="data_table tr">
+                <td> {props.no}</td>
+                <td>{props.lawyerName}</td>
+                <td>{props.userName}</td>
+                <td>{props.phoneNo}</td>
+                {/* <td>{props.description}</td> */}
+                <td>{props.appointmentStatus}</td>
+                <td><Link to={`info/${props.id}`}>
+                    <i title="View Inquery" className="bi bi-info-circle text-info"></i>
+                </Link>
                 </td>
-                
-        </tr>
-            
-            // <div className="col-lg-4 col-md-6">
-                
-            //         <div className="service-item bg-primary rounded d-flex flex-column align-items-center justify-content-center text-center">
-                        // {/* <div className="service-icon mb-4">
-                        // <i className="fa-solid fa-user"></i>
-                        // </div> */}
-                // <h6 className="mb-3">Id: {props.id}</h6>
-                // <h4 className="mb-3">Lawyer: {props.lawyerName}</h4>
-                // <h6 className="mb-3">User PhoneNo: {props.phoneNo}</h6>
-                // <p className="m-0">{props.description}</p>
-                // <div className="my-3">
-                //     <Link to={`/inquery/edit/${props.id}`}>
-                //         <button className="btn btn-success mx-3">Update</button>
-                //     </Link>
-                //     <Link onClick={deleteHandler}>
-                //         <button className="btn btn-danger mx-3">
-                //             Delete
-                //         </button>
-                //     </Link>
-                //     {isModalOpen && <ConfirmModal onCancel={cancelHandler} onConfirm={confirmHandler} />}
-                //     {/* {isModalOpen && <Backdrop onBackdrop={backdropHandler}/>}  */}
-                // </div>
-                // <a className="btn btn-lg btn-primary rounded-pill">
-                //     <i className="bi bi-arrow-right"></i>
-                // </a>
-            //         </div>
-             
-            // </div>
 
-
-    );
+            </tr>
+        )
+    }
+    return result;
 }
 export default InqueryItem;

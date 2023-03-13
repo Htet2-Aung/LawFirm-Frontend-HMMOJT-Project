@@ -1,7 +1,9 @@
-function TopHeader(){
-    return(
-        <div>            
-   
+import Home from "./Home";
+
+function TopHeader() {
+    return (
+        <div>
+
             <div className="container-fluid py-2 border-bottom d-none d-lg-block text-primary">
                 <div className="container">
                     <div className="row">
@@ -34,8 +36,8 @@ function TopHeader(){
                     </div>
                 </div>
             </div>
-    
 
+            <Home />
         </div>
 
     );

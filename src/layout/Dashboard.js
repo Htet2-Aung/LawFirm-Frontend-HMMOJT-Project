@@ -1,35 +1,74 @@
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { fetchAppointment, selectAllIAppointment } from "../component/appointment/appointmentSlice";
-import { selectAllCase } from "../component/case/casesSlice";
-import { selectAllContract } from "../component/contract/contractSlice";
-import { fetchInquery, selectAllInquery } from "../component/inquery/inquerySlice";
+import { Link } from "react-router-dom";
+import { fetchAppointment, fetchAppointmentAdmin, selectAllIAppointment, selectAppointmentByContractStatus } from "../component/appointment/appointmentSlice";
+import { fetchCases, selectAllCase } from "../component/case/casesSlice";
+import { fetchContracts, selectAllContract, selectContractsByCaseStatus } from "../component/contract/contractSlice";
+import { fetchInquery, fetchInqueryAdmin, selectAllInquery, selectInqueryByStatus } from "../component/inquery/inquerySlice";
+import { fetchPayments, selectAllPayments } from "../component/payment/paymentSlice";
+import { fetchUser, selectAllUser } from "../component/user/usersSlice";
 
 function Dashboard(){
     const dispatch = useDispatch()
-    const inquerys = useSelector(selectAllInquery)
+    const users = useSelector(selectAllUser)
+    const inquerys = useSelector((state)=>selectInqueryByStatus(state,'NO_CREATE'))
     console.log("InqueryList: "+inquerys.length)
-    const appointments = useSelector(selectAllIAppointment)
-    const contracts = useSelector(selectAllContract)
+    const appointments = useSelector((state)=>selectAppointmentByContractStatus(state,'NO_CREATE'))
+    const contracts = useSelector((state)=>selectContractsByCaseStatus(state,'NO_CREATE'))
+    console.log("app list: "+appointments.length)
+    console.log("contract list: "+contracts.length)
     const cases = useSelector( selectAllCase )
+    const payments = useSelector( selectAllPayments );
+
+  
+        let sum=0;
+        payments.map(
+            (pay)=>(sum=sum+pay.totalCost));
+
+        console.log("Sum is ::::::"+sum)
+      
+
    
     useEffect(() => {
-        
-            dispatch(fetchInquery())
-            dispatch(fetchAppointment())
-        },dispatch
+            dispatch(fetchUser())
+            dispatch(fetchInqueryAdmin())
+            dispatch(fetchAppointmentAdmin())
+            dispatch(fetchContracts())
+            dispatch(fetchCases())
+            dispatch(fetchPayments())
+        },[dispatch]
         )
 
    
     return(
         <div className="row">
-             <div className="col-xl-3 col-md-6 mb-4">
+        <div className="col-xl-2 col-md-6 mb-4">
+                            <Link to="/userLog">
                             <div className="card border-left-primary shadow h-100 py-2">
                                 <div className="card-body">
                                     <div className="row no-gutters align-items-center">
                                         <div className="col mr-2">
                                             <div className="text-xs font-weight-bold text-primary text-uppercase mb-1">
-                                            Total Inquiry</div>
+                                            Total User</div>
+                                            <div className="h5 mb-0 font-weight-bold text-gray-800">{users.length}</div>
+                                        </div>
+                                        <div className="col-auto">
+                                        <i className='fas fa-2x fa-user-alt text-primary'></i>
+                                       
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            </Link>
+                        </div>
+                        <div className="col-xl-2 col-md-6 mb-4">
+                        <Link to="/inquery/todo">
+                            <div className="card border-left-primary shadow h-100 py-2">
+                                <div className="card-body">
+                                    <div className="row no-gutters align-items-center">
+                                        <div className="col mr-2">
+                                            <div className="text-xs font-weight-bold text-primary text-uppercase mb-1">
+                                           Inquiry</div>
                                             <div className="h5 mb-0 font-weight-bold text-gray-800">{inquerys.length}</div>
                                         </div>
                                         <div className="col-auto">
@@ -38,14 +77,16 @@ function Dashboard(){
                                     </div>
                                 </div>
                             </div>
+                            </Link>
                         </div>
-                        <div className="col-xl-3 col-md-6 mb-4">
+                        <div className="col-xl-2 col-md-6 mb-4">
+                        <Link to="/appointment">
                             <div className="card border-left-primary shadow h-100 py-2">
                                 <div className="card-body">
                                     <div className="row no-gutters align-items-center">
                                         <div className="col mr-2">
                                             <div className="text-xs font-weight-bold text-primary text-uppercase mb-1">
-                                            Total Appointment</div>
+                                            Appointment</div>
                                             <div className="h5 mb-0 font-weight-bold text-gray-800">{appointments.length}</div>
                                         </div>
                                         <div className="col-auto">
@@ -54,24 +95,29 @@ function Dashboard(){
                                     </div>
                                 </div>
                             </div>
+                            </Link>
                         </div>
-                        <div className="col-xl-3 col-md-6 mb-4">
+                        <div className="col-xl-2 col-md-6 mb-4">
+                        <Link to="/contract">
                             <div className="card border-left-primary shadow h-100 py-2">
                                 <div className="card-body">
                                     <div className="row no-gutters align-items-center">
                                         <div className="col mr-2">
                                             <div className="text-xs font-weight-bold text-primary text-uppercase mb-1">
-                                            Total Contract</div>
+                                            Contract</div>
                                             <div className="h5 mb-0 font-weight-bold text-gray-800">{contracts.length}</div>
                                         </div>
                                         <div className="col-auto">
-                                           <i className="fas fa-2x fa-scroll text-primary"></i>
+                                           <i class='fas fa-2x fa-handshake text-primary'></i>
+                                           {/* <i className="fas fa-2x fa-scroll text-primary"></i> */}
                                         </div>
                                     </div>
                                 </div>
                             </div>
+                            </Link>
                         </div>
-                        <div className="col-xl-3 col-md-6 mb-4">
+                        <div className="col-xl-2 col-md-6 mb-4">
+                        <Link to="/case">
                             <div className="card border-left-primary shadow h-100 py-2">
                                 <div className="card-body">
                                     <div className="row no-gutters align-items-center">
@@ -86,6 +132,25 @@ function Dashboard(){
                                     </div>
                                 </div>
                             </div>
+                            </Link>
+                        </div>
+                        <div className="col-xl-2 col-md-6 mb-4">
+                        <Link to="/payment/paymentTable">
+                            <div className="card border-left-primary shadow h-100 py-2">
+                                <div className="card-body">
+                                    <div className="row no-gutters align-items-center">
+                                        <div className="col mr-2">
+                                            <div className="text-xs font-weight-bold text-primary text-uppercase mb-1">
+                                            Total Payment ({payments.length})</div>
+                                            <div className="h6 mb-0 font-weight-bold text-gray-800">{sum} MMK</div>
+                                        </div>
+                                        <div className="col-md-3">
+                                        <i className='fas fa-2x fa-hand-holding-usd text-primary'></i>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            </Link> 
                         </div>
                         
                 

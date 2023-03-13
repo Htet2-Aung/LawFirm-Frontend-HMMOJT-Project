@@ -22,6 +22,8 @@ function EditContractForm() {
     const [id,setId]=useState(contract.id);
     const [contractDate,setContractDate] = useState(contract.contractDate);
     const [conDescription,setConDescription] = useState(contract.conDescription);
+    const [paymentStatus,setPaymentStatus] = useState(contract.paymentStatus);
+     const [caseStatus,setCaseStatus] = useState(contract.caseStatus);
     const [addRequestStatus,setAddRequestStatus] = useState('idle')
     
     
@@ -50,6 +52,8 @@ function EditContractForm() {
                             id,
                             contractDate,
                             conDescription,
+                            paymentStatus,
+                            caseStatus
                         }//,
                         //token
                     }),

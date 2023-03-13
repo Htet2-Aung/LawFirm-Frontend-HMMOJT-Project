@@ -2,17 +2,18 @@
 
 function Footer() {
     return (
-        <div className="container-fluid bg-dark text-light mt-5 py-5">
-        <div className="container py-5">
-            <div className="row g-5">
-                <div className="col-lg-3 col-md-6">
-                    <h4 className="d-inline-block text-primary text-uppercase border-bottom border-5 border-secondary mb-4">Get In Touch</h4>
-                    <p className="mb-4">No dolore ipsum accusam no lorem. Invidunt sed clita kasd clita et et dolor sed dolor</p>
-                    <p className="mb-2"><i className="fa fa-map-marker-alt text-primary me-3"></i>123 Street, New York, USA</p>
-                    <p className="mb-2"><i className="fa fa-envelope text-primary me-3"></i>info@example.com</p>
-                    <p className="mb-0"><i className="fa fa-phone-alt text-primary me-3"></i>+012 345 67890</p>
-                </div>
-                <div className="col-lg-3 col-md-6">
+        <div className="container-fluid text-light myfooter">
+        
+            <div className="row me-3">
+                <div className="col-md-2"></div>
+                <div className="col-md-10">
+                    <h4 className="d-inline-block text-uppercase  border-3 border-secondary my-4">Get In Touch</h4>
+                    <p className="">Please contact us when you need our service. We can pay fully responsible for your property and honor. Don't be hestitate to contact us!</p>
+                    <p className=""><i className="fa fa-map-marker-alt text-dark me-3"></i>123 Street, New York, USA</p>
+                    <p className=""><i className="fa fa-envelope text-dark me-3"></i>info@example.com</p>
+                    <p className=""><i className="fa fa-phone-alt text-dark me-3"></i>+012 345 67890</p>
+                
+                {/* <div className="col-lg-3 col-md-6">
                     <h4 className="d-inline-block text-primary text-uppercase border-bottom border-5 border-secondary mb-4">Quick Links</h4>
                     <div className="d-flex flex-column justify-content-start">
                         <a className="text-light mb-2" href="#"><i className="fa fa-angle-right me-2"></i>Home</a>
@@ -49,9 +50,9 @@ function Footer() {
                         <a className="btn btn-lg btn-primary btn-lg-square rounded-circle me-2" href="#"><i className="fab fa-linkedin-in"></i></a>
                         <a className="btn btn-lg btn-primary btn-lg-square rounded-circle" href="#"><i className="fab fa-instagram"></i></a>
                     </div>
-                </div>
+                </div> */}
             </div>
-        </div>
+            </div>
     </div>
     );
 }

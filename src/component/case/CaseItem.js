@@ -1,75 +1,121 @@
 import { Link } from "react-router-dom";
-import { useDispatch} from "react-redux";
+import { useDispatch, useSelector} from "react-redux";
 import { deleteCase } from "./casesSlice";
 import { useState } from "react";
 import ConfirmModal from "../utility/ConfirmModal";
 import BackDrop from "../utility/BackDrop";
-
-
+import { getToken, getUser } from "../auth/authSlice";
 
 function CaseItem(props){
-   
+
     console.log(props.id);
 
-    const [isModalOpen,setModalOpen] = useState(false)
+    const token=useSelector(getToken)
+    console.log("In the inquery Item and token is "+ token)
+
+    const user = useSelector(getUser)
+    console.log("In the inquery Item "+user.role)
+
+    //define Action for Admin
+    function Admin(){
+        return(
+            <td className="text-center">
+            <Link  to={`info/${props.id}`}>
+                <i title="View Cases" className="bi bi-info-circle text-info"></i>
+            </Link>
+
+            <Link to={`/case/edit/${props.id}`}>
+                <i titl="Edit Cases" className='fas fa-edit text-success mx-3'></i>
+            </Link>
+
+            <Link onClick={deleteHandler}>
+            <i title="Delete" className="fa fa-minus-circle pr-1 mx-2 text-danger "></i>
+            </Link>
+            {/* <Link to={`/appointment/create/${props.id}`}>
+                <button className="btn btn-light mx-2"><i className='fas fa-paste text-primary'></i>Appointment</button>
+                </Link> */}
+            {isModalOpen && <ConfirmModal onCancel={cancelHandler} onConfirm={confirmHandler} />}
+
+           </td>
+        );
+    }
+
+   
+
+   
+    const [isModalOpen, setModalOpen] = useState(false)
     const dispatch = useDispatch();
 
-    function deleteHandler(){
+    function deleteHandler() {
         setModalOpen(true);
     }
 
-    function backdropHandler(){
+    function cancelHandler() {
         setModalOpen(false);
     }
 
-    function cancelHandler(){
-        setModalOpen(false);
-    }
-
-    function confirmHandler(){
-        dispatch(deleteCase({caseId:props.id})).unwrap()
+    function confirmHandler() {
+        dispatch(deleteCase({caseId:props.id,token})).unwrap()
 
         setModalOpen(false)
     }
 
+    if(user.role==="Admin"){
+        return(<tr >
+
+            <td>{props.no}</td>
+            <td>{props.caseTitle}</td>
+            <td>{props.username}</td>
+            <td>{props.lawyerName}</td>
+            <td>{props.attenCourtRoom}</td>
+            <td>{props.caseStatus}</td>
+            <td>{props.description}</td>
+            <td>{props.startDate} - {props.startTime}</td>
+            <td>25-12-46</td>
+            <Admin/>
+                        
+                        
+                        
+        </tr>);
+
+    }
+    else
+    {
+        return(<tr >
+
+            <td>{props.no}</td>
+            <td>{props.caseTitle}</td>
+            <td>{props.username}</td>
+            <td>{props.lawyerName}</td>
+            <td>{props.attenCourtRoom}</td>
+            <td>{props.caseStatus}</td>
+            <td>{props.description}</td>
+            <td>{props.startDate} - {props.startTime}</td>
+            <td>25-35-26</td>
+            <td>
+            <Link  to={`info/${props.id}`}>
+                <i title="View Cases" className="bi bi-info-circle text-info"></i>
+            </Link>
+            </td>
+            
+                        
+                        
+                        
+        </tr>);
+    }
+
+   
     
 
-    return (
+    
 
+
+       
         
                 
-                    <tr >                        
-                        <td > {props.id}</td>
-                        <td >{props.caseTitle}</td>
-                        <td >{props.attenCourtRoom}</td>
-                        <td >Status </td>
-                        <td >{props.description}</td>
-                        <td >{props.startDate} /{props.startTime}</td>
-                        <td >{props.endDate} / {props.endTime}</td>                       
-                        
-                        <td >
-                        <Link to={`/case/edit/${props.id}`}>
-                            <button className="btn btn-secondary mx-2">Update</button>
-                        </Link>
-                        <Link to={`/case/create/${props.id}`}>
-                            <button className="btn btn-success mx-2">Case</button>
-                        </Link>
-                        <Link onClick={deleteHandler}>
-                            <button className="btn btn-danger">Delete</button>
-                        </Link>
-                        
-
-                        </td>
-                        
-                        {isModalOpen && <ConfirmModal onCancel={cancelHandler} onConfirm={confirmHandler}/>}
-                        {isModalOpen && <BackDrop onBackdrop={backdropHandler}/>} 
-                        
-                    </tr>
-             
-           
         
-  
-    );
+             
+        
 }
 
 export default CaseItem;

@@ -1,46 +1,74 @@
+import { useEffect } from "react";
 import InqueryList from "../inquery/InqueryList";
+import $ from "jquery"
+import { fetchInquery, fetchInqueryAdmin, selectAllInquery, setInqueryStatus } from "../inquery/inquerySlice";
+import { useDispatch, useSelector } from "react-redux";
+
 
 function InqTable() {
-    
-    
-    return (
 
-        <div className="container-fluid">
-            <div className="card shadow mb-4">
+    const inquery = useSelector(selectAllInquery);
+    const dispatch = useDispatch();
+    useEffect(() => {
+        dispatch(fetchInqueryAdmin())
+    }, [dispatch])
+
+    console.log("in the inquery table :" + inquery)
+
+    useEffect(() => {
+        setTimeout(() => {
+            // $('#example').DataTable().destroy();
+            $('#example').DataTable();
+        }, 200);
+    })
+
+    return (
+        <div className="row container-fluid">
+            <div className="col-md-1"></div>
+            <div className="col-md-10">
+            <div className=" card shadow mb-4">
                 <div className="card-header py-3">
-                <input type="text" id="myInput" onkeyup="myFunction()" placeholder="Search for names.."/>
-                    
+                    <h5 className="card-title">Inquiry List</h5>
                 </div>
                 <div className="card-body">
-                    <div className="table-responsive">
-                        <table className="table table-bordered" id="myTable" width="100%" cellspacing="0">
-                            <thead>
+                    <div className=" table-responsive">
+                        <table id="example" className="display">
+                            <thead className="text-center">
                                 <tr class="header">
                                     <th>No</th>
                                     <th>Lawyer Name</th>
+                                    <th>User Name</th>
                                     <th>Phone No</th>
-                                    <th>Description</th>
+                                    <th>Appointment </th>
                                     <th>Actions</th>
                                 </tr>
                             </thead>
-                            {/* <tfoot>
+                            <tfoot>
                                 <tr>
                                     <th>No</th>
-                                    <th>Phone No</th>
                                     <th>Lawyer Name</th>
+                                    <th>User Name</th>
+                                    <th>Phone No</th>
+                                    {/* <th>Description</th> */}
+                                    <th>Appointment </th>
                                     <th>Actions</th>
                                 </tr>
-                            </tfoot> */}
+                            </tfoot>
                             <tbody >
-                                <InqueryList/>
+                                <InqueryList />
+
                             </tbody>
                         </table>
                     </div>
                 </div>
             </div>
+            </div>
+            <div className="col-md-1"></div>
+        
 
         </div>
-       
+
+
 
     );
 }

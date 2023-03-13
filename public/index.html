@@ -7,6 +7,35 @@
     <meta content="Free HTML Templates" name="keywords">
     <meta content="Free HTML Templates" name="description">
 
+       <!-- Favicon -->
+       <link href="newimg/favicon.ico" rel="icon">
+
+       <!-- Google Font -->
+       <link href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@1,600;1,700;1,800&family=Roboto:wght@400;500&display=swap" rel="stylesheet"> 
+       
+       <!--my CSS Libraries -->
+       <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" rel="stylesheet">
+       <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css" rel="stylesheet">
+       <link href="lib/animate/animate.min.css" rel="stylesheet">
+       <link href="lib/owlcarousel/assets/owl.carousel.min.css" rel="stylesheet">
+
+       <!--my Template Stylesheet -->
+       <link href="newcss/style.css" rel="stylesheet">
+
+       <!-- for slide-show -->
+       <link
+      rel="stylesheet"
+      type="text/css"
+      charset="UTF-8"
+       href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.6.0/slick.min.css"
+      />
+      <link
+      rel="stylesheet"
+      type="text/css"
+      href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.6.0/slick-theme.min.css"
+     />
+
+
     <!-- Favicon -->
     <link href="img/favicon.ico" rel="icon">
 
@@ -23,13 +52,8 @@
     <link rel="stylesheet" href="css/style.css">
     <link rel="stylesheet" href="css/sb-admin-2.css">
     <link rel="stylesheet" href="css/sb-admin-2.min.css">
-    <!-- <link href="vendor/datatables/dataTables.bootstrap4.min.css" rel="stylesheet"> -->
-    
-    <!-- <link rel="stylesheet"
-    href="https://cdn.datatables.net/1.12.1/css/dataTables.bootstrap5.min.css"> -->
- 
 
-
+     
     <!-- Libraries Stylesheet -->
     <link href="lib/owlcarousel/assets/owl.carousel.min.css" rel="stylesheet">
     <link href="lib/tempusdominus/css/tempusdominus-bootstrap-4.min.css" rel="stylesheet" />
@@ -59,68 +83,15 @@
       user's mobile device or desktop. See https://developers.google.com/web/fundamentals/web-app-manifest/
     -->
     <link rel="manifest" href="%PUBLIC_URL%/manifest.json" />
+    <link href="https://cdn.datatables.net/1.13.3/css/jquery.dataTables.min.css">
+    <link href="https://cdn.datatables.net/buttons/2.3.5/css/buttons.dataTables.min.css">
 
-<!-- 
-    <style>
-      * {
-        box-sizing: border-box;
-      }
-      
-      #myInput {
-        background-image: url('/css/searchicon.png');
-        background-position: 10px 10px;
-        background-repeat: no-repeat;
-        width: 100%;
-        font-size: 16px;
-        padding: 12px 20px 12px 40px;
-        border: 1px solid #ddd;
-        margin-bottom: 12px;
-      }
-      
-      #myTable {
-        border-collapse: collapse;
-        width: 100%;
-        border: 1px solid #ddd;
-        font-size: 18px;
-      }
-      
-      #myTable th, #myTable td {
-        text-align: left;
-        padding: 12px;
-      }
-      
-      #myTable tr {
-        border-bottom: 1px solid #ddd;
-      }
-      
-      #myTable tr.header, #myTable tr:hover {
-        background-color: #f1f1f1;
-      }
-      </style> -->
-    <!--
-      Notice the use of %PUBLIC_URL% in the tags above.
-      It will be replaced with the URL of the `public` folder during the build.
-      Only files inside the `public` folder can be referenced from the HTML.
-
-      Unlike "/favicon.ico" or "favicon.ico", "%PUBLIC_URL%/favicon.ico" will
-      work correctly both with client-side routing and a non-root public URL.
-      Learn how to configure a non-root public URL by running `npm run build`.
-    -->
     <title>React App</title>
   </head>
   <body>
     <noscript>You need to enable JavaScript to run this app.</noscript>
     <div id="root"></div>
-    <!--
-      This HTML file is a template.
-      If you open it directly in the browser, you will see an empty page.
-
-      You can add webfonts, meta tags, or analytics to this file.
-      The build step will place the bundled scripts into the <body> tag.
-
-      To begin the development, run `npm start` or `yarn start`.
-      To create a production bundle, use `npm run build` or `yarn build`.
-    -->
+   
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
     crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49"
@@ -129,9 +100,10 @@
     crossorigin="anonymous"></script> 
 
 
-     <!-- Bootstrap core JavaScript-->
-     <!-- <script src="vendor/jquery/jquery.min.js"></script> -->
-     <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+
+       <!-- Bootstrap core JavaScript-->
+    <script src="vendor/jquery/jquery.min.js"></script>
+    <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
  
      <!-- Core plugin JavaScript-->
      <script src="vendor/jquery-easing/jquery.easing.min.js"></script>
@@ -139,27 +111,20 @@
      <!-- Custom scripts for all pages-->
      <script src="js/sb-admin-2.min.js"></script>
 
-     <!-- <script>
-      function myFunction() {
-        var input, filter, table, tr, td, i, txtValue;
-        input = document.getElementById("myInput");
-        filter = input.value.toUpperCase();
-        table = document.getElementById("myTable");
-        tr = table.getElementsByTagName("tr");
-        for (i = 0; i < tr.length; i++) {
-          td = tr[i].getElementsByTagName("td")[0];
-          if (td) {
-            txtValue = td.textContent || td.innerText;
-            if (txtValue.toUpperCase().indexOf(filter) > -1) {
-              tr[i].style.display = "";
-            } else {
-              tr[i].style.display = "none";
-            }
-          }       
-        }
-      }
-      </script>
-        }); 
-</script> -->
+
+
+
+
+
+ <!--my JavaScript Libraries -->
+ <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.bundle.min.js"></script>
+        <script src="newlib/easing/easing.min.js"></script>
+        <script src="newlib/owlcarousel/owl.carousel.min.js"></script>
+        <script src="newlib/isotope/isotope.pkgd.min.js"></script>
+
+        <!-- myTemplate Javascript -->
+        <script src="newjs/main.js"></script>
+</script>
   </body>
 </html>

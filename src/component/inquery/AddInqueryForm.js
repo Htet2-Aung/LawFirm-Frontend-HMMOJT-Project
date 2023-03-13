@@ -1,42 +1,75 @@
+import { findByRole } from "@testing-library/react";
+import { useEffect } from "react";
 import { useState } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { useNavigate, useParams } from "react-router-dom";
+import Banner from "../../layout/Banner";
+import Home from "../../layout/Home";
+import { getToken, getUser } from "../auth/authSlice";
+import { fetchUser, selectAllUser, selectLawyerByRole } from "../user/usersSlice";
 import { addNewInquery } from "./inquerySlice";
 import lawyerImage from "./lawyer.jpg";
 function AddInqueryForm(props) {
 
-    const [phoneNo, setPhoneNo] = useState('');
+   const navigate = useNavigate()
+
+    const token = useSelector(getToken)
+    console.log("Token is :"+ token)
+
+    // const user = useSelector(getUser)
+    // console.log("User Role:"+user.id)
+    // const userId = user.id;
+    // console.log(userId)
+      
+    // const user=useSelector(selectAllUser);
+    
+    const lawyers = useSelector(selectLawyerByRole)
+    console.log(lawyers)
+   
+    
     const [lawyerName, setLawyerName] = useState('');
-    const [description, setDescription] = useState('')
+    const [description, setDescription] = useState('');
+    //const [appointmentStatus, setAppointmentStatus] = useState('')
     const [addRequestStatus, setAddRequestStatus] = useState('idle')
 
-    const onPhoneNoChange = e => setPhoneNo(e.target.value);
+    // const [lawyerEmail, setLawyerEmail] = useState('')
+    // console.log(lawyerEmail)
+    // const onLawyerEmail = e => setLawyerEmail(e.target.value)
+
+    
     const onLawyerNameChange = e => setLawyerName(e.target.value);
     const onDescriptionChange = e => setDescription(e.target.value);
 
-    const canSave = [phoneNo, description].every(Boolean) && addRequestStatus === 'idle'
+    const canSave = [description].every(Boolean) && addRequestStatus === 'idle'
 
     //const isEdit = props.mode === 'edit'
 
     const dispatch = useDispatch();
+    useEffect(() => {
+        dispatch(fetchUser())
+    },[dispatch])
+
 
     const onSubmit = (event) => {
         event.preventDefault();
 
 
+
         if (canSave) {
             try {
                 setAddRequestStatus('pending')
-                console.log("In the can save")
+               
 
                 dispatch(
                     addNewInquery({
-                        phoneNo,
+                      inquery:{
                         lawyerName,
                         description
+                        
 
-                    }),
-                ).unwrap();
-
+                    },token
+                })).unwrap();
+                navigate('/inquery')
             } catch (error) {
                 console.log(error)
 
@@ -44,19 +77,26 @@ function AddInqueryForm(props) {
                 setAddRequestStatus('idle')
             }
 
-            setPhoneNo('')
+           
             setLawyerName('')
             setDescription('')
+            //setAppointmentStatus('')
 
         }
         console.log(canSave)
 
     }
     return (
+       
+            <div class="contact">
+                <div class="container">
+                    <div class="section-header">
+                        <h2>Inquiry Form</h2>
+                    </div>
 
-        <div className="container bg-gradient-primary">
+        
 
-            <div className="card o-hidden border-0 shadow-lg my-5">
+            <div className="contact card o-hidden border-0 shadow-lg my-5">
                 <div className="card-body p-0">
 
                     <div className="row">
@@ -77,17 +117,16 @@ function AddInqueryForm(props) {
                                             onChange={onLawyerNameChange}
                                         >
                                             <option value="">Select LawyerName</option>
-                                            <option value="Myat Thu">Myat Thu</option>
-                                            <option value="ThuRai">ThuRai</option>
+                                            {
+                                                lawyers.map((lawyer)=>
+                                                <option value={lawyer.username}>{lawyer.firstName} {lawyer.middleName} {lawyer.lastName}</option>
+                                                )
+                                            }
+                                            
+                                            
                                         </select>
                                         </div>
-                                        <div className="col-sm-6">
-                                            <input type="text" className="form-control" id="exampleLastName"
-                                                placeholder="Phone Number"
-                                                value={phoneNo}
-                                                onChange={onPhoneNoChange}
-                                            />
-                                        </div>
+                                       
                                     </div>
                                     <div className="form-group row mb-3">
                                         <div className="mb-3">
@@ -117,20 +156,15 @@ function AddInqueryForm(props) {
                                         />
                                         </div>
                                     </div>
-
-
                                 </form>
-
-
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
-
-        </div>
-
-
+            </div>
+            </div>
+       
 
     );
 }
