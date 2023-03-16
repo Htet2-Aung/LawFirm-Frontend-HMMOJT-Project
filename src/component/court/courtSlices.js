@@ -2,7 +2,7 @@ import { createSlice,createAsyncThunk } from "@reduxjs/toolkit";
 
 import axios from "axios";
 
-const POST_NEW_COURT = 'http://localhost:8585/api/court/create/';
+const POST_NEW_COURT = 'http://localhost:8585/api/court/create';
 const GET_ALL_COURT = 'http://localhost:8585/api/court/all';
 const DELETE_COURT = 'http://localhost:8585/api/court/id/';
 const POST_UPDATE_COURT ='http://localhost:8585/api/court/update';
@@ -15,14 +15,27 @@ export const fetchCourts = createAsyncThunk('court/fetchCourts', async ()=>{
 
 export const addNewCourt = createAsyncThunk('court/addNewCourt', async (data)=>{
     
-    const response = await axios.post(`${POST_NEW_COURT}${data.conId}`,data.court)
+    const response = await axios.post(POST_NEW_COURT,data.court,{
+        headers:{
+            
+            'Authorization':data.token,
+        }
+    })
     return response.data
 });
 
-export const updateCourt = createAsyncThunk('court/addUpdateCourt', async (data)=>{
-    const response = await axios.post(POST_UPDATE_COURT,data.court)
+export const updateCourt = createAsyncThunk('court/updateCourt', async (data)=>{
+    
+    const response = await axios.post(POST_NEW_COURT,data.court,{
+        headers:{
+            
+            'Authorization':data.token,
+        }
+    })
     return response.data
 });
+
+
 
 export const deleteCourt = createAsyncThunk('courts/deleteCourt', async (data)=>{
     await axios.delete(`${DELETE_COURT }${data.courtId}`)
@@ -44,12 +57,14 @@ export const courtSlice = createSlice({
             reducer(state,action){
                 state.push(action.payload);
             },
-            prepare(id,conDescription,contractDate){
+            prepare(id,address,city,courtName,township){
                return {
                 payload:{
                     id,
-                    conDescription,
-                    contractDate
+                    address,
+                    city,
+                    courtName,
+                    township
                     
                 }
             };           
@@ -101,11 +116,10 @@ export const courtSlice = createSlice({
 
 
 export const selectAllCourt = (state)=>state.courts.courts;
-export const getCourtStatus =  (state)=>state.courts.courts;
+export const getCourtStatus =  (state)=>state.courts.status;
 export const getCourtError =  (state)=>state.courts.error;
 export const selectCourtById = (state,courtId)=> state.courts.courts.find(c => c.id === courtId)
-export const selectCourtsByNotCourtDefine =(state)=>state.contracts.contracts.filter(contract=> contract.courtId===(undefined))
-export const selectCourtsByCourtDefine =(state)=>state.contracts.contracts.filter(contract=> contract.courtId!==(undefined))
+export const selectCourtsByDes=(state,courtDes)=>  state.courts.courts.find(c=>c.courtName===courtDes)
 
 
 export const { addCourt } = courtSlice.actions;

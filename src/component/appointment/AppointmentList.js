@@ -1,6 +1,7 @@
 import { useEffect } from "react"
 import { useDispatch, useSelector } from "react-redux"
 import { getToken, getUser } from "../auth/authSlice"
+import { fetchInqueryAdmin } from "../inquery/inquerySlice"
 import Appointment from "./Appointment"
 import { fetchAppointment, fetchAppointmentAdmin, getAppointmentError, getAppointmentStatus, selectAllIAppointment, selectAppointmentByLawyerName, selectAppointmentByUsername } from "./appointmentSlice"
 
@@ -21,7 +22,6 @@ function AppointmentList(){
 //    console.log("In the appointmet List , appointmentsUsername by user name is"+appointmentsUsername);
    const appointmentsLawyername=useSelector((state)=>selectAppointmentByLawyerName(state,user.username))
 //    console.log("In the inquery List , appointmentsLawyername is"+appointmentsLawyername);
-
 
 
     useEffect(() => {
@@ -70,6 +70,11 @@ function AppointmentList(){
             content = (<p>error</p>);
         }
  
+        useEffect(()=>{
+            dispatch(fetchInqueryAdmin())
+        
+        },[dispatch])
+        
 
     return content;
 }

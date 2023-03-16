@@ -1,10 +1,15 @@
 import { useState } from "react";
 import { useDispatch,useSelector } from "react-redux";
 import { selectCategoryById, updateCategory } from "./categorySlices";
+import categoryImg from "./category.jpg"
 
 //for update
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
+import { getToken } from "../auth/authSlice";
 function UpdateCategoryForm(props){
+
+    const navigate=useNavigate();
+    const token=useSelector(getToken)
 
     const { categoryId } = useParams( )
     const category = useSelector((state)=>selectCategoryById(state,Number(categoryId))) 
@@ -40,24 +45,24 @@ function UpdateCategoryForm(props){
                 console.log("In the can save")
 
                 dispatch(
-                    //isEdit?
-                    updateCategory({
-                        id,
-                        categoryName,
-                        description
 
-                    }),
-                )
+                    updateCategory({
+                        category:{
+                            id,
+                            categoryName,
+                            description
+
+                        },token
+
+                        
+
+                    })
+                ).unwrap();
+
+                navigate('/category')
             }
             
-                //     addNewCategory({
-                //         id,
-                //         categoryName,
-                //         description
-        
-                // }),
-                    // ).unwrap();
-                
+            
              catch (error) {
                 console.log(error)
                 
@@ -75,78 +80,66 @@ function UpdateCategoryForm(props){
         }
     return (
    
-        <div className="bg-light container-fluid py-7">
-
-        <div className="container">
-            <div className="row gx-5">
-            <div className="col-lg-3 mb-5 mb-lg-0">
-                    </div>
-
-        <div className="col-lg-6 mb-5 mb-lg-0" >
-       
-      
-            <h1 className="text-primary text-center mb-4">Update Category Form</h1>
-            <div className="b-light text-center rounded p-5">
-
-                <form onSubmit={ onSubmit }>
-                
-                    <div className="row g-3">
-                    <div className="col-12 ">
-
+        <div class="contact">
+            <div class="container">
+                <div>
                     
-                    <div className="Date" id="date" data-target-input="nearest">
-                                <input type="text"
-                                    className="form-control text-primary bg-white border-0 datetimepicker-input"
-                                    name="appointmentId"
-                                    placeholder="Id" data-target="#date" data-toggle="datetimepicker" 
-                                        value={id}
-                                        onChange = {onCategoryIdChange}
-                                        disabled
-                                    />
-                            </div>
-                        
-                    
-                            <div className="Date" id="date" data-target-input="nearest">
-                                <input type="text"
-                                    className="form-control text-primary bg-white border-0 datetimepicker-input"
-                                    name="appointmentId"
-                                    placeholder="Category Name" data-target="#date" data-toggle="datetimepicker" 
-                                        value={categoryName}
-                                        onChange = {onCategoryNameChange}
-                                        disabled 
-                                    />
-                            </div>
-                        
-                        <div className="col-12">
+                </div>
 
-                            <textarea type="text"
-                                className="form-control text-primary bg-white border-0 datetimepicker-input"
-                                rows={10}
-                               
-                                placeholder="Description" data-target="#time" data-toggle="datetimepicker"
-                                value={description}
-                                onChange = {onDescriptionChange} />
-                        </div><br/>
-                      
-                        <div className="col-12">
-                             <button 
-                                type="submit" 
-                                className="btn btn-primary w-100 py-3" 
-                                disabled={!canSave}
-                                value={isEdit?'Update':'Save'} >Submit
-                                </button>
+                <div className="row">
+               
+                    <div className="col-md-2"></div>
+                    <div className="col-md-8">
+                        <div className="contact card o-hidden border-0 shadow-lg my-5">
+                            <div className="card-body p-0">
+                                <div className="row">
+                                <h2 className="text-primary text-center mt-3">Update Category</h2>
+                                    <div className="col-lg-5 d-none d-lg-block"><img src={categoryImg} className="w-100" /></div>
+                                    <div className="col-lg-7 pr-5">
+                                        <form onSubmit={onSubmit}>
+                                            <div className="row g-3">
+
+                                                <div className="col-12 ">
+                                                    <div className="date" id="date" data-target-input="nearest">
+                                                        <input type="text"
+                                                            name="contractDate"
+                                                            className="form-control"
+                                                            placeholder="Category Name" data-target="#date" data-toggle="datetimepicker"
+                                                            value={categoryName}
+                                                            onChange={onCategoryNameChange} />
+                                                    </div>
+                                                </div>
+                                                <div className="col-12">
+
+                                                    <textarea type="text"
+                                                        className="form-control"
+                                                        rows={10}
+                                                        name="conDescription"
+                                                        placeholder="Contract Description" data-target="#time" data-toggle="datetimepicker"
+                                                        value={description}
+                                                        onChange={onDescriptionChange} />
+
+                                                </div>
+                                                <div className="col-12">
+                                                    <button className="btn btn-primary w-100 py-3" type="submit">Update Category</button>
+                                                </div>
+                                            </div>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+
+
 
                         </div>
                     </div>
-                    </div>
-                </form>
-            </div>
-            </div>
-           
+                    <div className="col-md-2"></div>
 
-           </div>
+                </div>
 
-        </div>
+
+
+            </div>
         </div>
         
         

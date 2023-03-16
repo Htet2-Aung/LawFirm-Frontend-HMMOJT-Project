@@ -28,7 +28,7 @@ function InqTable() {
             <div className="col-md-10">
             <div className=" card shadow mb-4">
                 <div className="card-header py-3">
-                    <h5 className="card-title">Inquiry List</h5>
+                    <h5 className="card-title text-center">Inquiry List</h5>
                 </div>
                 <div className="card-body">
                     <div className=" table-responsive">

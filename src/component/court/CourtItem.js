@@ -4,6 +4,7 @@ import { deleteCourt } from "./courtSlices";
 
 
 function CourtItem(props){
+    console.log("In the court Item : Id is : :::::::::: "+props.id)
 
     const dispatch = useDispatch()
     return(
@@ -40,14 +41,14 @@ function CourtItem(props){
                      <td>{props.township}</td>
                      <td>{props.city}</td>
                      <td className="text-center">
+
+                        <Link to={`/court/view/${props.id}`}>
+                        <i title="View Court" className="bi bi-info-circle text-info"></i>
+                         </Link>
      
                          <Link to={`/court/edit/${props.id}`}>
-                         <i className="fa fa-edit pr-1 mx-2">Update</i>
+                         <i title="Update Court" className="fa fa-edit pr-1 mx-2"></i>
                          </Link>
-
-                         <Link>
-                         <a onClick={()=>{dispatch(deleteCourt(props.id))}}>
-                         <i className="fa fa-minus-circle pr-1 mx-2 text-danger ">Delete</i></a>  </Link>
                         
                        
                         

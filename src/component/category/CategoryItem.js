@@ -17,18 +17,15 @@ function CategoryItem(props){
                 <td>{props.description}</td>
                 <td className="text-center">
 
+                    <Link to={`/category/view/${props.id}`}>
+                        <i title="View Category" className="bi bi-info-circle text-info"></i>
+                    </Link>
+
                     <Link to={`/category/edit/${props.id}`}>
                     {/* <button className="btn btn-success mx-2">Update</button> */}
-                    <i className="fa fa-edit pr-1 mx-2">Update</i>
+                    <i title="Update Category" className="fa fa-edit pr-1 mx-2"></i>
                     </Link>
-                    <Link>
-                    <a onClick={()=>{dispatch(deleteCategory(props.id))}}>
-                    <i className="fa fa-minus-circle pr-1 mx-2 text-danger ">Delete</i></a>  </Link>
-
-                  <Link to={`/case/create/${props.id}`}>
-                  <i className="fa fa-flag-checkered pr-1 mx-2">Case</i>   
-                    {/* <button className="btn btn-success mx-2">Case</button> */}
-                    </Link>
+            
                    
                 </td>
                 

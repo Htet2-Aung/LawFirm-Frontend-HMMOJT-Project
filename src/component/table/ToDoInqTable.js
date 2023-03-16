@@ -29,7 +29,7 @@ function ToDoInqTable() {
             <div className=" card shadow mb-4">
                 <div className="card-header py-3">
 
-                    <h5 className="card-title">Inquiry List</h5>
+                    <h5 className="card-title text-center">Inquiry List Does'nt Have Appointment</h5>
 
 
                 </div>

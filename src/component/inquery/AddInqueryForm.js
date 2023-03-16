@@ -7,7 +7,7 @@ import Banner from "../../layout/Banner";
 import Home from "../../layout/Home";
 import { getToken, getUser } from "../auth/authSlice";
 import { fetchUser, selectAllUser, selectLawyerByRole } from "../user/usersSlice";
-import { addNewInquery } from "./inquerySlice";
+import { addNewInquery, fetchInqueryAdmin } from "./inquerySlice";
 import lawyerImage from "./lawyer.jpg";
 function AddInqueryForm(props) {
 
@@ -47,7 +47,10 @@ function AddInqueryForm(props) {
     const dispatch = useDispatch();
     useEffect(() => {
         dispatch(fetchUser())
+        dispatch(fetchInqueryAdmin())
     },[dispatch])
+
+
 
 
     const onSubmit = (event) => {
@@ -69,6 +72,7 @@ function AddInqueryForm(props) {
 
                     },token
                 })).unwrap();
+                // dispatch(fetchInqueryAdmin())
                 navigate('/inquery')
             } catch (error) {
                 console.log(error)

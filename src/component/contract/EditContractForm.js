@@ -87,8 +87,8 @@ function EditContractForm() {
                     </div>
                     <div className="col-lg-6 mb-5 mb-lg-0">
 
-                        <h1 className="text-primary text-center mb-4">Make Contract</h1>
-                        <div className="b-light text-center rounded p-5">
+                        <h1 className="text-primary text-center mb-4">Update Contract</h1>
+                        <div className="bg-primary text-center rounded p-5">
 
                         <form onSubmit={onSubmit}>
                                 <div className="row g-3">
@@ -115,7 +115,7 @@ function EditContractForm() {
                                     <div className="col-12">
                                             <input 
                                             type="submit" 
-                                            className="btn btn-primary w-100 py-3" 
+                                            className="btn btn-info w-100 py-3" 
                                             disabled={!canSave}
                                             value={'Update A Contract'}
                                             />

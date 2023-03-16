@@ -44,18 +44,22 @@ function Home(){
                     <Link to="/userLog" className="nav-link">User</Link>
                 </div>
                 <div className="nav-item dropdown">
-                    <Link to="/" className="nav-link dropdown-toggle" data-bs-toggle="dropdown">I & A</Link>
+                    <Link to="/" className="nav-link dropdown-toggle" data-bs-toggle="dropdown">View</Link>
                     <div className="dropdown-menu m-0">
                         <Link to="/inquery" className="text-primary dropdown-item">Inquery List</Link>
                         {/* as={Link} */}
                         <Link to="/appointment" className="text-primary dropdown-item">Appointment List</Link>
+                        <Link to="/contract" className="text-primary dropdown-item">Contract List</Link>
+                        <Link to="/case" className="text-primary dropdown-item">Case List</Link>
+                        <Link to="/category" className="text-primary dropdown-item">Category List</Link>
+                        <Link to="/court" className="text-primary dropdown-item">Court List</Link>
                     </div>
                 </div> 
                 <div className="nav-item dropdown">
-                    <Link to="/" className="nav-link dropdown-toggle" data-bs-toggle="dropdown">C & C </Link>
+                    <Link to="/" className="nav-link dropdown-toggle" data-bs-toggle="dropdown">Add</Link>
                     <div className="dropdown-menu m-0">
-                        <Link to="/contract" className="text-primary dropdown-item">Contract List</Link>
-                        <Link to="/case" className="text-primary dropdown-item">Case List</Link>
+                        <Link to="/court/create" className="text-primary dropdown-item">Add Court</Link>
+                        <Link to="/category/create" className="text-primary dropdown-item">Add Category</Link>
                     </div>
                 </div>         
                 <div className="nav-item ">
@@ -99,7 +103,7 @@ function Home(){
                     <Link to="/" className="nav-link">Home</Link>
                 </div>
                 <div className="nav-item ">
-                    <Link to={`/user/info/${user.id}`} className="nav-link">Profile</Link>
+                    <Link to={`/user/userInfo/${user.id}`} className="nav-link">Profile</Link>
                 </div>
                 <div className="nav-item ">
                 <Link to="/inquery/create" className="nav-link">Make Inquiry</Link>
@@ -148,7 +152,7 @@ function Home(){
                     <Link to="/" className="nav-link">Home</Link>
                 </div>
                 <div className="nav-item ">
-                <Link to={`/user/info/${user.id}`} className="nav-link">Profile</Link>
+                <Link to={`/user/lawyerInfo/${user.id}`} className="nav-link">Profile</Link>
                 </div>
                 <div className="nav-item dropdown">
                     <Link to="/" className="nav-link dropdown-toggle" data-bs-toggle="dropdown">View</Link>

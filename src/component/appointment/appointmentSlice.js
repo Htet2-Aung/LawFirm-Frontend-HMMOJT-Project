@@ -24,12 +24,20 @@ export const fetchAppointmentAdmin = createAsyncThunk('inquerys/fetchAppointment
 });
 
 export const addNewAppointment = createAsyncThunk('appointments/addNewAppointment', async(data)=>{
-    const response = await axios.post(`${POST_NEW_Appointment}${data.inqueryId}`,data.appointment,{
-        headers:{
+    // const response = await axios.post(`${POST_NEW_Appointment}${data.inqueryId}`,data.appointment,{
+    //     headers:{
             
-        'Authorization':data.token,
-    }
+    //     'Authorization':data.token,
+    // }
+
+  await axios.post(`${POST_NEW_Appointment}${data.inqueryId}`,data.appointment,{
+            headers:{
+                
+            'Authorization':data.token,
+        }
+        
 })
+const response = await axios.get(GET_ALL_Appointment);
     return response.data;
 })
 
@@ -121,7 +129,9 @@ export const appointmentSlice = createSlice({
                 state.error = action.error.message
             })
             .addCase(addNewAppointment.fulfilled,(state,action)=>{
-                state.appointments.push(action.payload)
+                // state.appointments.push(action.payload)
+                state.status = 'succeeded'
+                state.appointments = action.payload
             })
             .addCase(updateAppointment.fulfilled, (state, action) => {
 

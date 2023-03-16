@@ -1,9 +1,9 @@
 import { selectContractById } from "./contractSlice"
 import { useState } from "react";
-import { useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import contractImg from "./img/contractImg.jpg";
-import UserInfo from "../user/UserInfo";
+import AdminUserInfo from "../user/AdminUserInfo";
 import ViewCaseForm from "../case/ViewCaseForm";
 import ViewAppointmentForm from "../appointment/ViewAppointmentForm";
 import { fetchAppointmentAdmin, selectAppointmentById } from "../appointment/appointmentSlice";
@@ -37,12 +37,12 @@ function ViewContractForm(props) {
 
     const appointment1 = useState(contract.appointment);
 
-    console.log("appointment is ::::::::::::::::::"+appointment1)
+    console.log("appointment is ::::::::::::::::::" + appointment1)
 
     const appointment = useSelector((state) => selectAppointmentById(state, appointmentId))
     const dispatch = useDispatch();
-    console.log("extracted appointment is ::::::::::::::::"+appointment)
-   // console.log("In the view contract form , extract appointmet is ::: " + appointment.id)
+    console.log("extracted appointment is ::::::::::::::::" + appointment)
+    // console.log("In the view contract form , extract appointmet is ::: " + appointment.id)
 
 
     //inquiry data
@@ -75,9 +75,6 @@ function ViewContractForm(props) {
 
 
     return (
-
-
-
 
         <div className="row container bg-light">
             <div className="col-md-1"></div>
@@ -142,7 +139,13 @@ function ViewContractForm(props) {
                                 nrc={lawyer.nrc}
                                 phoneNo={lawyer.phoneNo}
                             /></div>
+                            <hr className="sidebar-divider" />
+                            <div className="text-center">
 
+                                <Link to="/contract">
+                                    <button className="btn btn-danger mx-2">Close</button>
+                                </Link>
+                            </div>
                         </div>
 
                     </div>
@@ -153,6 +156,8 @@ function ViewContractForm(props) {
 
 
         </div>
+
+
 
 
 

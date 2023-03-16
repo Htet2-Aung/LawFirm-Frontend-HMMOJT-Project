@@ -116,7 +116,7 @@ function AddPaymentForm(){
                                                 placeholder="CVC " data-target="#date" data-toggle="datetimepicker"
                                                 value={cvc}
                                         onChange = {onCvcChange} />
-                                        <span className="text-danger">CVC must be 3 numbers.</span>
+                                     
                                         </div>
                                     </div>
 

@@ -2,7 +2,7 @@ import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
 
 const GET_ALL_Category = "http://localhost:8585/api/category/all";
-const POST_NEW_Category = "http://localhost:8585/api/category/create/";
+const POST_NEW_Category = "http://localhost:8585/api/category/create";
 const UPDATE_Category = "http://localhost:8585/api/category/update";
 const DELETE_Category = "http://localhost:8585/api/category/id/";
 
@@ -12,13 +12,26 @@ export const fetchCategories= createAsyncThunk('categories/fetchCategories', asy
 });
 
 export const addNewCategory = createAsyncThunk('categories/addNewCategory', async(data)=>{
-    const response = await axios.post(`${POST_NEW_Category}${data.inqueryId}`,data.category)
+    console.log("In the add new category :  "+ data.category)
+    const response = await axios.post(POST_NEW_Category,data.category,{
+        headers:{
+            
+            'Authorization':data.token,
+        }
+    })
     return response.data;
 })
 
 export const updateCategory= createAsyncThunk('categories/updateCategory',async (data) => {
-    const response = await axios.post(UPDATE_Category,data.category);
-    return response.data
+
+    console.log("In the add UPdate  category Slice :  "+ data.category)
+    const response = await axios.post(UPDATE_Category,data.category,{
+        headers:{
+            
+            'Authorization':data.token,
+        }
+    })
+    return response.data;
  })
 
  export const deleteCategory= createAsyncThunk('categories/deleteCategory', async (data) => {
@@ -34,23 +47,19 @@ const initialState = {
 }
 export const categorySlice = createSlice({
     
-    name: "apppointments",
+    name: "categories",
     initialState,
     reducers: {
         addCategory: {
             reducer(state, action) {
                 state.push(action.payload);
             },
-            prepare( id,name, consultantFees, clientStatus,lawyerStatus,date,time) {
+            prepare( id,categoryName,description) {
                 return {
                     payload:{
                         id,
-                        name, 
-                        consultantFees, 
-                        clientStatus,
-                        lawyerStatus,
-                        date,
-                        time,
+                        categoryName,
+                        description
                     }
                 }
             },
@@ -99,7 +108,7 @@ export const getCategoryStatus = (state) => state.categories.status
 export const getCategoryError = (state) => state.categories.error
 export const selectCategoryById = (state, categoryId) => state.categories.categories.find(category => category.id === categoryId)
 export const selectCategoryByName = (state,searchValue)=>(searchValue==="")?state.categories.categories:state.categories.categories.filter(category=> category.name.toLowerCase().includes(searchValue.toLowerCase()))
-
+export const selectCategoriesByDes=(state,des)=>state.categories.categories.find(category=>category.description===des)
 
 export const { addCategory} = categorySlice.actions;
 

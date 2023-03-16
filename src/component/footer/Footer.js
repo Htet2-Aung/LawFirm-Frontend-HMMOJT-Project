@@ -2,7 +2,7 @@
 
 function Footer() {
     return (
-        <div className="container-fluid text-light myfooter">
+        <div className="container-fluid text-light myfooter mt-4">
         
             <div className="row me-3">
                 <div className="col-md-2"></div>

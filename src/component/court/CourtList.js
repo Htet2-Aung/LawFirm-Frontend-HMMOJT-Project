@@ -2,17 +2,21 @@ import { useEffect } from "react";
 import { useSelector,useDispatch } from "react-redux";
 import CourtItem from "./CourtItem";
 
-import { /*selectAllCourts,*/getCourtError,getCourtStatus, fetchCourts,selectCourtsByDes} from "./courtSlices";
+import { getCourtError,getCourtStatus, fetchCourts,selectAllCourt} from "./courtSlices";
 
 
 
 function CourtList(props){
     const dispatch = useDispatch();
+    console.log("In the court List::::::::::::::")
     const searchValue = props.searchValue;
 
-    const courts = useSelector((state)=>selectCourtsByDes(state,searchValue)) 
-    //const courts = useSelector(selectAllCourts );
+    //const courts = useSelector((s) 
+    const courts = useSelector(selectAllCourt);
+    console.log("All courts are ::::::::::"+courts)
+    
     const courtStatus = useSelector(getCourtStatus);
+    console.log("Court Status is "+courtStatus)
     const error = useSelector(getCourtError);
 
     useEffect(()=>{
@@ -25,10 +29,12 @@ function CourtList(props){
     let content;
 
     if(courtStatus === 'loading'){
+        console.log("In the court loading to call court Item")
         content = (<p>Loading......</p>)
     }
 
     if(courtStatus === 'succeeded'){
+        console.log("In the court succeded to call court Item")
         content = courts.map(
             (court)=>(
                 
@@ -49,6 +55,7 @@ function CourtList(props){
         
     
     if(courtStatus === 'failed'){
+        console.log("In the court fail to call court Item")
         content = (<p>{error}</p>)
     }
 

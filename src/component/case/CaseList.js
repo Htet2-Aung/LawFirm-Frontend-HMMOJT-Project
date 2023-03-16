@@ -75,7 +75,10 @@ function CaseList(props) {
                 />));
     
    
+    useEffect(()=>{
+        dispatch(fetchContracts())
     
+    },[dispatch])
     return content;
 
 }

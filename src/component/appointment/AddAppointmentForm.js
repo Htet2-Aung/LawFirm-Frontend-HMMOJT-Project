@@ -1,8 +1,8 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate, useParams } from "react-router-dom";
 import { getToken } from "../auth/authSlice";
-import { selectInqueryById } from "../inquery/inquerySlice";
+import { fetchInquery, fetchInqueryAdmin, selectInqueryById } from "../inquery/inquerySlice";
 import { selectUserByEmail } from "../user/usersSlice";
 import { addNewAppointment } from "./appointmentSlice";
 import lawyerDiscussion from "./lawyerDiscussion.jpg";
@@ -42,6 +42,8 @@ function AddAppointmentForm(props) {
 
 
     const dispatch = useDispatch();
+
+   
 
     const onSubmit = (event) => {
         event.preventDefault();

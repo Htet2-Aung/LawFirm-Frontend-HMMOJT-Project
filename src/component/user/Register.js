@@ -234,7 +234,12 @@ function Register(props) {
                                                 </div>
                                                 <div className="col-md-2 col-sm-4 form-group"></div>
                                                 <div className="col-md-5 col-sm-4 form-group">
-                                                    <button class="btn" type="reset">Reset</button>
+                                                <input
+                                            type="reset"
+                                            className="btn btn-danger w-100 py-3"
+
+                                            value={'Reset'}
+                                        />
                                                 </div>
                                             </div>
                                         </div>

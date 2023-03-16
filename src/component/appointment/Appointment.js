@@ -17,19 +17,17 @@ function Appointment(props) {
     //define Action for Admin
     function Admin(){
         return(
-            <td className="text-center">
             
-            <Link to={`/appointment/edit/${props.id}/${props.inqueryId}`}>
-                <i titl="Edit Appointment" className='fas fa-edit text-success mx-3'></i>
-            </Link>
+            
+            
 
             <SetLink />
-            {/* <Link to={`/appointment/create/${props.id}`}>
-                <button className="btn btn-light mx-2"><i className='fas fa-paste text-primary'></i>Appointment</button>
-                </Link> */}
+            //  {/* <Link to={`/appointment/create/${props.id}`}>
+            //     <button className="btn btn-light mx-2"><i className='fas fa-paste text-primary'></i>Appointment</button>
+            //     </Link>  */}
             
 
-           </td>
+      
         );
     }
 
@@ -37,7 +35,7 @@ function Appointment(props) {
     function SetLink() {
         let content;
         console.log("in the setLink")
-        console.log(props.appointmentStatus)
+        console.log("In the contract status in appointment: "+props.contractStatus)
         if (props.contractStatus === 'CREATED') {
             content = <UnLinkItem />
         }
@@ -49,14 +47,21 @@ function Appointment(props) {
 
     function LinkItem() {
         return (
+            <td className="text-center">
+            <Link to={`/appointment/edit/${props.id}/${props.inqueryId}`}>
+                <i titl="Edit Appointment" className='fas fa-edit text-primary mx-3'></i>
+            </Link>
             <Link to={`/contract/create/${props.id}`}>
                <i title="Create Contract" className='fas fa-paste text-primary'></i>
             </Link>
+            </td>
         );
     }
     function UnLinkItem() {
         return (
+            <td className="text-center">
            <i title="Contract Created" className='fas fa-paste text-success'></i>
+           </td>
         );
     }
 

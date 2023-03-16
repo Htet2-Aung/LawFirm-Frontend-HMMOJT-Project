@@ -110,6 +110,9 @@ export const getPaymentError = (state) => state.payments.error
 //for update
 export const selectPaymentById = (state,paymentId) => state.payments.payments.find(payment => payment.id === paymentId)
 
+export const selectPaymentByUsername = (state, email) => state.payments.payments.filter(payment => payment.username === email)
+export const selectPaymentByLawyerName = (state, email) => state.payments.payments.filter(payment => payment.lawyerName === email)
+
 
 export const { addPayment } = paymentSlice.actions;
 export default paymentSlice.reducer;

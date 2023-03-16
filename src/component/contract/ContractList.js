@@ -101,7 +101,10 @@ function ContractList(props) {
      
 
         }
-    
+        useEffect(()=>{
+            dispatch(fetchAppointmentAdmin())
+        
+        },[dispatch])
 
     return content;
 

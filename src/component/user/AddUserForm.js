@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { useDispatch } from "react-redux";
+import { useNavigate } from "react-router-dom";
 import { addNewLawyer} from "./usersSlice";
 
 function AddUserForm(props) {
@@ -50,6 +51,7 @@ function AddUserForm(props) {
 
     const canSave = [firstName, middleName, lastName, accountName, password, nrc, address, phoneNo].every(Boolean) && addRequestStatus === 'idle'
 
+    const navigate = useNavigate();
     const dispatch = useDispatch();
 
     const onSubmit = (event) => {
@@ -87,7 +89,7 @@ function AddUserForm(props) {
                         }
                     })
                 ).unwrap();
-
+                navigate("/userLog")
             } catch (error) {
                 console.log(error)
 
@@ -138,7 +140,7 @@ function AddUserForm(props) {
                                 <form onSubmit={onSubmit} class="user">
                                 <div class="form-group row mb-3">
                                     <div class="col-sm-4">
-                                        <input type="text" class="form-control form-control-user" id="exampleLastName"
+                                        <input type="text" class="form-control " id="exampleLastName"
                                             placeholder="Your First Name"
                                             value={firstName}
                                             onChange={onFirstNameChange}
@@ -146,14 +148,15 @@ function AddUserForm(props) {
                                         />
                                     </div>
                                     <div class="col-sm-4">
-                                        <input type="text" class="form-control form-control-user" id="exampleLastName"
+                                        <input type="text" class="form-control " id="exampleLastName"
                                             placeholder="Your Middle Name"
                                             value={middleName}
                                             onChange={onMiddleNameChange}
+                                            required
                                         />
                                     </div>
                                     <div class="col-sm-4">
-                                        <input type="text" class="form-control form-control-user" id="exampleLastName"
+                                        <input type="text" class="form-control " id="exampleLastName"
                                             placeholder="Your Last Name"
                                             value={lastName}
                                             onChange={onLastNameChange}
@@ -164,7 +167,7 @@ function AddUserForm(props) {
                                
                                 <div class="form-group row mb-3">
                                     <div class="col-sm-6">
-                                    <input type="text" class="form-control form-control-user" id="exampleLastName"
+                                    <input type="text" class="form-control " id="exampleLastName"
                                             placeholder="Image URL"
                                             value={imageURL}
                                             onChange={onImageChange}
@@ -185,7 +188,7 @@ function AddUserForm(props) {
                                 </div>
                                 <div class="form-group row mb-3">
                                     <div class="col-sm-6">
-                                        <input type="text" class="form-control form-control-user" id="exampleLastName"
+                                        <input type="text" class="form-control " id="exampleLastName"
                                             placeholder="Your Profile Name"
                                             value={accountName}
                                             onChange={onAccountNameChange}
@@ -193,7 +196,7 @@ function AddUserForm(props) {
                                         />
                                     </div>
                                     <div class="col-sm-6">
-                                        <input type="text" class="form-control form-control-user" id="exampleLastName"
+                                        <input type="text" class="form-control " id="exampleLastName"
                                             placeholder="Your NRC"
                                             value={nrc}
                                             onChange={onNrcChange}
@@ -203,7 +206,7 @@ function AddUserForm(props) {
                                 </div>
                                 <div class="form-group row mb-3">
                                     <div class="col-sm-6">
-                                        <input type="email" class="form-control form-control-user" id="exampleLastName"
+                                        <input type="email" class="form-control " id="exampleLastName"
                                             placeholder="Your Email"
                                             value={username}
                                             onChange={onEmailChange}
@@ -211,7 +214,7 @@ function AddUserForm(props) {
                                         />
                                     </div>
                                     <div class="col-sm-6">
-                                        <input type="text" class="form-control form-control-user" id="exampleLastName"
+                                        <input type="text" class="form-control " id="exampleLastName"
                                             placeholder="Your Phone Number"
                                             value={phoneNo}
                                             onChange={onPhoneNoChange}
@@ -221,7 +224,7 @@ function AddUserForm(props) {
                                 </div>
                                 <div class="form-group row mb-3">
                                 <div class="col-sm-6">
-                                        <input type="text" class="form-control form-control-user" id="exampleLastName"
+                                        <input type="text" class="form-control " id="exampleLastName"
                                             placeholder="Your Cost"
                                             value={cost}
                                             onChange={onCostChange}
@@ -229,7 +232,7 @@ function AddUserForm(props) {
                                         />
                                     </div>
                                     <div class="col-sm-6">
-                                        <input type="text" class="form-control form-control-user" id="exampleLastName"
+                                        <input type="text" class="form-control " id="exampleLastName"
                                             placeholder="Your Address"
                                             value={address}
                                             onChange={onAddressChange}
@@ -242,7 +245,7 @@ function AddUserForm(props) {
                                   
                                     <div class="col-sm-6">
                                         <select
-                                            className="form-control form-control-user"
+                                            className="form-control "
                                             value={statuss}
                                             onChange={onStatussChange}
                                             required
@@ -253,7 +256,7 @@ function AddUserForm(props) {
                                         </select>
                                     </div>
                                     <div class="col-sm-6">
-                                        <input type="text" class="form-control form-control-user" id="exampleLastName"
+                                        <input type="text" class="form-control " id="exampleLastName"
                                             placeholder="Your Field"
                                             value={field}
                                             onChange={onFieldChange}
@@ -263,14 +266,14 @@ function AddUserForm(props) {
                                 </div>
                                 <div class="form-group row mb-3">
                                 <div class="col-sm-6">
-                                        <input type="password" class="form-control form-control-user" id="exampleLastName"
+                                        <input type="password" class="form-control " id="exampleLastName"
                                             placeholder="Your Password"
                                             value={password}
                                             onChange={onPasswordChange}
                                         />
                                     </div>
                                     <div class="col-sm-6">
-                                        <input type="password" class="form-control form-control-user" id="exampleLastName"
+                                        <input type="password" class="form-control " id="exampleLastName"
                                             placeholder="Your Confirm Password"
                                             value={confirmPassword}
                                             onChange={onConfirmPasswordChange}
@@ -280,7 +283,8 @@ function AddUserForm(props) {
                                 </div>
                                 <div class="form-group row mb-3">
                                     <div class="col-sm-6">
-                                        <input type="text" class="form-control form-control-user" id="exampleLastName"
+                                    <label className="form-label">License Number</label>
+                                        <input type="text" class="form-control " id="exampleLastName"
                                             placeholder="Your License Number"
                                             value={licenseNo}
                                             onChange={onLicenseNoChange}
@@ -288,7 +292,8 @@ function AddUserForm(props) {
                                         />
                                     </div>
                                     <div class="col-sm-6">
-                                        <input type="date" class="form-control form-control-user" id="exampleLastName"
+                                    <label className="form-label">License Expire Date</label>
+                                        <input type="date" class="form-control " id="exampleLastName"
                                             placeholder="Your license Expire Date"
                                             value={licenseExpireDate}
                                             onChange={onLicenseExpireDateChange}

@@ -12,7 +12,9 @@ function PaymentTable(){
 
         return (
 
-            <div className="container-fluid">
+            <div className="container-fluid row">
+            <div className="col-md-1"></div>
+            <div className="col-md-10">
             <div className="card shadow mb-4">
                 <div className="card-header py-3">
                     
@@ -52,6 +54,9 @@ function PaymentTable(){
                     </div>
                 </div>
             </div>
+            </div>
+            <div className="col-md-1"></div>
+        
     
         </div>
         );

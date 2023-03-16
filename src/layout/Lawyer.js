@@ -1,6 +1,7 @@
 import { Link } from "react-router-dom";
 
 function Lawyer(props){
+        const lawyerId = props.id;
         return (
             <div className="team">
             <div className="team-item">
@@ -10,12 +11,10 @@ function Lawyer(props){
                 </div>
                 <div className="team-text">
                     <h2>{props.accountName}</h2>
-                    <Link to={`/user/info/${props.id}`}>
+                    <Link to={`/user/viewLawyer/${lawyerId}`}>
                     <div className="team-social">
-                        <a className="social-tw" href=""><i className="fab fa-twitter"></i></a>
-                        <a className="social-fb" href=""><i className="fab fa-facebook-f"></i></a>
-                        <a className="social-li" href=""><i className="fab fa-linkedin-in"></i></a>
-                        <a className="social-in" href=""><i className="fab fa-instagram"></i></a>
+                        <a className="social-fb" href=""><i class='fas fa-user-circle fa-2x'></i></a>
+                      
                     </div>
                     </Link>
                     <p className="text-light">{props.field}</p>

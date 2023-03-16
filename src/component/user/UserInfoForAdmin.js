@@ -277,7 +277,7 @@ function UserInfoForAdmin(props) {
                                         <ProfileInfo />
                                         <hr className="sidebar-divider" />
                                         <div className="text-center mb-2">
-                                            <Link to="/">
+                                            <Link to="/userLog">
                                                 <button className="btn btn-primary">Close</button>
                                             </Link>
                                         </div>
@@ -306,7 +306,7 @@ function UserInfoForAdmin(props) {
 
                                         
                                         <div className="text-center mb-2">
-                                            <Link to="/">
+                                            <Link to="/userLog">
                                                 <button className="btn btn-primary">Close</button>
                                             </Link>
                                         </div>

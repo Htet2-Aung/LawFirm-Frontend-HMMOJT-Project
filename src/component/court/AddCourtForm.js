@@ -1,11 +1,14 @@
 import { useState } from "react";
 import { useDispatch,useSelector } from "react-redux";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
+import { getToken } from "../auth/authSlice";
+import courtImg from "./courtImg.jpg"
 
 import { addNewCourt,selectCategoryById, updateCategory } from "./courtSlices";
 function AddCourtForm(props){
-    const { caseId } =useParams()
-    console.log(Number(caseId));
+    const navigate=useNavigate();
+    const token=useSelector(getToken);
+    console.log("In the add court form , token is : "+token);
 
     const [courtName,setCourtName] = useState('');
     const [address,setAddress] = useState('');
@@ -37,15 +40,16 @@ function AddCourtForm(props){
                     
                     addNewCourt({
                         court:{
-                        
                         courtName,
                         address,
                         township,
                         city
-                        },caseId
+                        },token
         
                 }),
                     ).unwrap();
+
+                    navigate("/court")
                 
             } catch (error) {
                 console.log(error)
@@ -66,74 +70,88 @@ function AddCourtForm(props){
        
   
     return (
-           <div className="bg-light container-fluid py-5">
+        <div class="contact">
+            <div class="container">
+                <div>
 
-            <div className="container">
-                <div className="row gx-5">
-                    <div className="col-lg-3 mb-5 mb-lg-0">
-                    </div>
-                    <div className="col-lg-6 mb-5 mb-lg-0">
+                </div>
 
-                        <h1 className="text-primary text-center mb-4">Create Court Form</h1>
-                        <div className="b-light text-center rounded p-5">
+                <div className="row">
 
-                            <form onSubmit={ onSubmit }>
-                                <div className="row g-3">
-                                    
-                                    <div className="col-12 ">
-                                        <div className="date" id="date" data-target-input="nearest">
-                                            <input type="text"
-                                                name="contractDate"
-                                                className="form-control text-primary bg-white border-0 datetimepicker-input"
-                                                placeholder="Court Name" data-target="#date" data-toggle="datetimepicker"
-                                                value={courtName}
-                                        onChange = {onCourtNameChange} />
-                                        </div>
-                                    </div>
+                    <div className="col-md-2"></div>
+                    <div className="col-md-8">
+                        <div className="contact card o-hidden border-0 shadow-lg my-5">
+                            <div className="card-body p-0">
+                                <div className="row">
+                                    <h2 className="text-primary text-center mt-3">Add New Court</h2>
+                                    <div className="col-lg-5 d-none d-lg-block"><img src={courtImg} className="w-100" /></div>
+                                    <div className="col-lg-7 pr-5">
+                                        <form onSubmit={onSubmit}>
+                                            <div className="row g-3">
 
-                                    <div className="col-12 ">
-                                        <div className="date" id="date" data-target-input="nearest">
-                                            <input type="text"
-                                                name="contractDate"
-                                                className="form-control text-primary bg-white border-0 datetimepicker-input"
-                                                placeholder="Address" data-target="#date" data-toggle="datetimepicker"
-                                                value={address}
-                                        onChange = {onAddressChange} />
-                                        </div>
-                                    </div>
+                                                <div className="col-12 ">
+                                                    <div className="date" id="date" data-target-input="nearest">
+                                                        <input type="text"
+                                                            name="contractDate"
+                                                            className="form-control text-primary bg-white border-0 datetimepicker-input"
+                                                            placeholder="Court Name" data-target="#date" data-toggle="datetimepicker"
+                                                            value={courtName}
+                                                            onChange={onCourtNameChange} />
+                                                    </div>
+                                                </div>
 
-                                    <div className="col-12 ">
-                                        <div className="date" id="date" data-target-input="nearest">
-                                            <input type="text"
-                                                name="contractDate"
-                                                className="form-control text-primary bg-white border-0 datetimepicker-input"
-                                                placeholder="Township " data-target="#date" data-toggle="datetimepicker"
-                                                value={township}
-                                        onChange = {onTownshipChange} />
-                                        </div>
-                                    </div>
+                                                <div className="col-12 ">
+                                                    <div className="date" id="date" data-target-input="nearest">
+                                                        <input type="text"
+                                                            name="contractDate"
+                                                            className="form-control text-primary bg-white border-0 datetimepicker-input"
+                                                            placeholder="Address" data-target="#date" data-toggle="datetimepicker"
+                                                            value={address}
+                                                            onChange={onAddressChange} />
+                                                    </div>
+                                                </div>
 
-                                    <div className="col-12 ">
-                                        <div className="date" id="date" data-target-input="nearest">
-                                            <input type="text"
-                                                name="contractDate"
-                                                className="form-control text-primary bg-white border-0 datetimepicker-input"
-                                                placeholder="City " data-target="#date" data-toggle="datetimepicker"
-                                                value={city}
-                                            onChange = {onCityChange} />
-                                        </div>
-                                    </div>
-                                    <div className="col-12">
-                                        <button className="btn btn-primary w-100 py-3" type="submit">Submit</button>
+                                                <div className="col-12 ">
+                                                    <div className="date" id="date" data-target-input="nearest">
+                                                        <input type="text"
+                                                            name="contractDate"
+                                                            className="form-control text-primary bg-white border-0 datetimepicker-input"
+                                                            placeholder="Township " data-target="#date" data-toggle="datetimepicker"
+                                                            value={township}
+                                                            onChange={onTownshipChange} />
+                                                    </div>
+                                                </div>
+
+                                                <div className="col-12 ">
+                                                    <div className="date" id="date" data-target-input="nearest">
+                                                        <input type="text"
+                                                            name="contractDate"
+                                                            className="form-control text-primary bg-white border-0 datetimepicker-input"
+                                                            placeholder="City " data-target="#date" data-toggle="datetimepicker"
+                                                            value={city}
+                                                            onChange={onCityChange} />
+                                                    </div>
+                                                </div>
+                                                <div className="col-12">
+                                                    <button className="btn btn-primary w-100 py-3" type="submit">Submit</button>
+                                                </div>
+                                            </div>
+                                        </form>
                                     </div>
                                 </div>
-                            </form>
+                            </div>
+
+
+
                         </div>
-
                     </div>
-                </div>
-            </div>
+                    <div className="col-md-2"></div>
 
+                </div>
+
+
+
+            </div>
         </div>
 
 

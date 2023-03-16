@@ -2,7 +2,7 @@
 import { Link } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { deletePayment } from "./paymentSlice";
-import UpdatePaymentForm from "./UpdatePaymentForm";
+
 
 function PaymentItem(props){
 

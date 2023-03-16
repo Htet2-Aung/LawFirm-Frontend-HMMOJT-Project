@@ -2,8 +2,17 @@ import { Link } from "react-router-dom";
 import $, { each } from "jquery"
 import { useEffect } from "react";
 import ContractList from "./ContractList";
+import { useDispatch, useSelector } from "react-redux";
+import { fetchContracts, selectAllContract } from "./contractSlice";
 
 function ContractTable() {
+
+    const contract = useSelector(selectAllContract);
+    const dispatch = useDispatch();
+    useEffect(() => {
+        dispatch(fetchContracts())
+    }, [dispatch])
+
     useEffect(() => {
         setTimeout(() => {
             // $('#example').DataTable().destroy();

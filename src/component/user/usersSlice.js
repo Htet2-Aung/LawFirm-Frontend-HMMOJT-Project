@@ -5,6 +5,8 @@ const GET_ALL_USER = "http://localhost:8585/api/user/all";
 // const GET_USER="http://localhost:8585/api/user/all"
 const POST_NEW_LAWYER = "http://localhost:8585/api/user/createLawyer";
 const POST_NEW_USER = "http://localhost:8585/api/user/createUser";
+const UPDATE_USER = "http://localhost:8585/api/user/updateUser";
+const UPDATE_Lawyer = "http://localhost:8585/api/user/updateLawyer";
 const DELETE_USER = "http://localhost:8585/api/user/id/";
 
 
@@ -34,7 +36,14 @@ export const addNewUser = createAsyncThunk('users/addNewUser', async (data) => {
 })
 
 export const updateUser = createAsyncThunk('users/updateUser', async (data) => {
-    const response = await axios.post(POST_NEW_LAWYER, data.user);
+    // const response = await axios.post(UPDATE_USER, data.user);
+   await axios.post(UPDATE_USER, data.user);
+   const response = await axios.get(GET_ALL_USER);
+
+    return response.data
+})
+export const updateLawyer = createAsyncThunk('users/updateLawyer', async (data) => {
+    const response = await axios.post(UPDATE_Lawyer, data.user);
     return response.data
 })
 
@@ -111,12 +120,24 @@ export const userSlice = createSlice({
             })
             .addCase(updateUser.fulfilled, (state, action) => {
 
-                const user = action.payload
+                state.status = 'succeeded';
+                state.users = action.payload
 
 
-                const users = state.users.filter(us => us.id !== user.id)
+                // const users = state.users.filter(us => us.id !== user.id)
 
-                state.users = [user, ...users]
+                // state.users = [user, ...users]
+
+
+            })
+            .addCase(updateLawyer.fulfilled, (state, action) => {
+
+                const lawyer = action.payload
+
+
+                const lawyers = state.users.filter(us => us.id !== lawyer.id)
+
+                state.users = [lawyer, ...lawyers]
 
 
             })
