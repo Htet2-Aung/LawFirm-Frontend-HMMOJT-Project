@@ -76,7 +76,7 @@ function ContractList(props) {
         if(contractStatus === 'loading'){
             content = (<p>Loading....</p>)
         }
-
+        console.log("In the contract List: "+contractStatus)
         if(contractStatus === 'succeeded'){
             content = contracts.map(
                 (contract) => (

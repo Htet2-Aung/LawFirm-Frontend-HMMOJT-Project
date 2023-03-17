@@ -8,31 +8,24 @@ function AdminUserInfo(props) {
 
     const user = useSelector(getUser)
 
-    // const { userId } = useParams()
-    // const user1 = useSelector((state) => selectUserById(state, Number(userId)))
-    // console.log(userId)
-    // console.log("In The User Info:"+user)
-
-
-    const id = useState(user?.id);
-    const firstName = useState(user?.firstName);
-    const middleName = useState(user?.middleName);
-    const lastName = useState(user?.lastName);
-    const accountName = useState(user?.accountName);
-    const imageURL = useState(user?.imageURL);
-    const gender = useState(user?.gender)
-    const cost = useState(user?.cost);
-    const address = useState(user?.address);
-    const nrc = useState(user?.nrc);
-    const phoneNo = useState(user?.phoneNo);
-    const statuss = useState(user?.statuss);
-    const role = useState(user?.role);
-    const username = useState(user?.username);
-    const field = useState(user?.field);
-    const certificate = useState(user?.certificate);
-    const description = useState(user?.description);
-    const licenseNo = useState(user?.licenseNo);
-    const licenseExpireDate = useState(user?.licenseExpireDate);
+    const id = useState(user.id);
+    const firstName = useState(user.firstName);
+    const lastName = useState(user.lastName);
+    const accountName = useState(user.accountName);
+    const imageURL = useState(user.imageURL);
+    const gender = useState(user.gender)
+    const cost = useState(user.cost);
+    const address = useState(user.address);
+    const nrc = useState(user.nrc);
+    const phoneNo = useState(user.phoneNo);
+    const statuss = useState(user.statuss);
+    const role = useState(user.role);
+    const username = useState(user.username);
+    const field = useState(user.field);
+    const certificate = useState(user.certificate);
+    const description = useState(user.description);
+    const licenseNo = useState(user.licenseNo);
+    const licenseExpireDate = useState(user.licenseExpireDate);
 
     console.log(role)
     function ProfileInfo() {
@@ -79,17 +72,6 @@ function AdminUserInfo(props) {
                             </div>
                             <div className="col-md-6">
                                 <h5 className="cardInfo">{firstName}</h5>
-                            </div>
-                        </div>
-                        <div className="row">
-                            <div className="col-md-5">
-                                <h5 className="cardInfo">Middle Name</h5>
-                            </div>
-                            <div className="col-md-1">
-                                <h5 className="cardInfo">:</h5>
-                            </div>
-                            <div className="col-md-6">
-                                <h5 className="cardInfo">{middleName}</h5>
                             </div>
                         </div>
                         <div className="row">
@@ -249,7 +231,7 @@ function AdminUserInfo(props) {
                                 <h5 className="cardInfo"><p>{certificate}</p></h5>
                             </div>
                         </div>
-                        <div className="row">
+                        {/* <div className="row">
                             <div className="col-md-5">
                                 <h5 className="cardInfo">Description</h5>
                             </div>
@@ -259,7 +241,7 @@ function AdminUserInfo(props) {
                             <div className="col-md-6">
                                 <h5 className="cardInfo"><p>{description}</p></h5>
                             </div>
-                        </div>
+                        </div> */}
                     </div>
                 </div>
               
@@ -305,7 +287,14 @@ function AdminUserInfo(props) {
                                     <LawyerInfo />
                                 </div>
                             </div>
-
+                            <div className="row">
+                            
+                                <h5 className="cardInfo">Description</h5>
+                           
+                            
+                           
+                                <h5 className="cardInfo"><p>{description}</p></h5>
+                            </div>
 
                             <div className="text-center mb-2">
                                 <Link to="/">

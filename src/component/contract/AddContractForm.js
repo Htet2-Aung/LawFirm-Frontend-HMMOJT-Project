@@ -1,8 +1,6 @@
 import {addNewContract} from "./contractSlice"
 import { useDispatch, useSelector} from "react-redux";
 import { useState } from "react";
-//import { useParams,useNavigate } from "react-router-dom";
-//import { getToken } from "../auth/authSlice";
 import contractImage from "./img/AddContractImg.png"
 import { getToken } from "../auth/authSlice";
 import { useNavigate, useParams } from "react-router-dom";

@@ -26,24 +26,11 @@ function UserList(){
                 (user) => (
                     <UserItem
                         id={user.id}
-                        // firstName={user.firstName}
-                        // middleName={user.middleName}
-                        // lastName={user.lastName}
                         accountName={user.accountName}
                         role={user.role}
                         imageURL={user.imageURL}
                         username={user.username}
                         address={user.address}
-                        //nrc={user.nrc}
-                        // phoneNo={user.phoneNo}
-                        // cost={user.cost}
-                        // statuss={user.statuss}
-                        // licenseNo={user.licenseNo}
-                        // licenseExpireDate={user.licenseExpireDate}
-                        // password={user.password}
-                        // field={user.field}
-                        // description={user.description}
-                        // certificate={user.certificate}
                        
                     />
                 )

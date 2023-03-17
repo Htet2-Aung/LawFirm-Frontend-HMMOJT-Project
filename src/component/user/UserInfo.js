@@ -1,7 +1,6 @@
-import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link, useNavigate, useParams } from "react-router-dom";
-import { fetchUser, selectUserById } from "./usersSlice";
+import { selectUserById } from "./usersSlice";
 function UserInfo(props){
         const dispatch = useDispatch()
         const { userId } = useParams()
@@ -62,17 +61,6 @@ function UserInfo(props){
                             </div>
                             <div className="col-md-6">
                                 <h5 className="cardInfo">{user.firstName}</h5>
-                            </div>
-                        </div>
-                        <div className="row">
-                            <div className="col-md-5">
-                                <h5 className="cardInfo">Middle Name</h5>
-                            </div>
-                            <div className="col-md-1">
-                                <h5 className="cardInfo">:</h5>
-                            </div>
-                            <div className="col-md-6">
-                                <h5 className="cardInfo">{user.middleName}</h5>
                             </div>
                         </div>
                         <div className="row">

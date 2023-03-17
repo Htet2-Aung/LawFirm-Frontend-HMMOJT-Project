@@ -20,10 +20,6 @@ function UserItem(props) {
         setModalOpen(true);
     }
 
-    // function backdropHandler(){
-    //     setModalOpen(false);
-    // }
-
     function cancelHandler(){
         setModalOpen(false);
     }

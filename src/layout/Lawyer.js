@@ -14,7 +14,6 @@ function Lawyer(props){
                     <Link to={`/user/viewLawyer/${lawyerId}`}>
                     <div className="team-social">
                         <a className="social-fb" href=""><i class='fas fa-user-circle fa-2x'></i></a>
-                      
                     </div>
                     </Link>
                     <p className="text-light">{props.field}</p>

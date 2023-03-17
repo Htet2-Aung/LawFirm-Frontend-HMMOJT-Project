@@ -1,12 +1,4 @@
-
-
-
-function ViewUser(props) {
-
-    
-
-
-    
+function ViewUser(props) {  
     return (            
         <div>
             <center><h4 > {props.role}</h4></center>
@@ -15,7 +7,7 @@ function ViewUser(props) {
                 <div className="row">
                 <div className="col-md-5"><label>Name</label></div>
                 <div className="col-md-1">:</div>
-                <div className="col-md-6"><label>{props.firstName}{props.middleName}{props.lastName}</label></div>
+                <div className="col-md-6"><label>{props.firstName}{props.lastName}</label></div>
                 </div>
                 <div className="row">
                 <div className="col-md-5"><label>Genger</label></div>

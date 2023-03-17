@@ -62,10 +62,13 @@ import ViewCategoryForm from "./component/category/ViewCategoryForm";
 
 function App() {
   const user = useSelector(getUser)
+  console.log("In the App :"+user.role)
 
+  let content;
 
-  return (
-    <div className="row">
+  if(user.role === 'Admin'){
+    content = (
+      <div className="row">
       <TopHeader />
 
 
@@ -85,7 +88,7 @@ function App() {
 
           <Route path='user'>
             <Route path='create' element={<AddUserForm />} />
-            <Route path='infoAdmin/:userId' element={<UserInfoForAdmin />} />
+            <Route path='infoAdmin/:userId' element={<UserInfoForAdmin/>} />
             <Route path='info/:userId' element={<AdminUserInfo />} />
             <Route path='edit/:userId' element={<EditUserForm />} />
             <Route path='editLawyer/:userId' element={<EditLawyerForm/>} />
@@ -150,9 +153,102 @@ function App() {
             <Route path='category/view/:categoryId' element={<ViewCategoryForm />} />
             
       </Routes>
-      <Footer />
+    
     </div>
-  );
+    )}
+  else{
+      content = (
+        <div className="row">
+        <TopHeader />
+  
+  
+        <Routes>
+          <Route path="/">
+            <Route index element={<UserPage />} />
+            <Route path="register" element={<Register />} />
+            <Route path="login" element={<Login />} />
+            <Route path="admin" element={<AdminPage />} />
+  
+            <Route path="banner" element={<Banner />} />
+  
+            <Route path='userLog' element={<UsersTable />} />
+            <Route path="inquery" element={<InqTable />} />
+            <Route path="inquery/todo" element={<ToDoInqTable />} />
+  
+  
+            <Route path='user'>
+              <Route path='create' element={<AddUserForm />} />
+              <Route path='infoAdmin/:userId' element={<UserInfoForAdmin/>} />
+              <Route path='info/:userId' element={<AdminUserInfo />} />
+              <Route path='edit/:userId' element={<EditUserForm />} />
+              <Route path='editLawyer/:userId' element={<EditLawyerForm/>} />
+              <Route path='userInfo/:userId' element={<UserInfo />}/>
+              <Route path='lawyerInfo/:userId' element={<LawyerInfo />}/>
+              <Route path="viewLawyer/:lawyerId" element={<LawyerInfo1 />} />
+            </Route>
+            <Route path='inquery'>
+  
+              <Route path='create' element={
+                <PrivateRoute user={user}>
+                  <AddInqueryForm />
+                </PrivateRoute>
+              } />
+              {/* <Route path='create' element={<AddInqueryForm />} /> */}
+              <Route path='info/:inqueryId' element={<InqueryInfo />} />
+              <Route path='todo/info/:inqueryId' element={<InqueryInfo />} />
+              <Route path="edit/:inqueryId" element={<EditInqueryForm />} />
+            </Route>
+  
+            <Route path="appointment" element={<AppTable />} />
+            <Route path="appointment/todo" element={<ToDoAppTable />} />
+  
+            <Route path="appointment">
+              <Route path="create/:inqueryId" element={<AddAppointmentForm />} />
+              <Route path="edit/:appointmentId/:inqueryId" element={<EditAppointmentForm />} />
+            </Route>
+  
+            <Route path='contract' element={<ContractTable />} />
+            <Route path='contract/todo' element={<ToDoContractTable />} />
+  
+            <Route path='contract'>
+              <Route path='create/:appointmentId' element={<AddContractForm />} />
+              <Route path='edit/:contractId' element={<EditContractForm />} />
+              <Route path='view/:contractId' element={<ViewContractForm />} />
+            </Route>
+  
+            <Route path='case' element={<CaseTable />} />
+            <Route path='case'>
+              <Route path='create/:contractId' element={<AddCaseForm />} />
+              <Route path='edit/:caseId' element={<EditCaseForm />} />
+              <Route path='info/:caseId' element={<ViewCaseForm />} />
+            </Route>
+          </Route>
+  
+          <Route path='payment'>
+            <Route path='create/:contractId' element={<AddPaymentForm />} />
+            <Route path='edit/:paymentId' element={<UpdatePaymentForm />} />
+            <Route path='paymentTable' element={<PaymentTable />} />
+          </Route>
+  
+          <Route path='court' element={<CourtTable />} />
+              <Route path='court/create' element={<AddCourtForm />} />
+              <Route path='court/edit/:courtId' element={<UpdateCourtForm />} />
+              <Route path='court/view/:courtId' element={<ViewCourtForm />} />
+  
+             
+  
+            <Route path='category' element={<CategoryTable />} />
+              <Route path='category/create' element={<AddCategoryForm />} />
+              <Route path='category/edit/:categoryId' element={<UpdateCategoryForm />} />
+              <Route path='category/view/:categoryId' element={<ViewCategoryForm />} />
+              
+        </Routes>
+        <Footer />
+      </div>
+      )
+  }
+
+  return content;
 }
 
 export default App;

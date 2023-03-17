@@ -36,9 +36,9 @@ function Home(){
                 </button>
                 <div className="collapse navbar-collapse" id="navbarCollapse">
                 <div className="navbar-nav ms-auto py-0">
-                <div className="nav-item ">
+                {/* <div className="nav-item ">
                     <Link to="/" className="nav-link">Home</Link>
-                </div>
+                </div> */}
                
                 <div className="nav-item ">
                     <Link to="/userLog" className="nav-link">User</Link>
@@ -76,7 +76,6 @@ function Home(){
 
                 </div>
             </nav>
-            {/* <NavigationBar/> */}
             <Dashboard/>
         </div>
         
@@ -112,7 +111,6 @@ function Home(){
                     <Link to="/" className="nav-link dropdown-toggle" data-bs-toggle="dropdown">View</Link>
                     <div className="dropdown-menu m-0">
                         <Link to="/inquery" className="text-primary dropdown-item">View Inquiry</Link>
-                        {/* as={Link} */}
                         <Link to="/appointment" className="text-primary dropdown-item">View Appointment</Link>
                         <Link to="/contract" className="text-primary dropdown-item">View Contract</Link>
                         <Link to="/case" className="text-primary dropdown-item">View Case</Link>

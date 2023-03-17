@@ -119,6 +119,7 @@ function AddInqueryForm(props) {
                                             className="form-control"
                                             value={lawyerName}
                                             onChange={onLawyerNameChange}
+                                            required
                                         >
                                             <option value="">Select LawyerName</option>
                                             {

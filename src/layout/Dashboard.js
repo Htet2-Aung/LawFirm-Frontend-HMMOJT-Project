@@ -50,7 +50,7 @@ function Dashboard(){
                                         <div className="col mr-2">
                                             <div className="text-xs font-weight-bold text-primary text-uppercase mb-1">
                                             Total User</div>
-                                            <div className="h5 mb-0 font-weight-bold text-gray-800">{users.length}</div>
+                                            <div className="h5 mb-0 font-weight-bold text-gray-800 text-danger">{users.length}</div>
                                         </div>
                                         <div className="col-auto">
                                         <i className='fas fa-2x fa-user-alt text-primary'></i>
@@ -69,7 +69,7 @@ function Dashboard(){
                                         <div className="col mr-2">
                                             <div className="text-xs font-weight-bold text-primary text-uppercase mb-1">
                                            Inquiry</div>
-                                            <div className="h5 mb-0 font-weight-bold text-gray-800">{inquerys.length}</div>
+                                            <div className="h5 mb-0 font-weight-bold text-gray-800 text-danger">{inquerys.length}</div>
                                         </div>
                                         <div className="col-auto">
                                         <i className='far fa-file-alt fa-2x text-primary'></i>
@@ -87,7 +87,7 @@ function Dashboard(){
                                         <div className="col mr-2">
                                             <div className="text-xs font-weight-bold text-primary text-uppercase mb-1">
                                             Appointment</div>
-                                            <div className="h5 mb-0 font-weight-bold text-gray-800">{appointments.length}</div>
+                                            <div className="h5 mb-0 font-weight-bold text-gray-800 text-danger">{appointments.length}</div>
                                         </div>
                                         <div className="col-auto">
                                         <i className='fas fa-paste fa-2x text-primary'></i>
@@ -105,7 +105,7 @@ function Dashboard(){
                                         <div className="col mr-2">
                                             <div className="text-xs font-weight-bold text-primary text-uppercase mb-1">
                                             Contract</div>
-                                            <div className="h5 mb-0 font-weight-bold text-gray-800">{contracts.length}</div>
+                                            <div className="h5 mb-0 font-weight-bold text-gray-800 text-danger">{contracts.length}</div>
                                         </div>
                                         <div className="col-auto">
                                            <i class='fas fa-2x fa-handshake text-primary'></i>
@@ -124,7 +124,7 @@ function Dashboard(){
                                         <div className="col mr-2">
                                             <div className="text-xs font-weight-bold text-primary text-uppercase mb-1">
                                             Total Case</div>
-                                            <div className="h5 mb-0 font-weight-bold text-gray-800">{cases.length}</div>
+                                            <div className="h5 mb-0 font-weight-bold text-gray-800 text-danger">{cases.length}</div>
                                         </div>
                                         <div className="col-auto">
                                             <i className="fas fa-calendar fa-2x text-primary"></i>

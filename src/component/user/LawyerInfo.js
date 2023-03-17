@@ -1,4 +1,3 @@
-import { useState } from "react";
 import { useSelector } from "react-redux";
 import { Link, useNavigate, useParams } from "react-router-dom";
 import { selectUserById } from "./usersSlice";
@@ -9,11 +8,6 @@ function LawyerInfo(){
         const user = useSelector((state) => selectUserById(state, Number(userId)))
         console.log(userId)
         
-       
-    
-  
-   
-    // return info;
     return(
         <div className="container">
         <div className="row">
@@ -64,17 +58,6 @@ function LawyerInfo(){
                             </div>
                             <div className="col-md-6">
                                 <h5 className="cardInfo">{user.firstName}</h5>
-                            </div>
-                        </div>
-                        <div className="row">
-                            <div className="col-md-5">
-                                <h5 className="cardInfo">Middle Name</h5>
-                            </div>
-                            <div className="col-md-1">
-                                <h5 className="cardInfo">:</h5>
-                            </div>
-                            <div className="col-md-6">
-                                <h5 className="cardInfo">{user.middleName}</h5>
                             </div>
                         </div>
                         <div className="row">

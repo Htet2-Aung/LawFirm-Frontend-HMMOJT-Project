@@ -10,7 +10,6 @@ function EditLawyerForm(props){
 
     const [id, setId] = useState(user?.id);
     const [firstName, setFirstName] = useState(user?.firstName);
-    const [middleName, setMiddleName] = useState(user?.middleName);
     const [lastName, setLastName] = useState(user?.lastName);
     const [accountName, setAccountName] = useState(user?.accountName);
     const [imageURL, setImageURL] = useState(user?.imageURL);
@@ -32,7 +31,6 @@ function EditLawyerForm(props){
 
    
     const onFirstNameChange = e => setFirstName(e.target.value);
-    const onMiddleNameChange = e => setMiddleName(e.target.value);
     const onLastNameChange = e => setLastName(e.target.value);
     const onAccountNameChange = e => setAccountName(e.target.value);
     const onImageURLChange = e => setImageURL(e.target.value);
@@ -41,18 +39,15 @@ function EditLawyerForm(props){
     const onAddressChange = e => setAddress(e.target.value);
     const onNrcChange = e => setNrc(e.target.value);
     const onPhoneNoChange = e => setPhoneNo(e.target.value);
+    const onFieldChange = e => setField(e.target.value);
     const onStatussChange = e => setStatuss(e.target.value);
     const onRoleChange = e => setRole(e.target.value);
-    const onEmailChange = e => setEmail(e.target.value);
-    const onPasswordChange = e => setPassword(e.target.value);
-    const onConfirmPasswordChange = e => setConfirmPassword(e.target.value);
-    const onFieldChange = e => setField(e.target.value);
     const onCertificateChange = e => setCertificate(e.target.value);
     const onDescriptionChange = e => setDescription(e.target.value);
     const onLicenseNoChange = e => setLicenseNo(e.target.value);
     const onLicenseExpireDateChange = e => setLicenseExpireDate(e.target.value);
     const [addRequestStatus, setAddRequestStatus] = useState('idle')
-    const canSave = [firstName, middleName, lastName, accountName,imageURL, password, nrc, address, phoneNo].every(Boolean) && addRequestStatus === 'idle'
+    const canSave = [firstName, lastName, accountName,imageURL, password, nrc, address, phoneNo].every(Boolean) && addRequestStatus === 'idle'
 
     console.log(canSave)
     const dispatch = useDispatch();
@@ -71,7 +66,6 @@ function EditLawyerForm(props){
                         user:{
                         id,
                         firstName,
-                        middleName,
                         lastName,
                         address,
                         cost,
@@ -104,7 +98,6 @@ function EditLawyerForm(props){
 
             setId('')
             setFirstName('')
-            setMiddleName('')
             setLastName('')
             setAccountName('')
             setImageURL('')
@@ -144,21 +137,14 @@ function EditLawyerForm(props){
                                 </div>
                                 <form onSubmit={onSubmit} class="user">
                                     <div class="form-group row mb-3">
-                                        <div class="col-sm-4">
+                                        <div class="col-sm-6">
                                             <input type="text" class="form-control " id="exampleLastName"
                                                 placeholder="Your First Name"
                                                 value={firstName}
                                                 onChange={onFirstNameChange}
                                             />
                                         </div>
-                                        <div class="col-sm-4">
-                                            <input type="text" class="form-control " id="exampleLastName"
-                                                placeholder="Your Middle Name"
-                                                value={middleName}
-                                                onChange={onMiddleNameChange}
-                                            />
-                                        </div>
-                                        <div class="col-sm-4">
+                                        <div class="col-sm-6">
                                             <input type="text" class="form-control " id="exampleLastName"
                                                 placeholder="Your Last Name"
                                                 value={lastName}

@@ -1,7 +1,6 @@
 import { useState } from "react";
 import { useSelector } from "react-redux";
 import { Link, useParams } from "react-router-dom";
-import { getUser } from "../auth/authSlice";
 import { selectUserById } from "./usersSlice";
 
 
@@ -15,7 +14,6 @@ function UserInfoForAdmin(props) {
 
     const id = useState(user?.id);
     const firstName = useState(user?.firstName);
-    const middleName = useState(user?.middleName);
     const lastName = useState(user?.lastName);
     const accountName = useState(user?.accountName);
     const imageURL = useState(user?.imageURL);
@@ -82,17 +80,6 @@ function UserInfoForAdmin(props) {
                         </div>
                         <div className="row">
                             <div className="col-md-5">
-                                <h5 className="cardInfo">Middle Name</h5>
-                            </div>
-                            <div className="col-md-1">
-                                <h5 className="cardInfo">:</h5>
-                            </div>
-                            <div className="col-md-6">
-                                <h5 className="cardInfo">{middleName}</h5>
-                            </div>
-                        </div>
-                        <div className="row">
-                            <div className="col-md-5">
                                 <h5 className="cardInfo">Last Name</h5>
                             </div>
                             <div className="col-md-1">
@@ -135,28 +122,6 @@ function UserInfoForAdmin(props) {
                                 <h5 className="cardInfo">{nrc}</h5>
                             </div>
                         </div>
-                        {/* <div className="row">
-                            <div className="col-md-3">
-                                <h5>Email</h5>
-                            </div>
-                            <div className="col-md-2">
-                                <h5>:</h5>
-                            </div>
-                            <div className="col-md-7">
-                                <h5>{username}</h5>
-                            </div>
-                        </div> */}
-                        {/* <div className="row">
-                            <div className="col-md-3">
-                                <h5>Phone No</h5>
-                            </div>
-                            <div className="col-md-2">
-                                <h5>:</h5>
-                            </div>
-                            <div className="col-md-7">
-                                <h5>{phoneNo}</h5>
-                            </div> 
-                        </div>*/}
                         <div className="row">
                             <div className="col-md-5">
                                 <h5 className="cardInfo">Address</h5>
@@ -248,7 +213,7 @@ function UserInfoForAdmin(props) {
                                 <h5 className="cardInfo"><p>{certificate}</p></h5>
                             </div>
                         </div>
-                        <div className="row">
+                        {/* <div className="row">
                             <div className="col-md-5">
                                 <h5 className="cardInfo">Description</h5>
                             </div>
@@ -258,7 +223,7 @@ function UserInfoForAdmin(props) {
                             <div className="col-md-6">
                                 <h5 className="cardInfo"><p>{description}</p></h5>
                             </div>
-                        </div>
+                        </div> */}
                     </div>
                 </div>
                 </div>
@@ -302,7 +267,15 @@ function UserInfoForAdmin(props) {
                                     <div className="col-md-6">
                                     <LawyerInfo />
                                     </div>       
-                                    </div>                                      
+                                    </div> 
+                                    <div className="row">
+                            
+                            <h5 className="cardInfo text-center">Description</h5>
+                       
+                        
+                       
+                            <h5 className="cardInfo ms-2"><p>{description}</p></h5>
+                        </div>                                     
 
                                         
                                         <div className="text-center mb-2">

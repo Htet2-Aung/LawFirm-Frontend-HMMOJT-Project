@@ -2,13 +2,11 @@ import { useState } from "react";
 import { useDispatch } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
 import Banner from "../../layout/Banner";
-import Home from "../../layout/Home";
 import { addNewUser } from "./usersSlice";
 
 function Register(props) {
     console.log("hello")
     const [firstName, setFirstName] = useState('');
-    const [middleName, setMiddleName] = useState('');
     const [lastName, setLastName] = useState('');
     const [gender, setGender] = useState('')
     const [imageURL, setImageURL] = useState('')
@@ -22,7 +20,6 @@ function Register(props) {
     const [addRequestStatus, setAddRequestStatus] = useState('idle')
 
     const onFirstNameChange = e => setFirstName(e.target.value);
-    const onMiddleNameChange = e => setMiddleName(e.target.value);
     const onLastNameChange = e => setLastName(e.target.value);
     const onGenderChange = e => setGender(e.target.value);
     const onImageChange = e => setImageURL(e.target.value);
@@ -33,7 +30,7 @@ function Register(props) {
     const onEmailChange = e => setEmail(e.target.value);
     const onPasswordChange = e => setPassword(e.target.value);
     const onConfirmPasswordChange = e => setConfirmPassword(e.target.value);
-    const canSave = [firstName, middleName, lastName, accountName, password, nrc, address, phoneNo].every(Boolean) && addRequestStatus === 'idle'
+    const canSave = [firstName, lastName, accountName, password, nrc, address, phoneNo].every(Boolean) && addRequestStatus === 'idle'
 
     const dispatch = useDispatch();
     const navigate = useNavigate();
@@ -51,7 +48,6 @@ function Register(props) {
                     addNewUser({
                         user: {
                             firstName,
-                            middleName,
                             lastName,
                             gender,
                             imageURL,
@@ -76,7 +72,6 @@ function Register(props) {
             }
 
             setFirstName('')
-            setMiddleName('')
             setLastName('')
             setAccountName('')
             setGender('')
@@ -134,21 +129,13 @@ function Register(props) {
                             <div class="contact-form">
                                 <form onSubmit={onSubmit}>
                                     <div className="row">
-                                        <div className="col-md-4 form-group">
+                                        <div className="col-md-6 form-group">
                                             <input type="text" class="form-control" placeholder="Your First Name" required="required"
                                              value={firstName}
                                              onChange={onFirstNameChange} 
                                              />
                                         </div>
-                                        <div className="col-md-4 form-group">
-                                            <input type="text" class="form-control" placeholder="Your Middle Name" required="required" 
-                                            value={middleName}
-                                            onChange={onMiddleNameChange}
-                                            
-
-                                            />
-                                        </div>
-                                        <div className="col-md-4 form-group">
+                                        <div className="col-md-6 form-group">
                                             <input type="text" class="form-control" placeholder="Your Last Name" required="required"
                                             value={lastName}
                                             onChange={onLastNameChange} />
